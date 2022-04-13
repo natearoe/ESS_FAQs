@@ -1,0 +1,119 @@
+# Components
+
+Components are one of the core concepts in the NRCS ecological workflow. Ecosites are correlated to components. This 
+
+## What components are in an MLRA? {#componentsinMLRA}
+There are NASIS Queries that allow querying by MLRA. Unfortunately, this is not the best approach. See the section [What mapunits are in an MLRA](#mapunitsinMLRA) for an explanation of why. Spatial intersection of MLRA boundaries and mapunits is more reliable. 
+
+1. Determine the mapunits in the MLRA using the [Mapunits in MLRA tool](#mapunitsinMLRA)
+2. Take the group of mapunits and enter them into Query > MLRA09_Temple > ARE/LMU/MU/DMU by Lmukey list.
+
+Run against National Database:
+![Run against National](_book/componentsinMLRAquery.JPG)
+
+Run against Local: 
+![Run against Local](_book/componentsinMLRAlocal.JPG)
+
+3. Acquire the component names and component IDs using R:
+
+Load the soilDB package and fetch NASIS data
+```{r, eval=FALSE}
+library(soilDB)
+my.components.MLRA <- fetchNASIS(from = "components")
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+library(soilDB)
+my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
+
+```
+
+Look at component names - the ```head()``` function shows just the first six records. Remove the ```head()``` function to see all the component names
+```{r}
+head(my.components.MLRA$compname)
+```
+
+Look at the component IDs
+```{r}
+head(my.components.MLRA$coiid)
+```
+
+
+## What components are in a Soil Survey Area?
+
+Queries by Soil Survey Area are much more reliable than queries by MLRA. As previously mentioned, queries by MLRA are not ideal because the mapunit overlap tables are imperfectly populated. The Soil Survey area corresponds to the legend, and this means that components are reliably associated with Soil Survey Areas. Therefore, beginning with a query is the preferred approach:
+
+1. Run against National
+![Run against National SSA](componentsinSSA.JPG)
+
+2. Run against Local
+![Run against Local SSA](componentsinSSAlocal.JPG)
+
+3. Acquire component names and IDs using R. 
+
+Load the soilDB package and fetch NASIS data
+```{r, eval=FALSE}
+library(soilDB)
+my.components.SSA <- fetchNASIS(from = "components")
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+library(soilDB)
+my.components.SSA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/componentsSSA792.sqlite", SS = FALSE)
+```
+
+Look at component names - the ```head()``` function shows just the first six records. Remove the ```head()``` function to see all the component names
+```{r}
+head(my.components.SSA$compname)
+```
+
+Look at the component IDs
+```{r}
+head(my.components.SSA$coiid)
+```
+
+## What components are correlated to what ecosites?
+Perhaps we want to see what ecosite each component is correlated to. For this example, we will work with all the components in MLRA 18. We will continue from [What mapunits are in an MLRA?](#mapunitsinMLRA). You should have the object ```my.components.MLRA``` loaded. 
+
+Load a couple of necessary packages
+```{r, warning=FALSE}
+library(dplyr)
+library(aqp)
+```
+
+Now, let's look at the correlations between component ID and ecosite ID. This script takes our components in MLRA 18, pulls out the site level data (allows us to ignore pedon data), and then selects only the columns for component ID and ecosite ID (there are lots of other columns you can choose from, tailor to your needs). Finally we look at just the ```head()``` of the ```comp.ecosite.correlations```. If you want to see the full dataframe, remove ```head()```. 
+```{r}
+comp.ecosite.correlations <- my.components.MLRA %>% aqp::site() %>% select(coiid, ecosite_id)
+head(comp.ecosite.correlations)
+```
+
+## What components are correlated to an ecosite of interest?
+Perhaps there is a specific ecosite we are interested in and we want to see what components are correlated to that ecosite. Let's say the ecosite is ```R018XI202CA```. We will start with the ```comp.ecosite.correlations``` dataframe that we created in the previous example. 
+
+```{r}
+R018XI202CA <- comp.ecosite.correlations %>% filter(ecosite_id == "F018XA202CA")
+head(R018XI202CA) # Again, remove head() to see the full list. 
+```
+
+
+## What are the ecological characteristics of components?
+
+One of the best ways to do this is a NASIS report: NASIS > Reports > MLRA02_Davis > EXPORT - Ecological site concept data by MUKEY list v3. This report takes mapunit keys (MUKEY) as input. If you are interested in all the components in an MLRA, refer to [What mapunits are in an MLRA?](#mapunitsinMLRA). If you are interested in a Soil Survey Area ...... 
+
+1. Run against National
+![Run against National ecosite](ecositereport18.JPG)
+2. In the resulting output (html output in your browser), click anywhere, ctrl + a (select all), ctrl + c (copy)
+3. Open Excel, click in top left cell, ctrl + v (paste)
+4. Ctrl + a (select all), Insert > Table
+
+Now you have a table with lots of ecological characteristics. You can use the column headers to filter in various ways. If you prefer to work in R, save this file as a .csv and read it into R. 
+
+
+
+
+
+## Where do components occur?
+
+## How to correlate components to ecosites?

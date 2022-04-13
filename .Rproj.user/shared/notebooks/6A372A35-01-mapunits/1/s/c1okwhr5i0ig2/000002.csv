@@ -1,0 +1,8 @@
+"0","my.mapunits.SSA <- fetchNASIS(from = ""components"", dsn = ""C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/componentsSSA792.sqlite"", SS = FALSE)
+"
+"2","NOTE: all records are missing artifact volume
+"
+"2","converting profile IDs from integer to character
+"
+"2","converting horizon IDs in column `chiid` to character
+"
