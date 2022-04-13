@@ -1,12 +1,36 @@
-# Parts
+# Ecosites
 
-You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file. 
+## What ecosites are active in an MLRA?
+This process is going to be a very simple addition to the process of [Identfying components in an MLRA]{#componentsinMLRA}, beginning with the object created in that step, ```my.components.MLRA```. 
 
-Add a numbered part: `# (PART) Act one {-}` (followed by `# A chapter`)
+Then, we simply need to call the ecosite IDs or ecosite names, depending on your preference. Remember, remove ```head()``` to see the full list. 
+```{r}
+head(my.components.MLRA$ecosite_id)
+head(my.components.MLRA$ecosite_name)
+```
 
-Add an unnumbered part: `# (PART\*) Act one {-}` (followed by `# A chapter`)
+There are likely NAs (missing values) in the above list. This is because the above considers components are are minor and miscellaneous. We do not correlate ecosites to components that are minor and miscellaneous. It will likely be more useful to remove minor and miscellaneous componets: 
 
-Add an appendix as a special kind of un-numbered part: `# (APPENDIX) Other stuff {-}` (followed by `# A chapter`). Chapters in an appendix are prepended with letters instead of numbers.
+```{r}
+my.components.MLRA.reduced <- my.components.MLRA %>% site() %>% filter(compkind != "miscellaneous area" & majcompflag == "1")
+head(my.components.MLRA.reduced$ecosite_id)
+head(my.components.MLRA.reduced$ecosite_name)
+```
+
+We might also be interested to see how often different ecosites are used:
+```{r}
+table(my.components.MLRA.reduced$ecosite_id) %>% as.data.frame() %>% dplyr::rename(Ecosite = Var1) %>% arrange(desc(Freq))
+```
+
+Interesting... the most used ecosites in MLRA18 are ecosite concepts from MLRAs 22a and 17. 
 
 
+
+## Range in characteristics of ecosites
+I created a report that summarizes the characteristics of ecosites. It is organized based on the information that is supposed to be populated in EDIT. Here is a link to a [sample report](https://htmlpreview.github.io/?https://github.com/natearoe/practice/blob/master/F018XA201CA.html). I have established a methodology allowing you to create reports like the one linked for all of the ecosites in your MLRA within a few short steps. You can also produce the report for just one of your ecosites. For documentation on this methodology, [click here](https://natearoe.github.io/git-cloud-storage/read_me.docx). Click on the green 'Code' button and choose 'Download ZIP'. Once you have downloaded to the location of your preference, you can right click > Extract all. You can then open the read_me.docx file. Additionally, you can watch the following YouTube video:
+![](https://www.youtube.com/watch?v=9H8sz5fZaEQ)
+
+```{r, echo=FALSE}
+knitr::include_url("https://www.youtube.com/embed/9H8sz5fZaEQ?start=19")
+```
 

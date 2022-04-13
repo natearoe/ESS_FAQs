@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="mapunits.html"/>
-<link rel="next" href="parts.html"/>
+<link rel="next" href="ecosites.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -171,15 +171,19 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3" data-path="components.html"><a href="components.html"><i class="fa fa-check"></i><b>3</b> Components<span></span></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="components.html"><a href="components.html#componentsinMLRA"><i class="fa fa-check"></i><b>3.1</b> What components are in an MLRA?<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="components.html"><a href="components.html#what-components-are-in-a-soil-survey-area"><i class="fa fa-check"></i><b>3.2</b> What components are in a Soil Survey Area?<span></span></a></li>
-<li class="chapter" data-level="3.3" data-path="components.html"><a href="components.html#what-components-are-correlated-to-what-ecosites"><i class="fa fa-check"></i><b>3.3</b> What components are correlated to what ecosites?<span></span></a></li>
-<li class="chapter" data-level="3.4" data-path="components.html"><a href="components.html#what-components-are-correlated-to-an-ecosite-of-interest"><i class="fa fa-check"></i><b>3.4</b> What components are correlated to an ecosite of interest?<span></span></a></li>
-<li class="chapter" data-level="3.5" data-path="components.html"><a href="components.html#what-are-the-ecological-characteristics-of-components"><i class="fa fa-check"></i><b>3.5</b> What are the ecological characteristics of components?<span></span></a></li>
+<li class="chapter" data-level="3.1" data-path="components.html"><a href="components.html#componentsinMLRA"><i class="fa fa-check"></i><b>3.1</b> Identify components in MLRA?<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="components.html"><a href="components.html#identify-components-in-soil-survey-area"><i class="fa fa-check"></i><b>3.2</b> Identify components in Soil Survey Area?<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="components.html"><a href="components.html#existing-component-ecosite-correlations"><i class="fa fa-check"></i><b>3.3</b> Existing component, ecosite correlations<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="components.html"><a href="components.html#components-correlated-to-an-ecosite-of-interest"><i class="fa fa-check"></i><b>3.4</b> Components correlated to an ecosite of interest?<span></span></a></li>
+<li class="chapter" data-level="3.5" data-path="components.html"><a href="components.html#ecological-characteristics-of-components"><i class="fa fa-check"></i><b>3.5</b> Ecological characteristics of components?<span></span></a></li>
 <li class="chapter" data-level="3.6" data-path="components.html"><a href="components.html#where-do-components-occur"><i class="fa fa-check"></i><b>3.6</b> Where do components occur?<span></span></a></li>
 <li class="chapter" data-level="3.7" data-path="components.html"><a href="components.html#how-to-correlate-components-to-ecosites"><i class="fa fa-check"></i><b>3.7</b> How to correlate components to ecosites?<span></span></a></li>
+<li class="chapter" data-level="3.8" data-path="components.html"><a href="components.html#how-to-qc-the-correlation-between"><i class="fa fa-check"></i><b>3.8</b> How to QC the correlation between<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>4</b> Parts<span></span></a></li>
+<li class="chapter" data-level="4" data-path="ecosites.html"><a href="ecosites.html"><i class="fa fa-check"></i><b>4</b> Ecosites<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="ecosites.html"><a href="ecosites.html#range-in-characteristics-of-ecosites"><i class="fa fa-check"></i><b>4.1</b> Range in characteristics of ecosites<span></span></a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes<span></span></a></li>
@@ -222,7 +226,7 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 3</span> Components<a href="components.html#components" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Components are one of the core concepts in the NRCS ecological workflow. Ecosites are correlated to components. This</p>
 <div id="componentsinMLRA" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> What components are in an MLRA?<a href="components.html#componentsinMLRA" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">3.1</span> Identify components in MLRA?<a href="components.html#componentsinMLRA" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There are NASIS Queries that allow querying by MLRA. Unfortunately, this is not the best approach. See the section <a href="mapunits.html#mapunitsinMLRA">What mapunits are in an MLRA</a> for an explanation of why. Spatial intersection of MLRA boundaries and mapunits is more reliable.</p>
 <ol style="list-style-type: decimal">
 <li>Determine the mapunits in the MLRA using the <a href="mapunits.html#mapunitsinMLRA">Mapunits in MLRA tool</a></li>
@@ -240,20 +244,20 @@ div.csl-indent {
 <span id="cb3-2"><a href="components.html#cb3-2" aria-hidden="true" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>)</span></code></pre></div>
 <p>Look at component names - the <code>head()</code> function shows just the first six records. Remove the <code>head()</code> function to see all the component names</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="components.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA<span class="sc">$</span>compname)</span></code></pre></div>
-<pre><code>## [1] &quot;Jokerst&quot;             &quot;Doemill&quot;             &quot;Rockstripe&quot;         
-## [4] &quot;Ultic Haploxeralfs&quot;  &quot;Butterbredt&quot;         &quot;Butterbredt, eroded&quot;</code></pre>
+<pre><code>## [1] &quot;Jokerst&quot;             &quot;Doemill&quot;             &quot;Rockstripe&quot;          &quot;Ultic Haploxeralfs&quot;  &quot;Butterbredt&quot;        
+## [6] &quot;Butterbredt, eroded&quot;</code></pre>
 <p>Look at the component IDs</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="components.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA<span class="sc">$</span>coiid)</span></code></pre></div>
 <pre><code>## [1] &quot;1047328&quot; &quot;1047328&quot; &quot;1047328&quot; &quot;1047329&quot; &quot;1047329&quot; &quot;1047329&quot;</code></pre>
 </div>
-<div id="what-components-are-in-a-soil-survey-area" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> What components are in a Soil Survey Area?<a href="components.html#what-components-are-in-a-soil-survey-area" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="identify-components-in-soil-survey-area" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Identify components in Soil Survey Area?<a href="components.html#identify-components-in-soil-survey-area" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Queries by Soil Survey Area are much more reliable than queries by MLRA. As previously mentioned, queries by MLRA are not ideal because the mapunit overlap tables are imperfectly populated. The Soil Survey area corresponds to the legend, and this means that components are reliably associated with Soil Survey Areas. Therefore, beginning with a query is the preferred approach:</p>
 <ol style="list-style-type: decimal">
 <li><p>Run against National
-<img src="componentsinSSA.JPG" alt="Run against National SSA" /></p></li>
+<img src="_book/componentsinSSA.JPG" alt="Run against National SSA" /></p></li>
 <li><p>Run against Local
-<img src="componentsinSSAlocal.JPG" alt="Run against Local SSA" /></p></li>
+<img src="_book/componentsinSSAlocal.JPG" alt="Run against Local SSA" /></p></li>
 <li><p>Acquire component names and IDs using R.</p></li>
 </ol>
 <p>Load the soilDB package and fetch NASIS data</p>
@@ -261,35 +265,21 @@ div.csl-indent {
 <span id="cb8-2"><a href="components.html#cb8-2" aria-hidden="true" tabindex="-1"></a>my.components.SSA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>)</span></code></pre></div>
 <p>Look at component names - the <code>head()</code> function shows just the first six records. Remove the <code>head()</code> function to see all the component names</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="components.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.SSA<span class="sc">$</span>compname)</span></code></pre></div>
-<pre><code>## [1] &quot;Littlepete&quot;          &quot;Ladderlake&quot;          &quot;Terric Cryosaprists&quot;
-## [4] &quot;Mendel&quot;              &quot;Lackey&quot;              &quot;Pigchute&quot;</code></pre>
+<pre><code>## [1] &quot;Littlepete&quot;          &quot;Ladderlake&quot;          &quot;Terric Cryosaprists&quot; &quot;Mendel&quot;              &quot;Lackey&quot;             
+## [6] &quot;Pigchute&quot;</code></pre>
 <p>Look at the component IDs</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="components.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.SSA<span class="sc">$</span>coiid)</span></code></pre></div>
 <pre><code>## [1] &quot;2045891&quot; &quot;2045891&quot; &quot;2045891&quot; &quot;2045891&quot; &quot;2045891&quot; &quot;2045891&quot;</code></pre>
 </div>
-<div id="what-components-are-correlated-to-what-ecosites" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> What components are correlated to what ecosites?<a href="components.html#what-components-are-correlated-to-what-ecosites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="existing-component-ecosite-correlations" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Existing component, ecosite correlations<a href="components.html#existing-component-ecosite-correlations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Perhaps we want to see what ecosite each component is correlated to. For this example, we will work with all the components in MLRA 18. We will continue from <a href="mapunits.html#mapunitsinMLRA">What mapunits are in an MLRA?</a>. You should have the object <code>my.components.MLRA</code> loaded.</p>
 <p>Load a couple of necessary packages</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="components.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="components.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aqp)</span></code></pre></div>
-<pre><code>## This is aqp 1.41</code></pre>
-<pre><code>## 
-## Attaching package: &#39;aqp&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     combine, slice</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="components.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-2"><a href="components.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aqp)</span></code></pre></div>
 <p>Now, let’s look at the correlations between component ID and ecosite ID. This script takes our components in MLRA 18, pulls out the site level data (allows us to ignore pedon data), and then selects only the columns for component ID and ecosite ID (there are lots of other columns you can choose from, tailor to your needs). Finally we look at just the <code>head()</code> of the <code>comp.ecosite.correlations</code>. If you want to see the full dataframe, remove <code>head()</code>.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="components.html#cb21-1" aria-hidden="true" tabindex="-1"></a>comp.ecosite.correlations <span class="ot">&lt;-</span> my.components.MLRA <span class="sc">%&gt;%</span> aqp<span class="sc">::</span><span class="fu">site</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(coiid, ecosite_id)</span>
-<span id="cb21-2"><a href="components.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(comp.ecosite.correlations)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="components.html#cb14-1" aria-hidden="true" tabindex="-1"></a>comp.ecosite.correlations <span class="ot">&lt;-</span> my.components.MLRA <span class="sc">%&gt;%</span> aqp<span class="sc">::</span><span class="fu">site</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(coiid, ecosite_id)</span>
+<span id="cb14-2"><a href="components.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(comp.ecosite.correlations)</span></code></pre></div>
 <pre><code>##     coiid  ecosite_id
 ## 1 1047328 R018XA103CA
 ## 2 1047329 R018XA103CA
@@ -298,11 +288,11 @@ div.csl-indent {
 ## 5 1061198 R030XA020CA
 ## 6 1061613 R030XA020CA</code></pre>
 </div>
-<div id="what-components-are-correlated-to-an-ecosite-of-interest" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> What components are correlated to an ecosite of interest?<a href="components.html#what-components-are-correlated-to-an-ecosite-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="components-correlated-to-an-ecosite-of-interest" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Components correlated to an ecosite of interest?<a href="components.html#components-correlated-to-an-ecosite-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Perhaps there is a specific ecosite we are interested in and we want to see what components are correlated to that ecosite. Let’s say the ecosite is <code>R018XI202CA</code>. We will start with the <code>comp.ecosite.correlations</code> dataframe that we created in the previous example.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="components.html#cb23-1" aria-hidden="true" tabindex="-1"></a>R018XI202CA <span class="ot">&lt;-</span> comp.ecosite.correlations <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ecosite_id <span class="sc">==</span> <span class="st">&quot;F018XA202CA&quot;</span>)</span>
-<span id="cb23-2"><a href="components.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(R018XI202CA) <span class="co"># Again, remove head() to see the full list. </span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="components.html#cb16-1" aria-hidden="true" tabindex="-1"></a>R018XI202CA <span class="ot">&lt;-</span> comp.ecosite.correlations <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ecosite_id <span class="sc">==</span> <span class="st">&quot;F018XA202CA&quot;</span>)</span>
+<span id="cb16-2"><a href="components.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(R018XI202CA) <span class="co"># Again, remove head() to see the full list. </span></span></code></pre></div>
 <pre><code>##     coiid  ecosite_id
 ## 1 1047375 F018XA202CA
 ## 2 1122909 F018XA202CA
@@ -311,12 +301,12 @@ div.csl-indent {
 ## 5 1153765 F018XA202CA
 ## 6 1153766 F018XA202CA</code></pre>
 </div>
-<div id="what-are-the-ecological-characteristics-of-components" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> What are the ecological characteristics of components?<a href="components.html#what-are-the-ecological-characteristics-of-components" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ecological-characteristics-of-components" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Ecological characteristics of components?<a href="components.html#ecological-characteristics-of-components" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>One of the best ways to do this is a NASIS report: NASIS &gt; Reports &gt; MLRA02_Davis &gt; EXPORT - Ecological site concept data by MUKEY list v3. This report takes mapunit keys (MUKEY) as input. If you are interested in all the components in an MLRA, refer to <a href="mapunits.html#mapunitsinMLRA">What mapunits are in an MLRA?</a>. If you are interested in a Soil Survey Area ……</p>
 <ol style="list-style-type: decimal">
 <li>Run against National
-<img src="ecositereport18.JPG" alt="Run against National ecosite" /></li>
+<img src="_book/ecositereport18.JPG" alt="Run against National ecosite" /></li>
 <li>In the resulting output (html output in your browser), click anywhere, ctrl + a (select all), ctrl + c (copy)</li>
 <li>Open Excel, click in top left cell, ctrl + v (paste)</li>
 <li>Ctrl + a (select all), Insert &gt; Table</li>
@@ -328,6 +318,9 @@ div.csl-indent {
 </div>
 <div id="how-to-correlate-components-to-ecosites" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> How to correlate components to ecosites?<a href="components.html#how-to-correlate-components-to-ecosites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="how-to-qc-the-correlation-between" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> How to QC the correlation between<a href="components.html#how-to-qc-the-correlation-between" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
@@ -337,7 +330,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="mapunits.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="parts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ecosites.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
