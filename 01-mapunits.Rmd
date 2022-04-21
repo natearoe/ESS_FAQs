@@ -22,10 +22,6 @@ Queries by Soil Survey Area are much more reliable than queries by MLRA. As prev
 ![Run against National SSA](_book/componentsinSSA.JPG)
 
 2. Run against Local
-```{r}
-knitr::include_graphics("_book/componentsinSSAlocal.JPG")
-```
-
 ![Run against Local SSA](_book/componentsinSSAlocal.JPG)
 
 3. Acquire component names and IDs using R. 
