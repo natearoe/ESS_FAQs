@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2022-04-13" />
+<meta name="date" content="2022-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -182,7 +182,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="ecosites.html"><a href="ecosites.html"><i class="fa fa-check"></i><b>4</b> Ecosites<span></span></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="ecosites.html"><a href="ecosites.html#range-in-characteristics-of-ecosites"><i class="fa fa-check"></i><b>4.1</b> Range in characteristics of ecosites<span></span></a></li>
+<li class="chapter" data-level="4.1" data-path="ecosites.html"><a href="ecosites.html#what-ecosites-are-active-in-an-mlra"><i class="fa fa-check"></i><b>4.1</b> What ecosites are active in an MLRA?<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="ecosites.html"><a href="ecosites.html#range-in-characteristics-of-ecosites"><i class="fa fa-check"></i><b>4.2</b> Range in characteristics of ecosites<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
 <ul>
@@ -224,11 +225,48 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="ecosites" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Ecosites<a href="ecosites.html#ecosites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="range-in-characteristics-of-ecosites" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Range in characteristics of ecosites<a href="ecosites.html#range-in-characteristics-of-ecosites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I created a report that summarizes the characteristics of ecosites. It is organized based on the information that is supposed to be populated in EDIT. Here is a link to a <a href="https://htmlpreview.github.io/?https://github.com/natearoe/practice/blob/master/F018XA201CA.html">sample report</a>. I have established a methodology allowing you to create reports like the one linked for all of the ecosites in your MLRA within a few short steps. You can also produce the report for just one of your ecosites. For documentation on this methodology, <a href="https://natearoe.github.io/git-cloud-storage/read_me.docx">click here</a>. Click on the green ‘Code’ button and choose ‘Download ZIP.’ Once you have downloaded to the location of your preference, you can right click &gt; Extract all. You can then open the read_me.docx file. Additionally, you can watch the following YouTube video:
-<img src="https://www.youtube.com/watch?v=9H8sz5fZaEQ" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ecosites.html#cb18-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://www.youtube.com/embed/9H8sz5fZaEQ?start=19&quot;</span>)</span></code></pre></div>
+<div id="what-ecosites-are-active-in-an-mlra" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> What ecosites are active in an MLRA?<a href="ecosites.html#what-ecosites-are-active-in-an-mlra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This process is going to be a very simple addition to the process of <span id="componentsinMLRA">Identfying components in an MLRA</span>, beginning with the object created in that step, <code>my.components.MLRA</code>.</p>
+<p>Then, we simply need to call the ecosite IDs or ecosite names, depending on your preference. Remember, remove <code>head()</code> to see the full list.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ecosites.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA<span class="sc">$</span>ecosite_id)</span></code></pre></div>
+<pre><code>## [1] &quot;R018XA103CA&quot; &quot;R018XA103CA&quot; &quot;R018XA104CA&quot; &quot;F018XA202CA&quot; &quot;R030XA020CA&quot;
+## [6] &quot;R030XA020CA&quot;</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="ecosites.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA<span class="sc">$</span>ecosite_name)</span></code></pre></div>
+<pre><code>## [1] &quot;Shallow  Thermic Volcanic Ridges 30- 40 PZ&quot;    
+## [2] &quot;Shallow  Thermic Volcanic Ridges 30- 40 PZ&quot;    
+## [3] &quot;Shallow Mesic Volcanic Ridges 39 - 49 PZ&quot;      
+## [4] &quot;Deep Mesic Mountain Slopes &amp; Summits 40- 55 PZ&quot;
+## [5] &quot;Arid Fans 5-7&quot;                                 
+## [6] &quot;Arid Fans 5-7&quot;</code></pre>
+<p>There are likely NAs (missing values) in the above list. This is because the above considers components are are minor and miscellaneous. We do not correlate ecosites to components that are minor and miscellaneous. It will likely be more useful to remove minor and miscellaneous componets:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="ecosites.html#cb22-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA.reduced <span class="ot">&lt;-</span> my.components.MLRA <span class="sc">%&gt;%</span> <span class="fu">site</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="ecosites.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(compkind <span class="sc">!=</span> <span class="st">&quot;miscellaneous area&quot;</span> <span class="sc">&amp;</span> majcompflag <span class="sc">==</span> <span class="st">&quot;1&quot;</span>)</span>
+<span id="cb22-3"><a href="ecosites.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA.reduced<span class="sc">$</span>ecosite_id)</span></code></pre></div>
+<pre><code>## [1] &quot;R018XA103CA&quot; &quot;R018XA103CA&quot; &quot;R018XA104CA&quot; &quot;F018XA202CA&quot; &quot;R030XA020CA&quot;
+## [6] &quot;R017XY902CA&quot;</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="ecosites.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA.reduced<span class="sc">$</span>ecosite_name)</span></code></pre></div>
+<pre><code>## [1] &quot;Shallow  Thermic Volcanic Ridges 30- 40 PZ&quot;    
+## [2] &quot;Shallow  Thermic Volcanic Ridges 30- 40 PZ&quot;    
+## [3] &quot;Shallow Mesic Volcanic Ridges 39 - 49 PZ&quot;      
+## [4] &quot;Deep Mesic Mountain Slopes &amp; Summits 40- 55 PZ&quot;
+## [5] &quot;Arid Fans 5-7&quot;                                 
+## [6] &quot;Duripan Vernal Pools&quot;</code></pre>
+<p>We might also be interested to see how often different ecosites are used:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="ecosites.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(my.components.MLRA.reduced<span class="sc">$</span>ecosite_id) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="ecosites.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Ecosite =</span> Var1) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(Freq)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##       Ecosite Freq
+## 1 F022AW007CA  411
+## 2 R017XY902CA  395
+## 3 R017XY905CA  279
+## 4 R017XY903CA  246
+## 5 R017XY904CA  213
+## 6 F018XC201CA  154</code></pre>
+<p>Interesting… the most used ecosites in MLRA18 are ecosite concepts from MLRAs 22a and 17.</p>
+</div>
+<div id="range-in-characteristics-of-ecosites" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Range in characteristics of ecosites<a href="ecosites.html#range-in-characteristics-of-ecosites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I created a report that summarizes the characteristics of ecosites. It is organized based on the information that is supposed to be populated in EDIT. Here is a link to a <a href="https://htmlpreview.github.io/?https://github.com/natearoe/practice/blob/master/F018XA201CA.html">sample report</a>. I have established a methodology allowing you to create reports like the one linked for all of the ecosites in your MLRA within a few short steps. You can also produce the report for just one of your ecosites. For documentation on this methodology, <a href="https://natearoe.github.io/git-cloud-storage/read_me.docx">click here</a>. Click on the green ‘Code’ button and choose ‘Download ZIP.’ Once you have downloaded to the location of your preference, you can right click &gt; Extract all. You can then open the read_me.docx file. Additionally, you can watch the following YouTube video:</p>
 <iframe src="https://www.youtube.com/embed/9H8sz5fZaEQ?start=19" width="672" height="400px" data-external="1">
 </iframe>
 

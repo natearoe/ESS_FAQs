@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2022-04-13" />
+<meta name="date" content="2022-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -182,7 +182,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="ecosites.html"><a href="ecosites.html"><i class="fa fa-check"></i><b>4</b> Ecosites<span></span></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="ecosites.html"><a href="ecosites.html#range-in-characteristics-of-ecosites"><i class="fa fa-check"></i><b>4.1</b> Range in characteristics of ecosites<span></span></a></li>
+<li class="chapter" data-level="4.1" data-path="ecosites.html"><a href="ecosites.html#what-ecosites-are-active-in-an-mlra"><i class="fa fa-check"></i><b>4.1</b> What ecosites are active in an MLRA?<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="ecosites.html"><a href="ecosites.html#range-in-characteristics-of-ecosites"><i class="fa fa-check"></i><b>4.2</b> Range in characteristics of ecosites<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
 <ul>
@@ -244,8 +245,8 @@ div.csl-indent {
 <span id="cb3-2"><a href="components.html#cb3-2" aria-hidden="true" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>)</span></code></pre></div>
 <p>Look at component names - the <code>head()</code> function shows just the first six records. Remove the <code>head()</code> function to see all the component names</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="components.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA<span class="sc">$</span>compname)</span></code></pre></div>
-<pre><code>## [1] &quot;Jokerst&quot;             &quot;Doemill&quot;             &quot;Rockstripe&quot;          &quot;Ultic Haploxeralfs&quot;  &quot;Butterbredt&quot;        
-## [6] &quot;Butterbredt, eroded&quot;</code></pre>
+<pre><code>## [1] &quot;Jokerst&quot;             &quot;Doemill&quot;             &quot;Rockstripe&quot;         
+## [4] &quot;Ultic Haploxeralfs&quot;  &quot;Butterbredt&quot;         &quot;Butterbredt, eroded&quot;</code></pre>
 <p>Look at the component IDs</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="components.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA<span class="sc">$</span>coiid)</span></code></pre></div>
 <pre><code>## [1] &quot;1047328&quot; &quot;1047328&quot; &quot;1047328&quot; &quot;1047329&quot; &quot;1047329&quot; &quot;1047329&quot;</code></pre>
@@ -265,8 +266,8 @@ div.csl-indent {
 <span id="cb8-2"><a href="components.html#cb8-2" aria-hidden="true" tabindex="-1"></a>my.components.SSA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>)</span></code></pre></div>
 <p>Look at component names - the <code>head()</code> function shows just the first six records. Remove the <code>head()</code> function to see all the component names</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="components.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.SSA<span class="sc">$</span>compname)</span></code></pre></div>
-<pre><code>## [1] &quot;Littlepete&quot;          &quot;Ladderlake&quot;          &quot;Terric Cryosaprists&quot; &quot;Mendel&quot;              &quot;Lackey&quot;             
-## [6] &quot;Pigchute&quot;</code></pre>
+<pre><code>## [1] &quot;Littlepete&quot;          &quot;Ladderlake&quot;          &quot;Terric Cryosaprists&quot;
+## [4] &quot;Mendel&quot;              &quot;Lackey&quot;              &quot;Pigchute&quot;</code></pre>
 <p>Look at the component IDs</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="components.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.SSA<span class="sc">$</span>coiid)</span></code></pre></div>
 <pre><code>## [1] &quot;2045891&quot; &quot;2045891&quot; &quot;2045891&quot; &quot;2045891&quot; &quot;2045891&quot; &quot;2045891&quot;</code></pre>

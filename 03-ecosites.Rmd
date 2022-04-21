@@ -12,14 +12,16 @@ head(my.components.MLRA$ecosite_name)
 There are likely NAs (missing values) in the above list. This is because the above considers components are are minor and miscellaneous. We do not correlate ecosites to components that are minor and miscellaneous. It will likely be more useful to remove minor and miscellaneous componets: 
 
 ```{r}
-my.components.MLRA.reduced <- my.components.MLRA %>% site() %>% filter(compkind != "miscellaneous area" & majcompflag == "1")
+my.components.MLRA.reduced <- my.components.MLRA %>% site() %>% 
+  filter(compkind != "miscellaneous area" & majcompflag == "1")
 head(my.components.MLRA.reduced$ecosite_id)
 head(my.components.MLRA.reduced$ecosite_name)
 ```
 
 We might also be interested to see how often different ecosites are used:
 ```{r}
-table(my.components.MLRA.reduced$ecosite_id) %>% as.data.frame() %>% dplyr::rename(Ecosite = Var1) %>% arrange(desc(Freq))
+table(my.components.MLRA.reduced$ecosite_id) %>% as.data.frame() %>% 
+  dplyr::rename(Ecosite = Var1) %>% arrange(desc(Freq)) %>% head()
 ```
 
 Interesting... the most used ecosites in MLRA18 are ecosite concepts from MLRAs 22a and 17. 
