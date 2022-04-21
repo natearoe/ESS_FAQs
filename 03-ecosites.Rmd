@@ -28,7 +28,6 @@ Interesting... the most used ecosites in MLRA18 are ecosite concepts from MLRAs 
 
 ## Range in characteristics of ecosites
 I created a report that summarizes the characteristics of ecosites. It is organized based on the information that is supposed to be populated in EDIT. Here is a link to a [sample report](https://htmlpreview.github.io/?https://github.com/natearoe/practice/blob/master/F018XA201CA.html). I have established a methodology allowing you to create reports like the one linked for all of the ecosites in your MLRA within a few short steps. You can also produce the report for just one of your ecosites. For documentation on this methodology, [click here](https://natearoe.github.io/git-cloud-storage/read_me.docx). Click on the green 'Code' button and choose 'Download ZIP'. Once you have downloaded to the location of your preference, you can right click > Extract all. You can then open the read_me.docx file. Additionally, you can watch the following YouTube video:
-![](https://www.youtube.com/watch?v=9H8sz5fZaEQ)
 
 ```{r, echo=FALSE}
 knitr::include_url("https://www.youtube.com/embed/9H8sz5fZaEQ?start=19")
