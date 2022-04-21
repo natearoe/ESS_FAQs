@@ -1,15 +1,7 @@
 Welcome! 
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
+This documents outlines common methodologies used by NRCS Ecologists. It is intended to be an educational resource and to develop best practice standards. This is intended to be a living document. If you have recommendations for best practices or additional practices that should be added, please let me know!
 
-This template provides a skeleton file structure that you can edit to create your book. 
-
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
-
-Additional resources:
-
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
-
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
+The document can be viewed at https://natearoe.github.io/ESS_FAQs/. 
 
 
