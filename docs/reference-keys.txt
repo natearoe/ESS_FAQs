@@ -12,7 +12,8 @@ componentsinMLRA
 identify-components-in-soil-survey-area
 existing-component-ecosite-correlations
 components-correlated-to-an-ecosite-of-interest
-ecological-characteristics-of-components
+ecological-characteristics-of-components-non-programmatic
+ecological-characteristics-of-components-programmatic
 where-do-components-occur
 how-to-correlate-components-to-ecosites
 how-to-qc-the-correlation-between
