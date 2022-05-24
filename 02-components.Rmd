@@ -85,7 +85,7 @@ library(aqp)
 
 Now, let's look at the correlations between component ID and ecosite ID. This script takes our components in MLRA 18, pulls out the site level data (allows us to ignore pedon data), and then selects only the columns for component ID and ecosite ID (there are lots of other columns you can choose from, tailor to your needs). Finally we look at just the ```head()``` of the ```comp.ecosite.correlations```. If you want to see the full dataframe, remove ```head()```. 
 ```{r}
-comp.ecosite.correlations <- my.components.MLRA %>% aqp::site() %>% select(coiid, ecosite_id)
+comp.ecosite.correlations <- my.components.MLRA %>% aqp::site() %>% dplyr::select(coiid, ecosite_id)
 head(comp.ecosite.correlations)
 ```
 
@@ -117,20 +117,25 @@ https://nroe.shinyapps.io/MapunitsInMLRA/ tool to determine all the mapunits in
 my MLRA and then using the NASIS Query, NSSC Pangaea > Area/Legend/Mapunit/DMU
 by record ID - LMAPUNITIID. 
 
-Load library and pull data from NASIS selected set
-```{r, eval=FALSE}
+Load library
+```{r}
 library(sf)
 library(aqp)
 library(dplyr)
 library(soilDB)
 library(stringr)
+```
 
+Pull data from NASIS selected set
+```{r, eval=FALSE}
 nasis_selection <- fetchNASIS(from = "components", rmHzErrors = FALSE)
 ```
 
 
 ```{r, echo=FALSE, message=FALSE}
-nasis_selection <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18pedondata.sqlite", SS = FALSE)
+library(soilDB)
+nasis_selection <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
+
 ```
 
 Let's start off by removing miscellaneous areas and minor components. This is 

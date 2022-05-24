@@ -20,6 +20,8 @@ how-to-qc-the-correlation-between
 ecosites
 what-ecosites-are-active-in-an-mlra
 range-in-characteristics-of-ecosites
+mapping-ecological-sites
+associated-sites
 footnotes-and-citations
 footnotes
 citations
