@@ -1,4 +1,18 @@
-# Mapunits 
+# Mapunits
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(soilDB)
+library(dplyr)
+library(aqp)
+library(sf)
+library(stringr)
+library(ggplot2)
+library(maps)
+```
 
 This section deals with mapunits. Mapunits have limited application for ecological work because they are broad concepts. Mapunits frequently contain multiple components, each occurring on different parts of the landscape and having different soil properties. Ecosites are correlated to components rather than mapunits because of the variability of mapunits. It should be noted that mapunits are spatially delineated, though, whereas components are not. Therefore, an attempt to map ecosites would rely heavily on mapunit delineations. An example of this can be seen on Web Soil Survey. Web Soil Survey can be used to map ecosites. These maps use mapunit delineations and show the ecosites that are correlated to the dominant component in that mapunit. 
 
@@ -40,7 +54,7 @@ my.mapunits.SSA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Do
 
 Look at the mapunits - the ```head()``` function shows just the first six records. Remove the ```head()``` function to see all the component names
 ```{r}
-#head(my.components.SSA$)
+head(my.mapunits.SSA$muname)
 ```
 
 ## Mapping mapunits

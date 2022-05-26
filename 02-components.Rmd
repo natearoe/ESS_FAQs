@@ -1,6 +1,20 @@
 # Components
 
-Components are one of the core concepts in the NRCS ecological workflow. Ecosites are correlated to components. This 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(soilDB)
+library(dplyr)
+library(aqp)
+library(sf)
+library(stringr)
+library(ggplot2)
+library(maps)
+```
+
+Components are one of the core concepts in the NRCS ecological workflow. Ecosites are correlated to components.
 
 ## Identify components in MLRA? {#componentsinMLRA}
 There are NASIS Queries that allow querying by MLRA. Unfortunately, this is not the best approach. See the section [What mapunits are in an MLRA](#mapunitsinMLRA) for an explanation of why. Spatial intersection of MLRA boundaries and mapunits is more reliable. 
@@ -23,7 +37,7 @@ my.components.MLRA <- fetchNASIS(from = "components")
 ```
 
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(soilDB)
 my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
 
@@ -75,17 +89,13 @@ head(my.components.SSA$coiid)
 ```
 
 ## Existing component, ecosite correlations
-Perhaps we want to see what ecosite each component is correlated to. For this example, we will work with all the components in MLRA 18. We will continue from [What mapunits are in an MLRA?](#mapunitsinMLRA). You should have the object ```my.components.MLRA``` loaded. 
+Perhaps we want to see what ecosite each component is correlated to. For this example, we will work with all the components in MLRA 18 using the [Standard Dataset and packages](#standard).
 
-Load a couple of necessary packages
-```{r, warning=FALSE, message=FALSE}
-library(dplyr)
-library(aqp)
-```
-
-Now, let's look at the correlations between component ID and ecosite ID. This script takes our components in MLRA 18, pulls out the site level data (allows us to ignore pedon data), and then selects only the columns for component ID and ecosite ID (there are lots of other columns you can choose from, tailor to your needs). Finally we look at just the ```head()``` of the ```comp.ecosite.correlations```. If you want to see the full dataframe, remove ```head()```. 
+With the Standard Dataset loaded, let's look at the correlations between component ID and ecosite ID. This script takes our components in MLRA 18, pulls out the site level data (allows us to ignore pedon data), and then selects only the columns for component ID and ecosite ID (there are lots of other columns you can choose from, tailor to your needs). Finally we look at just the ```head()``` of the ```comp.ecosite.correlations```. If you want to see the full dataframe, remove ```head()```. 
 ```{r}
-comp.ecosite.correlations <- my.components.MLRA %>% aqp::site() %>% dplyr::select(coiid, ecosite_id)
+comp.ecosite.correlations <- my.components.MLRA %>% aqp::site() %>% 
+  dplyr::select(coiid, ecosite_id)
+
 head(comp.ecosite.correlations)
 ```
 
@@ -112,38 +122,14 @@ Now you have a table with lots of ecological characteristics. You can use the co
 
 ## Ecological characteristics of components? (programmatic)
 
-Selected set: Determine an appropriate selected set. I am using the 
-https://nroe.shinyapps.io/MapunitsInMLRA/ tool to determine all the mapunits in
-my MLRA and then using the NASIS Query, NSSC Pangaea > Area/Legend/Mapunit/DMU
-by record ID - LMAPUNITIID. 
-
-Load library
-```{r}
-library(sf)
-library(aqp)
-library(dplyr)
-library(soilDB)
-library(stringr)
-```
-
-Pull data from NASIS selected set
-```{r, eval=FALSE}
-nasis_selection <- fetchNASIS(from = "components", rmHzErrors = FALSE)
-```
-
-
-```{r, echo=FALSE, message=FALSE}
-library(soilDB)
-nasis_selection <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
-
-```
+Load the [Standard Dataset and packages](#standard).
 
 Let's start off by removing miscellaneous areas and minor components. This is 
 going to simplify things and remove some of the oddities that may exist in the 
 data. Ecological sciences do not correlate to misc. areas or minor components, 
 so it will not be a loss to us. 
 ```{r}
-nasis_selection <- subset(nasis_selection, compkind != "miscellaneous area" &
+nasis_selection <- subset(my.components.MLRA, compkind != "miscellaneous area" &
                             majcompflag == "1")
 ```
 
@@ -177,7 +163,8 @@ Separate the texture column
 ```{r}
 horizon_df$texture_qualifier <- horizon_df$texture %>% stringr::str_extract(".*(?=-)")
 horizon_df$texture_only <- horizon_df$texture %>% stringr::str_extract("(?<=-).*")
-horizon_df$texture_only <- ifelse(is.na(horizon_df$texture_only), horizon_df$texture, horizon_df$texture_only)
+horizon_df$texture_only <- ifelse(is.na(horizon_df$texture_only), horizon_df$texture, 
+                                  horizon_df$texture_only)
 ```
 
 Working with texture:
@@ -205,7 +192,9 @@ to be determined by BR conditions. We are also specifically stating that
 texture is not equal to "BR" because several horizons that are BR have
 values of 0 for sand and clay when they should be NAs. 
 ```{r}
-horizon_df$thickness_modified <- ifelse(is.na(horizon_df$clay), 0.1, ifelse(horizon_df$texture == "BR", 0.1, horizon_df$thickness))
+horizon_df$thickness_modified <- ifelse(is.na(horizon_df$clay), 0.1, 
+                                        ifelse(horizon_df$texture == "BR", 
+                                        0.1, horizon_df$thickness))
 ```
 
 Now, we assign the textural modifier from the thickest horizon to the component.
@@ -262,8 +251,10 @@ component_data <-
        data.frame(
          coiid = coiid,
          compname = compname,
-         comppct_r = comppct_r,
          compkind = compkind,
+         areasymbol = areasymbol,
+         areaname = areaname,
+         comppct_r = comppct_r,
          slope_l = slope_l,
          slope_r = slope_r,
          slope_h = slope_h,
@@ -291,7 +282,9 @@ component_data <-
          taxtemp = taxtempregime,
          drainagecl = drainagecl,
          ecosite = ecosite_name,
-         ecosite_id = ecosite_id
+         ecosite_id = ecosite_id,
+         taxorder = taxorder,
+         taxsuborder = taxsuborder
        )
   )
 ```
@@ -317,10 +310,13 @@ component_data <- left_join(component_data, restriction_data)
 all_data <- horizon_to_component_data %>%
   dplyr::rename(coiid = component) %>%
   left_join(component_data) %>%
-  dplyr::select(coiid,  compname, ecosite, ecosite_id, landform, pmkind, pmorigin, taxtemp, textural_class,
-         texture_qualifier, rock_frag, surf_frag, depth_to_restr, drainagecl, slope_l, slope_r,
-         slope_h, ph_l_mean, ph_r_mean, ph_h_mean, elev_l, elev_rv, elev_h,
-         map_l, map_rv, map_h, maat_l, maat_rv, maat_h, ffd_l, ffd_rv, ffd_h ,comppct_r, dmuiid, everything())
+  dplyr::select(coiid,  compname, ecosite, ecosite_id, landform, pmkind, 
+                pmorigin, taxtemp, textural_class, texture_qualifier, 
+                rock_frag, surf_frag, depth_to_restr, drainagecl, slope_l, 
+                slope_r, slope_h, ph_l_mean, ph_r_mean, ph_h_mean, elev_l, 
+                elev_rv, elev_h, map_l, map_rv, map_h, maat_l, maat_rv, 
+                maat_h, ffd_l, ffd_rv, ffd_h ,comppct_r, dmuiid, 
+                everything())
 ```
 
 Save as csv

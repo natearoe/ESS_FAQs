@@ -1,13 +1,22 @@
 # Ecosites
 
-## What ecosites are active in an MLRA?
-This process is going to be a very simple addition to the process of [Identfying components in an MLRA]{#componentsinMLRA}, beginning with the object created in that step, ```my.components.MLRA```. 
-
-Library
-```{r}
-library(aqp)
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
 ```
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(soilDB)
+library(dplyr)
+library(aqp)
+library(sf)
+library(stringr)
+library(ggplot2)
+library(maps)
+```
+
+## What ecosites are active in an MLRA?
+
+Load the [Standard Dataset and packages](#standard).
 
 Then, we simply need to call the ecosite IDs or ecosite names, depending on your preference. Remember, remove ```head()``` to see the full list. 
 ```{r}
@@ -45,31 +54,14 @@ knitr::include_url("https://www.youtube.com/embed/9H8sz5fZaEQ?start=19")
 
 For this methodology, the ecological site is mapped in all map units containing a component correlated to the ecological site. The alternative would be to map the ecological site only in map units where the dominant component is correlated to the ecological site of interest. I am more interest in the full extent of the ecological site, so I am using the less restrictive of the two. 
 
-We are starting with the typical selected set from Query > MLRA09_Temple > ARE/LMU/MU/DMU by Lmukey list.
-
-Load required packages
-```{r, message=FALSE, warning=FALSE}
-library(sf)
-library(maps)
-library(soilDB)
-library(dplyr)
-library(ggplot2)
-```
-
-Load the soilDB package and fetch NASIS data
-```{r, eval=FALSE}
-my.components.MLRA <- fetchNASIS(from = "components")
-```
-
-```{r, echo=FALSE, message=FALSE}
-my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
-
-```
+Load the [Standard Dataset and packages](#standard).
 
 Load a shapefile of your map unit boundaries (the MLRA boundaries cover the whole country, but you will have to change the map unit boundaries to your local map unit shapefile)
-```{r}
-mapunit_boundaries <- sf::read_sf("C:/Users/Nathan.Roe/Documents/PES/gSSURGO_CA_2022.gdb", "mupolygon")
-mlra_boundaries <- sf::read_sf("C:/Users/Nathan.Roe/Documents/PES/MLRA_52_2022/MLRA_52_2022/MLRA_52.shp")
+```{r, message=FALSE, warning=FALSE}
+mapunit_boundaries <- sf::read_sf("C:/Users/Nathan.Roe/Documents/PES/gSSURGO_CA_2022.gdb",
+                                  "mupolygon")
+mlra_boundaries <- 
+  sf::read_sf("C:/Users/Nathan.Roe/Documents/PES/MLRA_52_2022/MLRA_52_2022/MLRA_52.shp")
 ```
 
 What is your ecological site of interest? (change appropriate to your project)
@@ -84,48 +76,46 @@ mlra_of_interest <- 18
 
 Reduce component data to those associated with ecosite of interest
 ```{r}
-my.components.MLRA.reduced <- aqp::site(my.components.MLRA) %>% filter(ecosite_id == ecosite_of_interest)
+my.components.MLRA.reduced <- aqp::site(my.components.MLRA) %>% 
+  filter(ecosite_id == ecosite_of_interest)
 ```
 
 Reduce mapunits to those associated with ecosite of interest
 ```{r}
-mapunit_boundaries_of_interest <- mapunit_boundaries %>% dplyr::filter(MUKEY %in% my.components.MLRA.reduced$muiid) %>% sf::st_transform("+proj=longlat +datum=WGS84")
+mapunit_boundaries_of_interest <- mapunit_boundaries %>% 
+  dplyr::filter(MUKEY %in% my.components.MLRA.reduced$muiid) %>% 
+  sf::st_transform("+proj=longlat +datum=WGS84")
 ```
 
 Reduce MLRA boundary to MLRA of interest
 ```{r}
-mlra_boundaries_reduced <- mlra_boundaries %>% dplyr::filter(MLRARSYM == mlra_of_interest) %>% sf::st_transform("+proj=longlat +datum=WGS84")
+mlra_boundaries_reduced <- mlra_boundaries %>% 
+  dplyr::filter(MLRARSYM == mlra_of_interest) %>% 
+  sf::st_transform("+proj=longlat +datum=WGS84")
 
 ```
 
 Select state of interest (change appropriate to your project, you could select multiple states too)
 ```{r}
-ca <- st_as_sf(maps::map("state", fill = TRUE, plot = FALSE)) %>% dplyr::filter(ID == "california") %>% sf::st_transform("+proj=longlat +datum=WGS84")
+ca <- st_as_sf(maps::map("state", fill = TRUE, plot = FALSE)) %>% 
+  dplyr::filter(ID == "california") %>% 
+  sf::st_transform("+proj=longlat +datum=WGS84")
 ```
 
 Plot map
 ```{r}
-ggplot() + theme_minimal() +  geom_sf(data = ca) + geom_sf(data = mlra_boundaries_reduced) + geom_sf(data = mapunit_boundaries_of_interest, col = "hotpink", alpha = 0, size = 2) + ggtitle(paste0("Distribution of ecological site - ", ecosite_of_interest))
+ggplot() + theme_minimal() +  geom_sf(data = ca) + 
+  geom_sf(data = mlra_boundaries_reduced) + 
+  geom_sf(data = mapunit_boundaries_of_interest,
+          col = "hotpink", alpha = 0, size = 2) + 
+  ggtitle(paste0("Distribution of ecological site - ", ecosite_of_interest))
 ```
 
 
 ## Associated sites
 Associated sites are ecological sites that occur in the same area of the landscape. The simplest way to think about this is ecological sites that are adjacent to your ecological site of interest. I am going to present a simple way of addressing this. We can determine what ecological sites occur in the same mapunit as your ecosite of interest. Looking at all the mapunits that your ecological site of interest occurs in, and tallying up all of the other ecological sites that are in shared mapunits, we can come to a metric of what other ecological sites tend to be near your ecological site of interest. In the future, I would like to make some improvements to this, so that it considers adjacent mapunits and considers the length of boundary between mapunits. 
 
-I am loading components from Query > MLRA09_Temple > ARE/LMU/MU/DMU by Lmukey list.
-
-Load the soilDB package and fetch NASIS data
-```{r, eval=FALSE}
-library(soilDB)
-my.components.MLRA <- fetchNASIS(from = "components")
-```
-
-
-```{r, echo=FALSE, message=FALSE}
-library(soilDB)
-my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
-
-```
+Load the [Standard Dataset and packages](#standard).
 
 Reduce data to major components and non-miscellaneous area
 ```{r}
@@ -135,7 +125,8 @@ my.components.MLRA.reduced <- my.components.MLRA %>% site() %>%
 
 Reduce to only MLRA18 ecosites
 ```{r}
-MLRA18_ecosites <-  my.components.MLRA.reduced$ecosite_id %>% stringr::str_subset("18X") %>% unique() 
+MLRA18_ecosites <-  my.components.MLRA.reduced$ecosite_id %>% 
+  stringr::str_subset("18X") %>% unique() 
 ```
 
 Create empty lists for upcoming for loops
@@ -147,21 +138,24 @@ mus_with_ecosite_list <-  list()
 Create for loop to determine all the mapunits that each ecological site occurs in
 ```{r}
 for(i in MLRA18_ecosites){
-  ecosite_mukeys_list[[i]] <-  my.components.MLRA.reduced %>% dplyr::filter(ecosite_id == i) %>% pull(mukey)
+  ecosite_mukeys_list[[i]] <-  my.components.MLRA.reduced %>% 
+    dplyr::filter(ecosite_id == i) %>% pull(mukey)
 }
 ```
 
 Create a list of dataframes. Each dataframe has the name of the ecological site that it represents. The dataframes contain all of the component data from all of the mapunits that the ecosite occurs in. For example, let's say we have an ecosite named F018XA201CA. The dataframe for F018XA201CA will contain data for all the components that occur in all of the mapunits that F018XA201CA occurs in. That means that many of the components will be components correlated to F018XA201CA, but it will also contain other components not correlated to F018XA201CA.
 ```{r}
 for(i in MLRA18_ecosites){
-  mus_with_ecosite_list[[i]] <- my.components.MLRA.reduced %>% dplyr::filter(mukey %in% ecosite_mukeys_list[[i]])
+  mus_with_ecosite_list[[i]] <- my.components.MLRA.reduced %>% 
+    dplyr::filter(mukey %in% ecosite_mukeys_list[[i]])
 }
 ```
 
 Now, we make a table from all of the ecological site data in each dataframe. 
 ```{r}
 associated_sites <-  lapply(mus_with_ecosite_list, FUN = function(x){
-  table(x$ecosite_id) %>% as.data.frame() %>% arrange(desc(Freq)) %>% dplyr::rename(Ecosite = Var1)
+  table(x$ecosite_id) %>% as.data.frame() %>% arrange(desc(Freq)) %>% 
+    dplyr::rename(Ecosite = Var1)
 })
 ```
 
@@ -172,3 +166,47 @@ Let's take a look at an example
 associated_sites$F018XA202CA
 ```
 Here, we can see that we are looking at the ecological site F018XA202CA. The ecological site that most commonly occurs in mapunits containing your ecological site......is your ecological site. That will likely always be the case. The other ecological sites it appears with are R018XA103CA and R018XA104CA - those are actually informative.  
+
+## Non-rep dmu components correlated to ecosites
+
+There is a good chance you have components from non-rep data map units (dmus) correlated to ecological sites. These should not exist. Non-rep dmus are more of a historical record of previous map units. Removing these correlations should be a standard part of QC. 
+
+Load the [Standard Dataset and packages](#standard).
+
+Look for nonrep dmus with ecosites assigned
+```{r}
+nonrep_with_ecosite <- aqp::site(my.components.MLRA) %>% 
+  filter(repdmu == 0 & !is.na(ecosite_id))
+```
+
+Components in nonrep dmus should not be correlated to ecosites. We are going to prepare files that remove these correlations. The process that I have been using to do this is creating to files, ESD Ecosites and ESD Notes. I follow a certain format for those files and email them to Tom Cochrane who uploads them to NASIS.
+
+ESD Ecosite file
+```{r}
+esd_ecosites_nonrep <- nonrep_with_ecosite %>% select(coiid)
+
+esd_ecosites_nonrep$`Ecosite ID` <- ""
+
+write.csv(esd_ecosites_nonrep, 
+  "C:/Users/Nathan.Roe/Documents/PES4ever/ESD Ecosite_nonrepdmu_20220522.csv", 
+  row.names = FALSE)
+```
+
+ESD Note file
+```{r}
+esd_notes_nonrep <- nonrep_with_ecosite %>% select(coiid, ecosite_id)
+
+esd_notes_nonrep$author <- "Nathan Roe"
+
+esd_notes_nonrep$note <- paste0("This site was formerly correlated to ", 
+                          esd_notes_nonrep$ecosite_id, 
+                          ". That correlation was removed because this 
+                          component belongs to a non-rep dmu and therefore 
+                          should not be correlated to an ecological site. 
+                          This change was made by Nathan Roe during the PES 
+                          initiative of FY2022.")
+
+write.csv(esd_notes_nonrep %>% select(-ecosite_id), 
+  "C:/Users/Nathan.Roe/Documents/PES4ever/ESD Notes_nonrepdmu_20220522.csv", 
+  row.names = FALSE)
+```

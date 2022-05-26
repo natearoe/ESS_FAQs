@@ -44,3 +44,42 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
+
+## Standard dataset/packages {#standard}
+
+For many of the examples in this document, we will be using the same dataset. I will refer to this as the Standard Dataset. I will provide links back to this section where the Standard Dataset is used.
+
+Load standard packages
+```{r, message=FALSE, warning=FALSE}
+library(soilDB)
+library(dplyr)
+library(aqp)
+library(sf)
+library(stringr)
+library(ggplot2)
+library(maps)
+```
+
+
+Step 1. Determine the mapunits of interest using the [Mapunit in MLRA tool](https://nroe.shinyapps.io/MapunitsInMLRA/) for MLRA 18 with a 15% Membership. This tool is discussed in detail in [What mapunits are in an MLRA?](#mapunitsinMLRA). 
+
+Step 2. Take the group of mapunits and enter them into Query > MLRA09_Temple > ARE/LMU/MU/DMU by Lmukey list.
+
+Run against National Database:
+![Run against National](_book/componentsinMLRAquery.JPG)
+
+Run against Local: 
+![Run against Local](_book/componentsinMLRAlocal.JPG)
+
+
+Step 3. Fetch NASIS data
+```{r, eval=FALSE}
+my.components.MLRA <- fetchNASIS(from = "components")
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
+```
+
+This is will provide you with the same data that I am using, if you want to following along exactly. You will likely find it to be of greater utility to use map units relevant to you, though. You can also use different Queries that do not take map units as input. Many Queries will return the same fields as the Query in Step 2 (i.e., the Query, NSSC Pangaea > Area/Legend/Mapunit/DMU by record ID - COIID will also work with most of the methodologies outlined if you prefer to query by Component ID). NASIS Queries do vary from each other, though, so it depends on the intracies of the Query. 

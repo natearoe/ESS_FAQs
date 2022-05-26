@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2022-05-24" />
+<meta name="date" content="2022-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,6 +162,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview<span></span></a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#obcd-connection"><i class="fa fa-check"></i><b>1.2</b> OBCD Connection<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#standard"><i class="fa fa-check"></i><b>1.3</b> Standard dataset/packages<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mapunits.html"><a href="mapunits.html"><i class="fa fa-check"></i><b>2</b> Mapunits<span></span></a>
 <ul>
@@ -187,6 +188,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="ecosites.html"><a href="ecosites.html#range-in-characteristics-of-ecosites"><i class="fa fa-check"></i><b>4.2</b> Range in characteristics of ecosites<span></span></a></li>
 <li class="chapter" data-level="4.3" data-path="ecosites.html"><a href="ecosites.html#mapping-ecological-sites"><i class="fa fa-check"></i><b>4.3</b> Mapping ecological sites<span></span></a></li>
 <li class="chapter" data-level="4.4" data-path="ecosites.html"><a href="ecosites.html#associated-sites"><i class="fa fa-check"></i><b>4.4</b> Associated sites<span></span></a></li>
+<li class="chapter" data-level="4.5" data-path="ecosites.html"><a href="ecosites.html#non-rep-dmu-components-correlated-to-ecosites"><i class="fa fa-check"></i><b>4.5</b> Non-rep dmu components correlated to ecosites<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
 <ul>
@@ -229,7 +231,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">NRCS Ecologist FAQs</h1>
 <p class="author"><em>Nathan Roe - <a href="mailto:nateroe@gmail.com" class="email">nateroe@gmail.com</a></em></p>
-<p class="date"><em>2022-05-24</em></p>
+<p class="date"><em>2022-05-25</em></p>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -250,6 +252,27 @@ div.csl-indent {
 <!-- # ```{r eval=FALSE} -->
 <!-- # bookdown::serve_book() -->
 <!-- # ``` -->
+</div>
+<div id="standard" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Standard dataset/packages<a href="index.html#standard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For many of the examples in this document, we will be using the same dataset. I will refer to this as the Standard Dataset. I will provide links back to this section where the Standard Dataset is used.</p>
+<p>Load standard packages</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aqp)</span>
+<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span></code></pre></div>
+<p>Step 1. Determine the mapunits of interest using the <a href="https://nroe.shinyapps.io/MapunitsInMLRA/">Mapunit in MLRA tool</a> for MLRA 18 with a 15% Membership. This tool is discussed in detail in <a href="mapunits.html#mapunitsinMLRA">What mapunits are in an MLRA?</a>.</p>
+<p>Step 2. Take the group of mapunits and enter them into Query &gt; MLRA09_Temple &gt; ARE/LMU/MU/DMU by Lmukey list.</p>
+<p>Run against National Database:
+<img src="_book/componentsinMLRAquery.JPG" alt="Run against National" /></p>
+<p>Run against Local:
+<img src="_book/componentsinMLRAlocal.JPG" alt="Run against Local" /></p>
+<p>Step 3. Fetch NASIS data</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>)</span></code></pre></div>
+<p>This is will provide you with the same data that I am using, if you want to following along exactly. You will likely find it to be of greater utility to use map units relevant to you, though. You can also use different Queries that do not take map units as input. Many Queries will return the same fields as the Query in Step 2 (i.e., the Query, NSSC Pangaea &gt; Area/Legend/Mapunit/DMU by record ID - COIID will also work with most of the methodologies outlined if you prefer to query by Component ID). NASIS Queries do vary from each other, though, so it depends on the intracies of the Query.</p>
 
 </div>
 </div>
