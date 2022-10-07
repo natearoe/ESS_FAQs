@@ -35,3 +35,5 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+determine-acreage-of-single-ecological-site
+determine-acreage-of-multiple-ecological-sites
