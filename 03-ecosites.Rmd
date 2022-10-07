@@ -1,7 +1,7 @@
 # Ecosites
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
+my.components.MLRA <- fetchNASIS(from = "components", duplicates = T, dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -165,48 +165,45 @@ Let's take a look at an example
 ```{r}
 associated_sites$F018XA202CA
 ```
-Here, we can see that we are looking at the ecological site F018XA202CA. The ecological site that most commonly occurs in mapunits containing your ecological site......is your ecological site. That will likely always be the case. The other ecological sites it appears with are R018XA103CA and R018XA104CA - those are actually informative.  
+Here, we can see that we are looking at the ecological site F018XA202CA. The ecological site that most commonly occurs in mapunits containing your ecological site......is your ecological site. That will likely always be the case. The other ecological sites it appears with are R018XA103CA and R018XA104CA - those are actually informative. 
 
-## Non-rep dmu components correlated to ecosites
-
-There is a good chance you have components from non-rep data map units (dmus) correlated to ecological sites. These should not exist. Non-rep dmus are more of a historical record of previous map units. Removing these correlations should be a standard part of QC. 
+## Determine acreage of single ecological site
+My office leader recently asked me how many acres a particular ecological site occupies because she was entering it as a project in NASIS and needed the associated acres. You might need to do something similar for a NASIS project, a tech team meeting, or to improve your own understanding of how prevalent an ecological site is. 
 
 Load the [Standard Dataset and packages](#standard).
 
-Look for nonrep dmus with ecosites assigned
+First, let's say we have a particular ecosite of interest - "R018XI105CA" 
 ```{r}
-nonrep_with_ecosite <- aqp::site(my.components.MLRA) %>% 
-  filter(repdmu == 0 & !is.na(ecosite_id))
+my_ecosite <- aqp::site(my.components.MLRA) %>% dplyr::filter(ecosite_id == "R018XI105CA")
 ```
 
-Components in nonrep dmus should not be correlated to ecosites. We are going to prepare files that remove these correlations. The process that I have been using to do this is creating to files, ESD Ecosites and ESD Notes. I follow a certain format for those files and email them to Tom Cochrane who uploads them to NASIS.
-
-ESD Ecosite file
+Now let's look at the components correlated to our ecosite of interest, the component percent (percent of mapunit represented by component), the mapunit acres, and calculate the acres associated with each component by multiplying component percent and mapunit acres. 
 ```{r}
-esd_ecosites_nonrep <- nonrep_with_ecosite %>% select(coiid)
+my_ecosite_compacres <- my_ecosite %>% select(ecosite_id, coiid, comppct_r, muacres) %>% mutate(comp_acreage = (comppct_r/100)*muacres)
 
-esd_ecosites_nonrep$`Ecosite ID` <- ""
-
-write.csv(esd_ecosites_nonrep, 
-  "C:/Users/Nathan.Roe/Documents/PES4ever/ESD Ecosite_nonrepdmu_20220522.csv", 
-  row.names = FALSE)
+head(my_ecosite_compacres)
 ```
 
-ESD Note file
+Then, we just need to sum the comp_acreage
 ```{r}
-esd_notes_nonrep <- nonrep_with_ecosite %>% select(coiid, ecosite_id)
-
-esd_notes_nonrep$author <- "Nathan Roe"
-
-esd_notes_nonrep$note <- paste0("This site was formerly correlated to ", 
-                          esd_notes_nonrep$ecosite_id, 
-                          ". That correlation was removed because this 
-                          component belongs to a non-rep dmu and therefore 
-                          should not be correlated to an ecological site. 
-                          This change was made by Nathan Roe during the PES 
-                          initiative of FY2022.")
-
-write.csv(esd_notes_nonrep %>% select(-ecosite_id), 
-  "C:/Users/Nathan.Roe/Documents/PES4ever/ESD Notes_nonrepdmu_20220522.csv", 
-  row.names = FALSE)
+sum(my_ecosite_compacres$comp_acreage)
 ```
+## Determine acreage of multiple ecological sites
+
+Let's look at how we would efficiently calculate the acreage of all the ecosites in your MLRA. 
+
+First, we will restrict the ecosites of interest to only those associate with MLRA 18. 
+```{r}
+MLRA18_ecosites <- my.components.MLRA$ecosite_id %>% str_subset(pattern = "18X") %>% unique()
+```
+
+
+```{r}
+test <- aqp::site(my.components.MLRA) %>% filter(ecosite_id %in% str_subset(my.components.MLRA@site$ecosite_id, pattern = "&")) %>% select(coiid, ecosite_id)
+```
+
+
+```{r}
+MLRA18_ecosites <- aqp::site(my.components.MLRA) %>% dplyr::filter(ecosite_id %in% str_subset())
+```
+

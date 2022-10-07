@@ -43,18 +43,23 @@ Queries by Soil Survey Area are much more reliable than queries by MLRA. As prev
 Load the soilDB package and fetch NASIS data
 ```{r, eval=FALSE}
 library(soilDB)
-my.mapunits.SSA <- fetchNASIS(from = "components")
+my.mapunits.SSA <- fetchNASIS(from = "components", duplicates = T)
 ```
 
 
 ```{r, echo=FALSE, message=FALSE}
 library(soilDB)
-my.mapunits.SSA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/componentsSSA792.sqlite", SS = FALSE)
+my.mapunits.SSA <- fetchNASIS(from = "components", duplicates = T, dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/componentsSSA792.sqlite", SS = FALSE)
 ```
 
 Look at the mapunits - the ```head()``` function shows just the first six records. Remove the ```head()``` function to see all the component names
 ```{r}
 head(my.mapunits.SSA$muname)
+```
+
+Look at the mapunit keys
+```{r}
+head(my.mapunits.SSA$mukey)
 ```
 
 ## Mapping mapunits

@@ -47,7 +47,7 @@ knitr::write_bib(c(
 
 ## Standard dataset/packages {#standard}
 
-For many of the examples in this document, we will be using the same dataset. I will refer to this as the Standard Dataset. I will provide links back to this section where the Standard Dataset is used.
+For many of the examples in this document, we will be using the same dataset and packages. I will refer to this as the Standard Dataset. I will provide links back to this section where the Standard Dataset is used.
 
 Load standard packages
 ```{r, message=FALSE, warning=FALSE}
@@ -63,7 +63,7 @@ library(maps)
 
 Step 1. Determine the mapunits of interest using the [Mapunit in MLRA tool](https://nroe.shinyapps.io/MapunitsInMLRA/) for MLRA 18 with a 15% Membership. This tool is discussed in detail in [What mapunits are in an MLRA?](#mapunitsinMLRA). 
 
-Step 2. Take the group of mapunits and enter them into Query > MLRA09_Temple > ARE/LMU/MU/DMU by Lmukey list.
+Step 2. Take the group of mapunits and enter them into Query > NSSC Pangaea > Area/Legend/Mapunit/DMU by record ID - LMAPUNITIID list.
 
 Run against National Database:
 ![Run against National](_book/componentsinMLRAquery.JPG)
