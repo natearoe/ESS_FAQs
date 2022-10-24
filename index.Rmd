@@ -69,13 +69,18 @@ Run against National Database:
 ![Run against National](_book/componentsinMLRAquery.JPG)
 
 Run against Local: 
-![Run against Local](_book/componentsinMLRAlocal.JPG)
+![Run against Local](_book/componentsinMLRAlocal.JPG)effec
 
 
 Step 3. Fetch NASIS data
 ```{r, eval=FALSE}
-my.components.MLRA <- fetchNASIS(from = "components")
+my.components.MLRA <- fetchNASIS(from = "components", duplicates = TRUE)
 ```
+
+Note on the ```duplicates = TRUE``` argument: ```fetchNASIS(from = "components")``` can access two hierarchical levels of data. The higher hierarchical level data is mapunit/soil survey area data. The lower hierarchical level data is component level data. By default, ```fetchNASIS(from = "components")``` accesses data at the component level. At times, we want to access data at a higher level (mapunit/soil survey area). When we want to access higher level data, the component level data must be nested within the higher level data. If there is a multiple:1 relationship between the higher level data and the component level data, duplication occurs. The multiple:1 relationship between higher level data and the component level data occurs because of MLRA mapunits - mapunits that occur across soil survey areas. With MLRA mapunits, components can be used in multiple mapunits/soil survey areas. 
+
+The take-home message is that you need to use the ```duplicates = TRUE``` to access mapunit/soil survey area data. This argument will cause duplication of component level data for MLRA mapunits where the component is used in multiple mapunits/soil survey areas. 
+
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -83,3 +88,4 @@ my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe
 ```
 
 This is will provide you with the same data that I am using, if you want to following along exactly. You will likely find it to be of greater utility to use map units relevant to you, though. You can also use different Queries that do not take map units as input. Many Queries will return the same fields as the Query in Step 2 (i.e., the Query, NSSC Pangaea > Area/Legend/Mapunit/DMU by record ID - COIID will also work with most of the methodologies outlined if you prefer to query by Component ID). NASIS Queries do vary from each other, though, so it depends on the intracies of the Query. 
+

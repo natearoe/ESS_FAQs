@@ -18,12 +18,14 @@ ecological-characteristics-of-components-programmatic
 where-do-components-occur
 how-to-correlate-components-to-ecosites
 how-to-qc-the-correlation-between
+test-section
 ecosites
 what-ecosites-are-active-in-an-mlra
 range-in-characteristics-of-ecosites
 mapping-ecological-sites
 associated-sites
-non-rep-dmu-components-correlated-to-ecosites
+determine-acreage-of-single-ecological-site
+determine-acreage-of-multiple-ecological-sites
 footnotes-and-citations
 footnotes
 citations
@@ -35,5 +37,3 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
-determine-acreage-of-single-ecological-site
-determine-acreage-of-multiple-ecological-sites

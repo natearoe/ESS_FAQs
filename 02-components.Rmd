@@ -1,7 +1,8 @@
 # Components
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
+my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE,
+                                 duplicates = TRUE)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -33,15 +34,16 @@ Run against Local:
 Load the soilDB package and fetch NASIS data
 ```{r, eval=FALSE}
 library(soilDB)
-my.components.MLRA <- fetchNASIS(from = "components")
+my.components.MLRA <- fetchNASIS(from = "components", duplicates = TRUE)
 ```
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(soilDB)
-my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
-
+my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE,
+                                     duplicates = TRUE)
 ```
+
 
 Look at component names - the ```head()``` function shows just the first six records. Remove the ```head()``` function to see all the component names
 ```{r}
@@ -69,13 +71,14 @@ Queries by Soil Survey Area are much more reliable than queries by MLRA. As prev
 Load the soilDB package and fetch NASIS data
 ```{r, eval=FALSE}
 library(soilDB)
-my.components.SSA <- fetchNASIS(from = "components")
+my.components.SSA <- fetchNASIS(from = "components", duplicates = TRUE)
 ```
 
 
 ```{r, echo=FALSE, message=FALSE}
 library(soilDB)
-my.components.SSA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/componentsSSA792.sqlite", SS = FALSE)
+my.components.SSA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/componentsSSA792.sqlite", SS = FALSE,
+                                duplicates = TRUE)
 ```
 
 Look at component names - the ```head()``` function shows just the first six records. Remove the ```head()``` function to see all the component names
@@ -128,10 +131,12 @@ Let's start off by removing miscellaneous areas and minor components. This is
 going to simplify things and remove some of the oddities that may exist in the 
 data. Ecological sciences do not correlate to misc. areas or minor components, 
 so it will not be a loss to us. 
+
 ```{r}
 nasis_selection <- subset(my.components.MLRA, compkind != "miscellaneous area" &
                             majcompflag == "1")
 ```
+
 
 ***Horizon level data***
 
@@ -142,9 +147,9 @@ the same syntax shown below. To see what horizon level data is available,
 type 'nasis_selection@horizons$' into the console. Horizon level data is 
 summarized into site level info. If you add other horizon level data, make 
 sure it is summarized in a conceptually meaningful way. 
+
 ```{r}
-horizon_df <- data.frame(component = nasis_selection$coiid,
-                         texture = nasis_selection$texture,
+horizon_df <- data.frame(texture = nasis_selection$texture,
                          frag_vol = nasis_selection$fragvoltot_r,
                          sand = nasis_selection$sandtotal_r,
                          clay = nasis_selection$claytotal_r,
@@ -156,7 +161,9 @@ horizon_df <- data.frame(component = nasis_selection$coiid,
                          ph_h = nasis_selection$ph1to1h2o_h,
                          awc_l = nasis_selection$awc_l,
                          awc_r = nasis_selection$awc_r,
-                         awc_h = nasis_selection$awc_h)
+                         awc_h = nasis_selection$awc_h,
+                         coiidcmb = nasis_selection$coiidcmb) %>% left_join(site(nasis_selection) %>% dplyr::select(coiidcmb, coiid)) %>% 
+                                                                  select(-coiidcmb) %>% dplyr::rename(component = coiid)
 ```
 
 Separate the texture column
@@ -301,15 +308,14 @@ restriction_data <- restrictions(nasis_selection) %>%
 
 Merge component data and restriction data
 ```{r}
-restriction_data$coiid <- as.character(restriction_data$coiid)
-component_data <- left_join(component_data, restriction_data)
+component_data_combined <- left_join(component_data, restriction_data)
 ```
 
 ***Merge horizon data and component data***
 ```{r, message=FALSE}
 all_data <- horizon_to_component_data %>%
   dplyr::rename(coiid = component) %>%
-  left_join(component_data) %>%
+  left_join(component_data_combined) %>%
   dplyr::select(coiid,  compname, ecosite, ecosite_id, landform, pmkind, 
                 pmorigin, taxtemp, textural_class, texture_qualifier, 
                 rock_frag, surf_frag, depth_to_restr, drainagecl, slope_l, 
@@ -330,3 +336,5 @@ write.csv(all_data, "C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv",
 ## How to correlate components to ecosites?
 
 ## How to QC the correlation between 
+
+## Test section

@@ -168,6 +168,7 @@ associated_sites$F018XA202CA
 Here, we can see that we are looking at the ecological site F018XA202CA. The ecological site that most commonly occurs in mapunits containing your ecological site......is your ecological site. That will likely always be the case. The other ecological sites it appears with are R018XA103CA and R018XA104CA - those are actually informative. 
 
 ## Determine acreage of single ecological site
+
 My office leader recently asked me how many acres a particular ecological site occupies because she was entering it as a project in NASIS and needed the associated acres. You might need to do something similar for a NASIS project, a tech team meeting, or to improve your own understanding of how prevalent an ecological site is. 
 
 Load the [Standard Dataset and packages](#standard).
@@ -202,8 +203,4 @@ MLRA18_ecosites <- my.components.MLRA$ecosite_id %>% str_subset(pattern = "18X")
 test <- aqp::site(my.components.MLRA) %>% filter(ecosite_id %in% str_subset(my.components.MLRA@site$ecosite_id, pattern = "&")) %>% select(coiid, ecosite_id)
 ```
 
-
-```{r}
-MLRA18_ecosites <- aqp::site(my.components.MLRA) %>% dplyr::filter(ecosite_id %in% str_subset())
-```
 
