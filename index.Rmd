@@ -23,7 +23,7 @@ This document is divided into 4 sections: mapunits, components, plots, and ecosi
 
 Much of this methodology relies on a combination of NASIS and R. It is my objective to make the R examples clear enough that someone with minimal to no experience with R can reproduce these examples. 
 
-## OBCD Connection
+## ODBC Connection
 
 As mentioned, these methodologies frequently utilize R and NASIS. To accomplish this, you will need to have R installed and establish an ODBC connection to NASIS. This is outlined in detail by the NRCS Stats for Soil Survey [pre-course assignment](http://ncss-tech.github.io/stats_for_soil_survey/chapters/0_pre-class-assignment/pre-class-assignment.html#1_USDA_Computer_Setup).
 

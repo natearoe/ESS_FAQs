@@ -2,7 +2,7 @@ eq:binom
 thm:tri
 introduction
 overview
-obcd-connection
+odbc-connection
 standard
 mapunits
 mapunitsinMLRA
@@ -26,9 +26,9 @@ mapping-ecological-sites
 associated-sites
 determine-acreage-of-single-ecological-site
 determine-acreage-of-multiple-ecological-sites
-footnotes-and-citations
-footnotes
-citations
+accessing-plot-level-vegetation-data
+extras
+creating-a-static-nasis-database
 blocks
 equations
 theorems-and-proofs

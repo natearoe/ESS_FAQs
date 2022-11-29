@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2022-10-24" />
+<meta name="date" content="2022-11-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="components.html"/>
-<link rel="next" href="footnotes-and-citations.html"/>
+<link rel="next" href="extras.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -119,28 +119,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -161,7 +139,7 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#obcd-connection"><i class="fa fa-check"></i><b>1.2</b> OBCD Connection</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#odbc-connection"><i class="fa fa-check"></i><b>1.2</b> ODBC Connection</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#standard"><i class="fa fa-check"></i><b>1.3</b> Standard dataset/packages</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mapunits.html"><a href="mapunits.html"><i class="fa fa-check"></i><b>2</b> Mapunits</a>
@@ -191,11 +169,11 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="ecosites.html"><a href="ecosites.html#associated-sites"><i class="fa fa-check"></i><b>4.4</b> Associated sites</a></li>
 <li class="chapter" data-level="4.5" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-single-ecological-site"><i class="fa fa-check"></i><b>4.5</b> Determine acreage of single ecological site</a></li>
 <li class="chapter" data-level="4.6" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-multiple-ecological-sites"><i class="fa fa-check"></i><b>4.6</b> Determine acreage of multiple ecological sites</a></li>
+<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#accessing-plot-level-vegetation-data"><i class="fa fa-check"></i><b>4.7</b> Accessing plot level vegetation data</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations</a>
+<li class="chapter" data-level="5" data-path="extras.html"><a href="extras.html"><i class="fa fa-check"></i><b>5</b> Extras</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes</a></li>
-<li class="chapter" data-level="5.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations</a></li>
+<li class="chapter" data-level="5.1" data-path="extras.html"><a href="extras.html#creating-a-static-nasis-database"><i class="fa fa-check"></i><b>5.1</b> Creating a Static NASIS database</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
 <ul>
@@ -368,7 +346,47 @@ div.csl-indent {
 <p>Let’s look at how we would efficiently calculate the acreage of all the ecosites in your MLRA.</p>
 <p>First, we will restrict the ecosites of interest to only those associate with MLRA 18.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="ecosites.html#cb73-1" aria-hidden="true" tabindex="-1"></a>MLRA18_ecosites <span class="ot">&lt;-</span> my.components.MLRA<span class="sc">$</span>ecosite_id <span class="sc">%&gt;%</span> <span class="fu">str_subset</span>(<span class="at">pattern =</span> <span class="st">&quot;18X&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="ecosites.html#cb74-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> aqp<span class="sc">::</span><span class="fu">site</span>(my.components.MLRA) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ecosite_id <span class="sc">%in%</span> <span class="fu">str_subset</span>(my.components.MLRA<span class="sc">@</span>site<span class="sc">$</span>ecosite_id, <span class="at">pattern =</span> <span class="st">&quot;&amp;&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(coiid, ecosite_id)</span></code></pre></div>
+<p>Now we can run a for loop that goes through each ecological site, calculates the acreage, and puts them all in a data frame</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="ecosites.html#cb74-1" aria-hidden="true" tabindex="-1"></a>ecosite_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb74-2"><a href="ecosites.html#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="ecosites.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> MLRA18_ecosites){</span>
+<span id="cb74-4"><a href="ecosites.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  ecosite_list[[i]] <span class="ot">&lt;-</span> aqp<span class="sc">::</span><span class="fu">site</span>(my.components.MLRA) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(ecosite_id <span class="sc">==</span> i) <span class="sc">%&gt;%</span> <span class="fu">select</span>(ecosite_id, coiid, comppct_r, muacres) <span class="sc">%&gt;%</span></span>
+<span id="cb74-5"><a href="ecosites.html#cb74-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="fu">mutate</span>(<span class="at">comp_acreage =</span> (comppct_r<span class="sc">/</span><span class="dv">100</span>)<span class="sc">*</span>muacres) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Ecosite =</span> <span class="fu">first</span>(ecosite_id), <span class="at">Acreage =</span></span>
+<span id="cb74-6"><a href="ecosites.html#cb74-6" aria-hidden="true" tabindex="-1"></a>                                                                                                           <span class="fu">sum</span>(comp_acreage))</span>
+<span id="cb74-7"><a href="ecosites.html#cb74-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb74-8"><a href="ecosites.html#cb74-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-9"><a href="ecosites.html#cb74-9" aria-hidden="true" tabindex="-1"></a>MLRA18_ecosite_acreage <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, ecosite_list) <span class="sc">%&gt;%</span> <span class="fu">remove_rownames</span>()</span>
+<span id="cb74-10"><a href="ecosites.html#cb74-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-11"><a href="ecosites.html#cb74-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(MLRA18_ecosite_acreage)</span></code></pre></div>
+<pre><code>##       Ecosite   Acreage
+## 1 R018XI163CA 251072.59
+## 2 R018XI164CA  38683.76
+## 3 F018XI200CA 406409.32
+## 4 R018XA102CA   8555.35
+## 5 F018XA201CA  32945.32
+## 6 F018XI201CA 364947.53</code></pre>
+</div>
+<div id="accessing-plot-level-vegetation-data" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Accessing plot level vegetation data<a href="ecosites.html#accessing-plot-level-vegetation-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla &gt; ‘Pedon/Site/Vegetation Plot by area overlap type and areasym.’ The description for this Query gives the necessary details.</p>
+<p>NATIONAL: Have to run this twice against the national in order to get sites, pedons, and vegetation plot. First, set target table to PEDON. Second, set target tablet to VEGETATION PLOT.</p>
+<p>LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.</p>
+<ol style="list-style-type: decimal">
+<li><p>Run against National - Pedon
+<img src="_book/veg_plot_national_pedon.JPG" alt="Run against National Vegplot Pedon" /></p></li>
+<li><p>Run against National - Vegetation plot
+<img src="_book/veg_plot_national_vegplot.JPG" alt="Run against National Vegplot Vegetation Plot" /></p></li>
+<li><p>Run against Local
+<img src="_book/veg_plot_local.JPG" alt="Run against local Vegplot" /></p></li>
+</ol>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="ecosites.html#cb76-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> <span class="fu">fetchVegdata</span>(<span class="at">SS =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>I will return to this to provide some tools for dealing with the actual veg data.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="ecosites.html#cb77-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">UserSiteID =</span> veg_data<span class="sc">$</span>vegplot<span class="sc">$</span>site_id, <span class="at">DataOrigin =</span> veg_data<span class="sc">$</span>vegplot<span class="sc">$</span>vegdataorigin)</span>
+<span id="cb77-2"><a href="ecosites.html#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="ecosites.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(test<span class="sc">$</span>DataOrigin)</span></code></pre></div>
+<pre><code>## 
+## site existing veg table        spreadsheet form 
+##                     420                     941</code></pre>
 
 </div>
 </div>
@@ -378,7 +396,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="components.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="footnotes-and-citations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="extras.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

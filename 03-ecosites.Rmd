@@ -12,6 +12,7 @@ library(sf)
 library(stringr)
 library(ggplot2)
 library(maps)
+library(tibble)
 ```
 
 ## What ecosites are active in an MLRA?
@@ -198,9 +199,53 @@ First, we will restrict the ecosites of interest to only those associate with ML
 MLRA18_ecosites <- my.components.MLRA$ecosite_id %>% str_subset(pattern = "18X") %>% unique()
 ```
 
+Now we can run a for loop that goes through each ecological site, calculates the acreage, and puts them all in a data frame
+```{r}
+
+ecosite_list <- list()
+
+for(i in MLRA18_ecosites){
+  ecosite_list[[i]] <- aqp::site(my.components.MLRA) %>% dplyr::filter(ecosite_id == i) %>% select(ecosite_id, coiid, comppct_r, muacres) %>%
+                                              mutate(comp_acreage = (comppct_r/100)*muacres) %>% summarise(Ecosite = first(ecosite_id), Acreage =
+                                                                                                           sum(comp_acreage))
+}
+
+MLRA18_ecosite_acreage <- do.call(rbind, ecosite_list) %>% remove_rownames()
+
+head(MLRA18_ecosite_acreage)
+```
+
+## Accessing plot level vegetation data
+
+This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla > 'Pedon/Site/Vegetation Plot by area overlap type and areasym'. The description for this Query gives the necessary details. 
+
+NATIONAL: Have to run this twice against the national in order to get sites, pedons, and vegetation plot.  First, set target table to PEDON.  Second, set target tablet to VEGETATION PLOT.
+
+LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.
+
+1. Run against National - Pedon
+![Run against National Vegplot Pedon](_book/veg_plot_national_pedon.JPG)
+
+2. Run against National - Vegetation plot
+![Run against National Vegplot Vegetation Plot](_book/veg_plot_national_vegplot.JPG)
+
+3. Run against Local
+![Run against local Vegplot](_book/veg_plot_local.JPG)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+veg_data <- fetchVegdata(dsn = "C:/Users/Nathan.Roe/Documents/SEKI/vegplotdata.sqlite", SS = FALSE)
+```
+
+```{r, eval=FALSE}
+veg_data <- fetchVegdata(SS = TRUE)
+```
+
+I will return to this to provide some tools for dealing with the actual veg data. 
 
 ```{r}
-test <- aqp::site(my.components.MLRA) %>% filter(ecosite_id %in% str_subset(my.components.MLRA@site$ecosite_id, pattern = "&")) %>% select(coiid, ecosite_id)
+test <- data.frame(UserSiteID = veg_data$vegplot$site_id, DataOrigin = veg_data$vegplot$vegdataorigin)
+
+table(test$DataOrigin)
 ```
 
 
