@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Ecosites | NRCS Ecologist FAQs</title>
   <meta name="description" content="This is a compilation of FAQs for NRCS Ecologists." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Ecosites | NRCS Ecologist FAQs" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2022-11-29" />
+<meta name="date" content="2023-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="components.html"/>
-<link rel="next" href="extras.html"/>
+<link rel="next" href="species.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,6 +52,22 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -169,17 +185,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="ecosites.html"><a href="ecosites.html#associated-sites"><i class="fa fa-check"></i><b>4.4</b> Associated sites</a></li>
 <li class="chapter" data-level="4.5" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-single-ecological-site"><i class="fa fa-check"></i><b>4.5</b> Determine acreage of single ecological site</a></li>
 <li class="chapter" data-level="4.6" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-multiple-ecological-sites"><i class="fa fa-check"></i><b>4.6</b> Determine acreage of multiple ecological sites</a></li>
-<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#accessing-plot-level-vegetation-data"><i class="fa fa-check"></i><b>4.7</b> Accessing plot level vegetation data</a></li>
+<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#plotveg"><i class="fa fa-check"></i><b>4.7</b> Accessing plot level vegetation data</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="extras.html"><a href="extras.html"><i class="fa fa-check"></i><b>5</b> Extras</a>
+<li class="chapter" data-level="5" data-path="species.html"><a href="species.html"><i class="fa fa-check"></i><b>5</b> Species</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="extras.html"><a href="extras.html#creating-a-static-nasis-database"><i class="fa fa-check"></i><b>5.1</b> Creating a Static NASIS database</a></li>
+<li class="chapter" data-level="5.1" data-path="species.html"><a href="species.html#mapping-the-location-of-species"><i class="fa fa-check"></i><b>5.1</b> Mapping the location of species</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<li class="chapter" data-level="6" data-path="nasis.html"><a href="nasis.html"><i class="fa fa-check"></i><b>6</b> NASIS</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="6.1" data-path="nasis.html"><a href="nasis.html#creating-a-static-nasis-database"><i class="fa fa-check"></i><b>6.1</b> Creating a Static NASIS database</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
 <ul>
@@ -366,8 +380,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 F018XA201CA  32945.32
 ## 6 F018XI201CA 364947.53</code></pre>
 </div>
-<div id="accessing-plot-level-vegetation-data" class="section level2 hasAnchor" number="4.7">
-<h2><span class="header-section-number">4.7</span> Accessing plot level vegetation data<a href="ecosites.html#accessing-plot-level-vegetation-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="plotveg" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Accessing plot level vegetation data<a href="ecosites.html#plotveg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla &gt; ‘Pedon/Site/Vegetation Plot by area overlap type and areasym.’ The description for this Query gives the necessary details.</p>
 <p>NATIONAL: Have to run this twice against the national in order to get sites, pedons, and vegetation plot. First, set target table to PEDON. Second, set target tablet to VEGETATION PLOT.</p>
 <p>LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.</p>
@@ -386,7 +400,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb77-3"><a href="ecosites.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(test<span class="sc">$</span>DataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## site existing veg table        spreadsheet form 
-##                     420                     941</code></pre>
+##                     470                     880</code></pre>
 
 </div>
 </div>
@@ -396,7 +410,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="components.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="extras.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="species.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -450,20 +464,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

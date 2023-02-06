@@ -1,0 +1,23 @@
+# NASIS
+
+## Creating a Static NASIS database
+
+It can be really useful to create a stored version of your selected set. That way, if you are frequently changing between different different selected sets, you do not have to clear your selected set and run a new query. This can be done by saving your selected set as an SQlite database. This allows you to call the saved SQlite database in SoilDB functions.
+
+Let's look at how we can create a stored SQlite database. 
+
+```{r, eval=FALSE}
+soilDB::createStaticNASIS(SS = TRUE, tables = 
+      soilDB::get_NASIS_table_name_by_purpose(c("area", "legend", "mapunit", "datamapunit", "component", "metadata", "lookup", "nasis")),
+      output_path = "C:/Users/Nathan.Roe/Documents/SEKI/vegplotdata.sqlite")
+```
+
+Note: The tables listed in the get_NASIS_table_name_by_purpose argument should cover the majority of situations. If you run into an issue, though, soilDB will likely name a specific table that is missing. If that happens, you will have to add the table to the character vector. 
+
+Once you have stored your SQlite database, you can call it using the soilDB functions. The default argument in ```fetchNASIS()``` and other SoilDB functions is ```SS = TRUE```. We are going to change that to false and identify the location of the SQlite database in the dsn argument. 
+
+```{r, eval=FALSE}
+my.components.MLRA <- fetchNASIS(from = "components", duplicates = T, dsn = "C:/Users/Nathan.Roe/Documents/SEKI/vegplotdata.sqlite", SS = FALSE)
+```
+
+This can be extremely useful when you have multiple selected sets that you are working with. 

@@ -1,5 +1,3 @@
-eq:binom
-thm:tri
 introduction
 overview
 odbc-connection
@@ -26,13 +24,11 @@ mapping-ecological-sites
 associated-sites
 determine-acreage-of-single-ecological-site
 determine-acreage-of-multiple-ecological-sites
-accessing-plot-level-vegetation-data
-extras
+plotveg
+species
+mapping-the-location-of-species
+nasis
 creating-a-static-nasis-database
-blocks
-equations
-theorems-and-proofs
-callout-blocks
 sharing-your-book
 publishing
 pages

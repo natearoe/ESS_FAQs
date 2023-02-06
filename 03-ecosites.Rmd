@@ -215,7 +215,7 @@ MLRA18_ecosite_acreage <- do.call(rbind, ecosite_list) %>% remove_rownames()
 head(MLRA18_ecosite_acreage)
 ```
 
-## Accessing plot level vegetation data
+## Accessing plot level vegetation data{#plotveg}
 
 This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla > 'Pedon/Site/Vegetation Plot by area overlap type and areasym'. The description for this Query gives the necessary details. 
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Mapunits | NRCS Ecologist FAQs</title>
   <meta name="description" content="This is a compilation of FAQs for NRCS Ecologists." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Mapunits | NRCS Ecologist FAQs" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2022-11-29" />
+<meta name="date" content="2023-02-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,22 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -169,17 +185,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="ecosites.html"><a href="ecosites.html#associated-sites"><i class="fa fa-check"></i><b>4.4</b> Associated sites</a></li>
 <li class="chapter" data-level="4.5" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-single-ecological-site"><i class="fa fa-check"></i><b>4.5</b> Determine acreage of single ecological site</a></li>
 <li class="chapter" data-level="4.6" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-multiple-ecological-sites"><i class="fa fa-check"></i><b>4.6</b> Determine acreage of multiple ecological sites</a></li>
-<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#accessing-plot-level-vegetation-data"><i class="fa fa-check"></i><b>4.7</b> Accessing plot level vegetation data</a></li>
+<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#plotveg"><i class="fa fa-check"></i><b>4.7</b> Accessing plot level vegetation data</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="extras.html"><a href="extras.html"><i class="fa fa-check"></i><b>5</b> Extras</a>
+<li class="chapter" data-level="5" data-path="species.html"><a href="species.html"><i class="fa fa-check"></i><b>5</b> Species</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="extras.html"><a href="extras.html#creating-a-static-nasis-database"><i class="fa fa-check"></i><b>5.1</b> Creating a Static NASIS database</a></li>
+<li class="chapter" data-level="5.1" data-path="species.html"><a href="species.html#mapping-the-location-of-species"><i class="fa fa-check"></i><b>5.1</b> Mapping the location of species</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<li class="chapter" data-level="6" data-path="nasis.html"><a href="nasis.html"><i class="fa fa-check"></i><b>6</b> NASIS</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="6.1" data-path="nasis.html"><a href="nasis.html#creating-a-static-nasis-database"><i class="fa fa-check"></i><b>6.1</b> Creating a Static NASIS database</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
 <ul>
@@ -213,6 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This section deals with mapunits. Mapunits have limited application for ecological work because they are broad concepts. Mapunits frequently contain multiple components, each occurring on different parts of the landscape and having different soil properties. Ecosites are correlated to components rather than mapunits because of the variability of mapunits. It should be noted that mapunits are spatially delineated, though, whereas components are not. Therefore, an attempt to map ecosites would rely heavily on mapunit delineations. An example of this can be seen on Web Soil Survey. Web Soil Survey can be used to map ecosites. These maps use mapunit delineations and show the ecosites that are correlated to the dominant component in that mapunit.</p>
 <p>For the purpose of this document, mapunits are primarily used as intermediate steps in different methodologies. For example, some NASIS Reports are particularly useful and require mapunits as input. Therefore, determining what mapunits are in your area of interest is helpful.</p>
 <p>The NRCS has four soil mapping products: SSURGO, gSSURGO, STATSGO, and gNATSGO. SSURGO is the most detailed product but is not available in all areas of the country. The resolution of SSURGO data ranges from 1:12,0000 to 1:63,360. gSSURGO is a gridded (rasterized) version of SSURGO - hence the “g” prefix. It covers the same areas as SSURGO but is gridded at a 10-meter cell size. STATSGO is a less detailed product but is available across all parts of the US. The resolution is 1:250,0000 in the continental US, Hawaii, Puerto Rico and the Virgin Islands. In Alaska, the resolution is 1:1,000,000. gNATSGO is a gridded combination of SSURGO and STATSGO. gNATSGO is primarily SSURGO data, but where SSURGO is unavailable, STATSGO is used to fill the gaps. The state-wide geodatabases are 10-meter cell sizes and the CONUS database is a 30-meter cell size.</p>
+<p>Data mapunits are the internal structure of mapunits. Data mapunits contain the mapunit component data as well as some information about the data mapunit itself. Over time, changes are sometimes made to data mapunits. Examples include adding a mapunit component to a mapunit, changing the particle size percentages of a mapunit component, or as a result of mapunits being renamed and aggregated as a result of transitioning into MLRA mapunits. When changes are made to a data mapunit, a new data mapunit is created. This new data mapunit becomes the representative data mapunit and the old data mapunit becomes a non-representative data mapunit. By doing this, a historical record of data mapunits is created, that way past versions are not lost. For ecological site work, we are almost always interested in working with representative data mapunits because they are the most up-to-date data available.</p>
 <div id="mapunitsinMLRA" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> What mapunits are in an MLRA?<a href="mapunits.html#mapunitsinMLRA" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>If your MLRA uses primarily SSURGO data, the <a href="https://nroe.shinyapps.io/MapunitsInMLRA/">Mapunit in MLRA tool</a> is the best option. It allow you to simply enter your MLRA of interest and define what percent of the total mapunit acreage must be within your MLRA for the mapunit to be considered a member of your MLRA of interest.</p>
@@ -316,20 +331,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
