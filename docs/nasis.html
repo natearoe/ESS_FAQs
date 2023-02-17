@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2023-02-06" />
+<meta name="date" content="2023-02-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="species.html"/>
-<link rel="next" href="sharing-your-book.html"/>
+<link rel="next" href="package-buildingmaintaining-tips.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -195,11 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="nasis.html"><a href="nasis.html#creating-a-static-nasis-database"><i class="fa fa-check"></i><b>6.1</b> Creating a Static NASIS database</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<li class="chapter" data-level="7" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>7</b> Package building/maintaining tips</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
-<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
-<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+<li class="chapter" data-level="7.1" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips-1"><i class="fa fa-check"></i><b>7.1</b> Package building/maintaining tips</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -228,12 +226,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.1</span> Creating a Static NASIS database<a href="nasis.html#creating-a-static-nasis-database" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>It can be really useful to create a stored version of your selected set. That way, if you are frequently changing between different different selected sets, you do not have to clear your selected set and run a new query. This can be done by saving your selected set as an SQlite database. This allows you to call the saved SQlite database in SoilDB functions.</p>
 <p>Let’s look at how we can create a stored SQlite database.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="nasis.html#cb91-1" aria-hidden="true" tabindex="-1"></a>soilDB<span class="sc">::</span><span class="fu">createStaticNASIS</span>(<span class="at">SS =</span> <span class="cn">TRUE</span>, <span class="at">tables =</span> </span>
-<span id="cb91-2"><a href="nasis.html#cb91-2" aria-hidden="true" tabindex="-1"></a>      soilDB<span class="sc">::</span><span class="fu">get_NASIS_table_name_by_purpose</span>(<span class="fu">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;legend&quot;</span>, <span class="st">&quot;mapunit&quot;</span>, <span class="st">&quot;datamapunit&quot;</span>, <span class="st">&quot;component&quot;</span>, <span class="st">&quot;metadata&quot;</span>, <span class="st">&quot;lookup&quot;</span>, <span class="st">&quot;nasis&quot;</span>)),</span>
-<span id="cb91-3"><a href="nasis.html#cb91-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">output_path =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/vegplotdata.sqlite&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="nasis.html#cb94-1" aria-hidden="true" tabindex="-1"></a>soilDB<span class="sc">::</span><span class="fu">createStaticNASIS</span>(<span class="at">SS =</span> <span class="cn">TRUE</span>, <span class="at">tables =</span> </span>
+<span id="cb94-2"><a href="nasis.html#cb94-2" aria-hidden="true" tabindex="-1"></a>      soilDB<span class="sc">::</span><span class="fu">get_NASIS_table_name_by_purpose</span>(<span class="fu">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;legend&quot;</span>, <span class="st">&quot;mapunit&quot;</span>, <span class="st">&quot;datamapunit&quot;</span>, <span class="st">&quot;component&quot;</span>, <span class="st">&quot;metadata&quot;</span>, <span class="st">&quot;lookup&quot;</span>, <span class="st">&quot;nasis&quot;</span>)),</span>
+<span id="cb94-3"><a href="nasis.html#cb94-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">output_path =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/vegplotdata.sqlite&quot;</span>)</span></code></pre></div>
 <p>Note: The tables listed in the get_NASIS_table_name_by_purpose argument should cover the majority of situations. If you run into an issue, though, soilDB will likely name a specific table that is missing. If that happens, you will have to add the table to the character vector.</p>
 <p>Once you have stored your SQlite database, you can call it using the soilDB functions. The default argument in <code>fetchNASIS()</code> and other SoilDB functions is <code>SS = TRUE</code>. We are going to change that to false and identify the location of the SQlite database in the dsn argument.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="nasis.html#cb92-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> T, <span class="at">dsn =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/vegplotdata.sqlite&quot;</span>, <span class="at">SS =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="nasis.html#cb95-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> T, <span class="at">dsn =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/vegplotdata.sqlite&quot;</span>, <span class="at">SS =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>This can be extremely useful when you have multiple selected sets that you are working with.</p>
 
 </div>
@@ -244,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="species.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sharing-your-book.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="package-buildingmaintaining-tips.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

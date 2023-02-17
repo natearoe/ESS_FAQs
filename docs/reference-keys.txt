@@ -29,7 +29,5 @@ species
 mapping-the-location-of-species
 nasis
 creating-a-static-nasis-database
-sharing-your-book
-publishing
-pages
-metadata-for-sharing
+package-buildingmaintaining-tips
+package-buildingmaintaining-tips-1

@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2023-02-06" />
+<meta name="date" content="2023-02-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -195,11 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="nasis.html"><a href="nasis.html#creating-a-static-nasis-database"><i class="fa fa-check"></i><b>6.1</b> Creating a Static NASIS database</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<li class="chapter" data-level="7" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>7</b> Package building/maintaining tips</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
-<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
-<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+<li class="chapter" data-level="7.1" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips-1"><i class="fa fa-check"></i><b>7.1</b> Package building/maintaining tips</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -350,7 +348,7 @@ sure it is summarized in a conceptually meaningful way.</p>
 <span id="cb29-13"><a href="components.html#cb29-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">awc_h =</span> nasis_selection<span class="sc">$</span>awc_h,</span>
 <span id="cb29-14"><a href="components.html#cb29-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">coiidcmb =</span> nasis_selection<span class="sc">$</span>coiidcmb) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(<span class="fu">site</span>(nasis_selection) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(coiidcmb, coiid)) <span class="sc">%&gt;%</span> </span>
 <span id="cb29-15"><a href="components.html#cb29-15" aria-hidden="true" tabindex="-1"></a>                                                                  <span class="fu">select</span>(<span class="sc">-</span>coiidcmb) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">component =</span> coiid)</span></code></pre></div>
-<pre><code>## Joining, by = &quot;coiidcmb&quot;</code></pre>
+<pre><code>## Joining with `by = join_by(coiidcmb)`</code></pre>
 <p>Separate the texture column</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="components.html#cb31-1" aria-hidden="true" tabindex="-1"></a>horizon_df<span class="sc">$</span>texture_qualifier <span class="ot">&lt;-</span> horizon_df<span class="sc">$</span>texture <span class="sc">%&gt;%</span> stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="st">&quot;.*(?=-)&quot;</span>)</span>
 <span id="cb31-2"><a href="components.html#cb31-2" aria-hidden="true" tabindex="-1"></a>horizon_df<span class="sc">$</span>texture_only <span class="ot">&lt;-</span> horizon_df<span class="sc">$</span>texture <span class="sc">%&gt;%</span> stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="st">&quot;(?&lt;=-).*&quot;</span>)</span>
@@ -466,7 +464,7 @@ rock frag using the horizon thickness as the weighting.</p>
 <span id="cb37-6"><a href="components.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice</span>(<span class="dv">1</span>)</span></code></pre></div>
 <p>Merge component data and restriction data</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="components.html#cb38-1" aria-hidden="true" tabindex="-1"></a>component_data_combined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(component_data, restriction_data)</span></code></pre></div>
-<pre><code>## Joining, by = &quot;coiid&quot;</code></pre>
+<pre><code>## Joining with `by = join_by(coiid)`</code></pre>
 <p><strong><em>Merge horizon data and component data</em></strong></p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="components.html#cb40-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> horizon_to_component_data <span class="sc">%&gt;%</span></span>
 <span id="cb40-2"><a href="components.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">coiid =</span> component) <span class="sc">%&gt;%</span></span>
@@ -478,9 +476,13 @@ rock frag using the horizon thickness as the weighting.</p>
 <span id="cb40-8"><a href="components.html#cb40-8" aria-hidden="true" tabindex="-1"></a>                elev_rv, elev_h, map_l, map_rv, map_h, maat_l, maat_rv, </span>
 <span id="cb40-9"><a href="components.html#cb40-9" aria-hidden="true" tabindex="-1"></a>                maat_h, ffd_l, ffd_rv, ffd_h ,comppct_r, dmuiid, </span>
 <span id="cb40-10"><a href="components.html#cb40-10" aria-hidden="true" tabindex="-1"></a>                <span class="fu">everything</span>())</span></code></pre></div>
+<pre><code>## Warning in left_join(., component_data_combined): Each row in `x` is expected to match at most 1 row in `y`.
+## ℹ Row 149 of `x` matches multiple rows.
+## ℹ If multiple matches are expected, set `multiple = &quot;all&quot;` to silence this
+##   warning.</code></pre>
 <p>Save as csv</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="components.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(all_data, <span class="st">&quot;C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv&quot;</span>,</span>
-<span id="cb41-2"><a href="components.html#cb41-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="components.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(all_data, <span class="st">&quot;C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv&quot;</span>,</span>
+<span id="cb42-2"><a href="components.html#cb42-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="where-do-components-occur" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> Where do components occur?<a href="components.html#where-do-components-occur" class="anchor-section" aria-label="Anchor link to header"></a></h2>

@@ -233,7 +233,7 @@ LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.
 ![Run against local Vegplot](_book/veg_plot_local.JPG)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-veg_data <- fetchVegdata(dsn = "C:/Users/Nathan.Roe/Documents/SEKI/vegplotdata.sqlite", SS = FALSE)
+veg_data <- fetchVegdata(dsn = "C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg.sqlite", SS = FALSE)
 ```
 
 ```{r, eval=FALSE}

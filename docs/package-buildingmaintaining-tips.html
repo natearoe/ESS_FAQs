@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Mapunits | NRCS Ecologist FAQs</title>
+  <title>Chapter 7 Package building/maintaining tips | NRCS Ecologist FAQs</title>
   <meta name="description" content="This is a compilation of FAQs for NRCS Ecologists." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Mapunits | NRCS Ecologist FAQs" />
+  <meta property="og:title" content="Chapter 7 Package building/maintaining tips | NRCS Ecologist FAQs" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a compilation of FAQs for NRCS Ecologists." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Mapunits | NRCS Ecologist FAQs" />
+  <meta name="twitter:title" content="Chapter 7 Package building/maintaining tips | NRCS Ecologist FAQs" />
   
   <meta name="twitter:description" content="This is a compilation of FAQs for NRCS Ecologists." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="components.html"/>
+<link rel="prev" href="nasis.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -220,52 +220,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mapunits" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Mapunits<a href="mapunits.html#mapunits" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This section deals with mapunits. Mapunits have limited application for ecological work because they are broad concepts. Mapunits frequently contain multiple components, each occurring on different parts of the landscape and having different soil properties. Ecosites are correlated to components rather than mapunits because of the variability of mapunits. It should be noted that mapunits are spatially delineated, though, whereas components are not. Therefore, an attempt to map ecosites would rely heavily on mapunit delineations. An example of this can be seen on Web Soil Survey. Web Soil Survey can be used to map ecosites. These maps use mapunit delineations and show the ecosites that are correlated to the dominant component in that mapunit.</p>
-<p>For the purpose of this document, mapunits are primarily used as intermediate steps in different methodologies. For example, some NASIS Reports are particularly useful and require mapunits as input. Therefore, determining what mapunits are in your area of interest is helpful.</p>
-<p>The NRCS has four soil mapping products: SSURGO, gSSURGO, STATSGO, and gNATSGO. SSURGO is the most detailed product but is not available in all areas of the country. The resolution of SSURGO data ranges from 1:12,0000 to 1:63,360. gSSURGO is a gridded (rasterized) version of SSURGO - hence the “g” prefix. It covers the same areas as SSURGO but is gridded at a 10-meter cell size. STATSGO is a less detailed product but is available across all parts of the US. The resolution is 1:250,0000 in the continental US, Hawaii, Puerto Rico and the Virgin Islands. In Alaska, the resolution is 1:1,000,000. gNATSGO is a gridded combination of SSURGO and STATSGO. gNATSGO is primarily SSURGO data, but where SSURGO is unavailable, STATSGO is used to fill the gaps. The state-wide geodatabases are 10-meter cell sizes and the CONUS database is a 30-meter cell size.</p>
-<p>Data mapunits are the internal structure of mapunits. Data mapunits contain the mapunit component data as well as some information about the data mapunit itself. Over time, changes are sometimes made to data mapunits. Examples include adding a mapunit component to a mapunit, changing the particle size percentages of a mapunit component, or as a result of mapunits being renamed and aggregated as a result of transitioning into MLRA mapunits. When changes are made to a data mapunit, a new data mapunit is created. This new data mapunit becomes the representative data mapunit and the old data mapunit becomes a non-representative data mapunit. By doing this, a historical record of data mapunits is created, that way past versions are not lost. For ecological site work, we are almost always interested in working with representative data mapunits because they are the most up-to-date data available.</p>
-<div id="mapunitsinMLRA" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> What mapunits are in an MLRA?<a href="mapunits.html#mapunitsinMLRA" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>If your MLRA uses primarily SSURGO data, the <a href="https://nroe.shinyapps.io/MapunitsInMLRA/">Mapunit in MLRA tool</a> is the best option. It allow you to simply enter your MLRA of interest and define what percent of the total mapunit acreage must be within your MLRA for the mapunit to be considered a member of your MLRA of interest.</p>
-<p>Note that this tool will make two groups of mapunits if there are more than 2,100 mapunits. This happens because most NASIS queries do not allow for more than 2,100 mapunits to be included in a query.</p>
-<p>Why not use a NASIS Query that queries components by MLRA, like NASIS &gt; Queries &gt; NSSC Pangaea &gt; Area/Legend/Mapunit/DMU by MLRA? Unfortunately, this is not the most reliable way to determine what mapunits are in an MLRA. Mapunits are assigned to an MLRA via the mapunit area overlap table. These tables are not perfectly populated. Some mapunits are not assigned to an MLRA and others could be assigned to multiple MLRAs. For this reason, using a spatial intersection, as is done in the ‘Mapunit in MLRA tool’ is the preferred approach. Components are assigned from the same mapunit area overlap tables and therefore suffer from imperfect population of mapunit overlap tables also. Components</p>
-</div>
-<div id="mapunitsinSSA" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> What mapunits are in a Soil Survey Area?<a href="mapunits.html#mapunitsinSSA" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Queries by Soil Survey Area are much more reliable than queries by MLRA. As previously mentioned, queries by MLRA are not ideal because the mapunit overlap tables are imperfectly populated. The Soil Survey area corresponds to the legend, and this means that components are reliably associated with Soil Survey Areas. Therefore, let’s use the following: NASIS &gt; Query &gt; NSSC Pangaea &gt; Area/Legend/Mapunit/DMU/Pedon/Site/ by areasymbol.</p>
-<ol style="list-style-type: decimal">
-<li><p>Run against National
-<img src="_book/componentsinSSA.JPG" alt="Run against National SSA" /></p></li>
-<li><p>Run against Local
-<img src="_book/componentsinSSAlocal.JPG" alt="Run against Local SSA" /></p></li>
-<li><p>Acquire component names and IDs using R.</p></li>
-</ol>
-<p>Load the soilDB package and fetch NASIS data</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="mapunits.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
-<span id="cb3-2"><a href="mapunits.html#cb3-2" aria-hidden="true" tabindex="-1"></a>my.mapunits.SSA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> T)</span></code></pre></div>
-<pre><code>## Warning: Horizon top depths contain NA! Check depth logic with
-## aqp::checkHzDepthLogic()</code></pre>
-<pre><code>## Warning: Horizon bottom depths contain NA! Check depth logic with
-## aqp::checkHzDepthLogic()</code></pre>
-<pre><code>## Warning in `hzidname&lt;-`(`*tmp*`, value = &quot;chiid&quot;): horizon ID name (chiid) not
-## unique. unique ID not changed.</code></pre>
-<p>Look at the mapunits - the <code>head()</code> function shows just the first six records. Remove the <code>head()</code> function to see all the component names</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="mapunits.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.mapunits.SSA<span class="sc">$</span>muname)</span></code></pre></div>
-<pre><code>## [1] &quot;Water&quot;                                                                                          
-## [2] &quot;Rock outcrop, granitic crags-Typic Cryorthents complex, 30 to 100 percent slopes&quot;               
-## [3] &quot;Rock outcrop, granitic crags-Typic Cryorthents complex, 30 to 100 percent slopes&quot;               
-## [4] &quot;Rock outcrop, granitic crags-Typic Cryorthents complex, 30 to 100 percent slopes&quot;               
-## [5] &quot;Rock outcrop, metamorphic crags-Typic Cryorthents, metamorphic complex, 30 to 90 percent slopes&quot;
-## [6] &quot;Rock outcrop, metamorphic crags-Typic Cryorthents, metamorphic complex, 30 to 90 percent slopes&quot;</code></pre>
-<p>Look at the mapunit keys</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="mapunits.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.mapunits.SSA<span class="sc">$</span>mukey)</span></code></pre></div>
-<pre><code>## [1] 2766840 2766852 2766852 2766852 2766853 2766853</code></pre>
-</div>
-<div id="mapping-mapunits" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Mapping mapunits<a href="mapunits.html#mapping-mapunits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Using Soil Web and R.</p>
+<div id="package-buildingmaintaining-tips" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Package building/maintaining tips<a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="package-buildingmaintaining-tips-1" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Package building/maintaining tips<a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section has helpful reminders for building and maintaining R packages.</p>
+<p>Update package documentation</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="package-buildingmaintaining-tips.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::document()</span></span></code></pre></div>
+<p>Add package</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="package-buildingmaintaining-tips.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use_package()</span></span></code></pre></div>
+<p>Add function from package. Adding a function from a package instead of the whole package keeps things lighter weight. If you want to just add a function, use the script below and put it in your function.R file where you use their function.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="package-buildingmaintaining-tips.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># @importFrom package-name object1 object2 objectn</span></span></code></pre></div>
+<p>Make a package documentation file</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="package-buildingmaintaining-tips.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># usethis::use_package_doc()</span></span></code></pre></div>
+<p>Check out this link for more details - <a href="https://devtools.r-lib.org/" class="uri">https://devtools.r-lib.org/</a></p>
 
 </div>
 </div>
@@ -274,8 +242,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="components.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="nasis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -306,7 +274,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-mapunits.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-package_building.Rmd",
 "text": "Edit"
 },
 "history": {
