@@ -118,55 +118,37 @@ Associated sites are ecological sites that occur in the same area of the landsca
 
 Load the [Standard Dataset and packages](#standard).
 
-Reduce data to major components and non-miscellaneous area
+Reduce data how you see fit. I am just going to remove miscellaneous areas, but you could choose additional criteria such as removing minor components. 
 ```{r}
-my.components.MLRA.reduced <- my.components.MLRA %>% site() %>% 
-  filter(compkind != "miscellaneous area" & majcompflag == "1")
+my.components.MLRA.reduced <- my.components.MLRA@site |> dplyr::filter(compkind != "miscellaneous area")
 ```
 
-Reduce to only MLRA18 ecosites
+Calculate the acreage associated with each component
 ```{r}
-MLRA18_ecosites <-  my.components.MLRA.reduced$ecosite_id %>% 
-  stringr::str_subset("18X") %>% unique() 
+my.components.MLRA.reduced$comp_acres <- (my.components.MLRA.reduced$muacres * my.components.MLRA.reduced$comppct_r)/100
 ```
 
-Create empty lists for upcoming for loops
+Create empty list for upcoming for loop
 ```{r}
-ecosite_mukeys_list <- list()
-mus_with_ecosite_list <-  list()
+associated_ecosites <- list()
 ```
 
-Create for loop to determine all the mapunits that each ecological site occurs in
+Create for loop to calculate the acreage of ecosites that occur in the same mapunits as your ecosite of interest. The results will be in a list. 
 ```{r}
-for(i in MLRA18_ecosites){
-  ecosite_mukeys_list[[i]] <-  my.components.MLRA.reduced %>% 
-    dplyr::filter(ecosite_id == i) %>% pull(mukey)
+for(i in my.components.MLRA.reduced$ecosite_id |> unique()){
+  associated_ecosites[[i]] <- my.components.MLRA.reduced |> 
+    dplyr::filter(mukey %in% (my.components.MLRA.reduced |> 
+                    dplyr::filter(ecosite_id == i) |> 
+                    dplyr::pull(mukey))) |> 
+    dplyr::group_by(ecosite_id) |> dplyr::summarise(acres = sum(comp_acres)) |> 
+    dplyr::filter(ecosite_id != i) |> arrange(dplyr::desc(acres))
 }
 ```
-
-Create a list of dataframes. Each dataframe has the name of the ecological site that it represents. The dataframes contain all of the component data from all of the mapunits that the ecosite occurs in. For example, let's say we have an ecosite named F018XA201CA. The dataframe for F018XA201CA will contain data for all the components that occur in all of the mapunits that F018XA201CA occurs in. That means that many of the components will be components correlated to F018XA201CA, but it will also contain other components not correlated to F018XA201CA.
-```{r}
-for(i in MLRA18_ecosites){
-  mus_with_ecosite_list[[i]] <- my.components.MLRA.reduced %>% 
-    dplyr::filter(mukey %in% ecosite_mukeys_list[[i]])
-}
-```
-
-Now, we make a table from all of the ecological site data in each dataframe. 
-```{r}
-associated_sites <-  lapply(mus_with_ecosite_list, FUN = function(x){
-  table(x$ecosite_id) %>% as.data.frame() %>% arrange(desc(Freq)) %>% 
-    dplyr::rename(Ecosite = Var1)
-})
-```
-
-The result is this list called associated_sites. associated_lists has a dataframe for every ecological site, ordered by how frequently the other ecologica sites occur. The table describes all the other ecological sites that occur in the same mapunit as the defined ecological site. 
 
 Let's take a look at an example
 ```{r}
-associated_sites$F018XA202CA
+associated_ecosites$F018XA202CA
 ```
-Here, we can see that we are looking at the ecological site F018XA202CA. The ecological site that most commonly occurs in mapunits containing your ecological site......is your ecological site. That will likely always be the case. The other ecological sites it appears with are R018XA103CA and R018XA104CA - those are actually informative. 
 
 ## Determine acreage of single ecological site
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2023-03-19" />
+<meta name="date" content="2023-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -108,7 +108,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -121,7 +121,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -254,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="range-in-characteristics-of-ecosites" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Range in characteristics of ecosites<a href="ecosites.html#range-in-characteristics-of-ecosites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I created a report that summarizes the characteristics of ecosites. It is organized based on the information that is supposed to be populated in EDIT. Here is a link to a <a href="https://htmlpreview.github.io/?https://github.com/natearoe/practice/blob/master/F018XA201CA.html">sample report</a>. I have established a methodology allowing you to create reports like the one linked for all of the ecosites in your MLRA within a few short steps. You can also produce the report for just one of your ecosites. For documentation on this methodology, <a href="https://natearoe.github.io/git-cloud-storage/read_me.docx">click here</a>. Click on the green ‘Code’ button and choose ‘Download ZIP.’ Once you have downloaded to the location of your preference, you can right click &gt; Extract all. You can then open the read_me.docx file. Additionally, you can watch the following YouTube video:</p>
+<p>I created a report that summarizes the characteristics of ecosites. It is organized based on the information that is supposed to be populated in EDIT. Here is a link to a <a href="https://htmlpreview.github.io/?https://github.com/natearoe/practice/blob/master/F018XA201CA.html">sample report</a>. I have established a methodology allowing you to create reports like the one linked for all of the ecosites in your MLRA within a few short steps. You can also produce the report for just one of your ecosites. For documentation on this methodology, <a href="https://natearoe.github.io/git-cloud-storage/read_me.docx">click here</a>. Click on the green ‘Code’ button and choose ‘Download ZIP’. Once you have downloaded to the location of your preference, you can right click &gt; Extract all. You can then open the read_me.docx file. Additionally, you can watch the following YouTube video:</p>
 <iframe src="https://www.youtube.com/embed/9H8sz5fZaEQ?start=19" width="672" height="400px" data-external="1">
 </iframe>
 </div>
@@ -298,50 +298,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.4</span> Associated sites<a href="ecosites.html#associated-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Associated sites are ecological sites that occur in the same area of the landscape. The simplest way to think about this is ecological sites that are adjacent to your ecological site of interest. I am going to present a simple way of addressing this. We can determine what ecological sites occur in the same mapunit as your ecosite of interest. Looking at all the mapunits that your ecological site of interest occurs in, and tallying up all of the other ecological sites that are in shared mapunits, we can come to a metric of what other ecological sites tend to be near your ecological site of interest. In the future, I would like to make some improvements to this, so that it considers adjacent mapunits and considers the length of boundary between mapunits.</p>
 <p>Load the <a href="index.html#standard">Standard Dataset and packages</a>.</p>
-<p>Reduce data to major components and non-miscellaneous area</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="ecosites.html#cb61-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA.reduced <span class="ot">&lt;-</span> my.components.MLRA <span class="sc">%&gt;%</span> <span class="fu">site</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb61-2"><a href="ecosites.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(compkind <span class="sc">!=</span> <span class="st">&quot;miscellaneous area&quot;</span> <span class="sc">&amp;</span> majcompflag <span class="sc">==</span> <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
-<p>Reduce to only MLRA18 ecosites</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="ecosites.html#cb62-1" aria-hidden="true" tabindex="-1"></a>MLRA18_ecosites <span class="ot">&lt;-</span>  my.components.MLRA.reduced<span class="sc">$</span>ecosite_id <span class="sc">%&gt;%</span> </span>
-<span id="cb62-2"><a href="ecosites.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_subset</span>(<span class="st">&quot;18X&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">unique</span>() </span></code></pre></div>
-<p>Create empty lists for upcoming for loops</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="ecosites.html#cb63-1" aria-hidden="true" tabindex="-1"></a>ecosite_mukeys_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb63-2"><a href="ecosites.html#cb63-2" aria-hidden="true" tabindex="-1"></a>mus_with_ecosite_list <span class="ot">&lt;-</span>  <span class="fu">list</span>()</span></code></pre></div>
-<p>Create for loop to determine all the mapunits that each ecological site occurs in</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="ecosites.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> MLRA18_ecosites){</span>
-<span id="cb64-2"><a href="ecosites.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  ecosite_mukeys_list[[i]] <span class="ot">&lt;-</span>  my.components.MLRA.reduced <span class="sc">%&gt;%</span> </span>
-<span id="cb64-3"><a href="ecosites.html#cb64-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(ecosite_id <span class="sc">==</span> i) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(mukey)</span>
-<span id="cb64-4"><a href="ecosites.html#cb64-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Create a list of dataframes. Each dataframe has the name of the ecological site that it represents. The dataframes contain all of the component data from all of the mapunits that the ecosite occurs in. For example, let’s say we have an ecosite named F018XA201CA. The dataframe for F018XA201CA will contain data for all the components that occur in all of the mapunits that F018XA201CA occurs in. That means that many of the components will be components correlated to F018XA201CA, but it will also contain other components not correlated to F018XA201CA.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="ecosites.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> MLRA18_ecosites){</span>
-<span id="cb65-2"><a href="ecosites.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  mus_with_ecosite_list[[i]] <span class="ot">&lt;-</span> my.components.MLRA.reduced <span class="sc">%&gt;%</span> </span>
-<span id="cb65-3"><a href="ecosites.html#cb65-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(mukey <span class="sc">%in%</span> ecosite_mukeys_list[[i]])</span>
-<span id="cb65-4"><a href="ecosites.html#cb65-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Now, we make a table from all of the ecological site data in each dataframe.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="ecosites.html#cb66-1" aria-hidden="true" tabindex="-1"></a>associated_sites <span class="ot">&lt;-</span>  <span class="fu">lapply</span>(mus_with_ecosite_list, <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
-<span id="cb66-2"><a href="ecosites.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(x<span class="sc">$</span>ecosite_id) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(Freq)) <span class="sc">%&gt;%</span> </span>
-<span id="cb66-3"><a href="ecosites.html#cb66-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Ecosite =</span> Var1)</span>
-<span id="cb66-4"><a href="ecosites.html#cb66-4" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
-<p>The result is this list called associated_sites. associated_lists has a dataframe for every ecological site, ordered by how frequently the other ecologica sites occur. The table describes all the other ecological sites that occur in the same mapunit as the defined ecological site.</p>
+<p>Reduce data how you see fit. I am just going to remove miscellaneous areas, but you could choose additional criteria such as removing minor components.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="ecosites.html#cb61-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA.reduced <span class="ot">&lt;-</span> my.components.MLRA<span class="sc">@</span>site <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(compkind <span class="sc">!=</span> <span class="st">&quot;miscellaneous area&quot;</span>)</span></code></pre></div>
+<p>Calculate the acreage associated with each component</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="ecosites.html#cb62-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA.reduced<span class="sc">$</span>comp_acres <span class="ot">&lt;-</span> (my.components.MLRA.reduced<span class="sc">$</span>muacres <span class="sc">*</span> my.components.MLRA.reduced<span class="sc">$</span>comppct_r)<span class="sc">/</span><span class="dv">100</span></span></code></pre></div>
+<p>Create empty list for upcoming for loop</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="ecosites.html#cb63-1" aria-hidden="true" tabindex="-1"></a>associated_ecosites <span class="ot">&lt;-</span> <span class="fu">list</span>()</span></code></pre></div>
+<p>Create for loop to calculate the acreage of ecosites that occur in the same mapunits as your ecosite of interest. The results will be in a list.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="ecosites.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> my.components.MLRA.reduced<span class="sc">$</span>ecosite_id <span class="sc">|&gt;</span> <span class="fu">unique</span>()){</span>
+<span id="cb64-2"><a href="ecosites.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  associated_ecosites[[i]] <span class="ot">&lt;-</span> my.components.MLRA.reduced <span class="sc">|&gt;</span> </span>
+<span id="cb64-3"><a href="ecosites.html#cb64-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(mukey <span class="sc">%in%</span> (my.components.MLRA.reduced <span class="sc">|&gt;</span> </span>
+<span id="cb64-4"><a href="ecosites.html#cb64-4" aria-hidden="true" tabindex="-1"></a>                    dplyr<span class="sc">::</span><span class="fu">filter</span>(ecosite_id <span class="sc">==</span> i) <span class="sc">|&gt;</span> </span>
+<span id="cb64-5"><a href="ecosites.html#cb64-5" aria-hidden="true" tabindex="-1"></a>                    dplyr<span class="sc">::</span><span class="fu">pull</span>(mukey))) <span class="sc">|&gt;</span> </span>
+<span id="cb64-6"><a href="ecosites.html#cb64-6" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(ecosite_id) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">acres =</span> <span class="fu">sum</span>(comp_acres)) <span class="sc">|&gt;</span> </span>
+<span id="cb64-7"><a href="ecosites.html#cb64-7" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(ecosite_id <span class="sc">!=</span> i) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(dplyr<span class="sc">::</span><span class="fu">desc</span>(acres))</span>
+<span id="cb64-8"><a href="ecosites.html#cb64-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Let’s take a look at an example</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="ecosites.html#cb67-1" aria-hidden="true" tabindex="-1"></a>associated_sites<span class="sc">$</span>F018XA202CA</span></code></pre></div>
-<pre><code>##       Ecosite Freq
-## 1 F018XA202CA   26
-## 2 R018XA103CA    6
-## 3 R018XA104CA    4
-## 4 R015XF008CA    1</code></pre>
-<p>Here, we can see that we are looking at the ecological site F018XA202CA. The ecological site that most commonly occurs in mapunits containing your ecological site……is your ecological site. That will likely always be the case. The other ecological sites it appears with are R018XA103CA and R018XA104CA - those are actually informative.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="ecosites.html#cb65-1" aria-hidden="true" tabindex="-1"></a>associated_ecosites<span class="sc">$</span>F018XA202CA</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   ecosite_id   acres
+##   &lt;chr&gt;        &lt;dbl&gt;
+## 1 R018XA103CA 14813.
+## 2 R018XA104CA  8784.
+## 3 R015XF008CA  1657</code></pre>
 </div>
 <div id="determine-acreage-of-single-ecological-site" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Determine acreage of single ecological site<a href="ecosites.html#determine-acreage-of-single-ecological-site" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>My office leader recently asked me how many acres a particular ecological site occupies because she was entering it as a project in NASIS and needed the associated acres. You might need to do something similar for a NASIS project, a tech team meeting, or to improve your own understanding of how prevalent an ecological site is.</p>
 <p>Load the <a href="index.html#standard">Standard Dataset and packages</a>.</p>
 <p>First, let’s say we have a particular ecosite of interest - “R018XI105CA”</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="ecosites.html#cb69-1" aria-hidden="true" tabindex="-1"></a>my_ecosite <span class="ot">&lt;-</span> aqp<span class="sc">::</span><span class="fu">site</span>(my.components.MLRA) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(ecosite_id <span class="sc">==</span> <span class="st">&quot;R018XI105CA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="ecosites.html#cb67-1" aria-hidden="true" tabindex="-1"></a>my_ecosite <span class="ot">&lt;-</span> aqp<span class="sc">::</span><span class="fu">site</span>(my.components.MLRA) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(ecosite_id <span class="sc">==</span> <span class="st">&quot;R018XI105CA&quot;</span>)</span></code></pre></div>
 <p>Now let’s look at the components correlated to our ecosite of interest, the component percent (percent of mapunit represented by component), the mapunit acres, and calculate the acres associated with each component by multiplying component percent and mapunit acres.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="ecosites.html#cb70-1" aria-hidden="true" tabindex="-1"></a>my_ecosite_compacres <span class="ot">&lt;-</span> my_ecosite <span class="sc">%&gt;%</span> <span class="fu">select</span>(ecosite_id, coiid, comppct_r, muacres) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">comp_acreage =</span> (comppct_r<span class="sc">/</span><span class="dv">100</span>)<span class="sc">*</span>muacres)</span>
-<span id="cb70-2"><a href="ecosites.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-3"><a href="ecosites.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_ecosite_compacres)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="ecosites.html#cb68-1" aria-hidden="true" tabindex="-1"></a>my_ecosite_compacres <span class="ot">&lt;-</span> my_ecosite <span class="sc">%&gt;%</span> <span class="fu">select</span>(ecosite_id, coiid, comppct_r, muacres) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">comp_acreage =</span> (comppct_r<span class="sc">/</span><span class="dv">100</span>)<span class="sc">*</span>muacres)</span>
+<span id="cb68-2"><a href="ecosites.html#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="ecosites.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my_ecosite_compacres)</span></code></pre></div>
 <pre><code>##    ecosite_id   coiid comppct_r muacres comp_acreage
 ## 1 R018XI105CA 2516892        25    5717      1429.25
 ## 2 R018XI105CA 2029027        10   34449      3444.90
@@ -350,26 +340,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 R018XI105CA 2029025        10    7447       744.70
 ## 6 R018XI105CA 2482828        15   22906      3435.90</code></pre>
 <p>Then, we just need to sum the comp_acreage</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="ecosites.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(my_ecosite_compacres<span class="sc">$</span>comp_acreage)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="ecosites.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(my_ecosite_compacres<span class="sc">$</span>comp_acreage)</span></code></pre></div>
 <pre><code>## [1] 85585.38</code></pre>
 </div>
 <div id="determine-acreage-of-multiple-ecological-sites" class="section level2 hasAnchor" number="4.6">
 <h2><span class="header-section-number">4.6</span> Determine acreage of multiple ecological sites<a href="ecosites.html#determine-acreage-of-multiple-ecological-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s look at how we would efficiently calculate the acreage of all the ecosites in your MLRA.</p>
 <p>First, we will restrict the ecosites of interest to only those associate with MLRA 18.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="ecosites.html#cb74-1" aria-hidden="true" tabindex="-1"></a>MLRA18_ecosites <span class="ot">&lt;-</span> my.components.MLRA<span class="sc">$</span>ecosite_id <span class="sc">%&gt;%</span> <span class="fu">str_subset</span>(<span class="at">pattern =</span> <span class="st">&quot;18X&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="ecosites.html#cb72-1" aria-hidden="true" tabindex="-1"></a>MLRA18_ecosites <span class="ot">&lt;-</span> my.components.MLRA<span class="sc">$</span>ecosite_id <span class="sc">%&gt;%</span> <span class="fu">str_subset</span>(<span class="at">pattern =</span> <span class="st">&quot;18X&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code></pre></div>
 <p>Now we can run a for loop that goes through each ecological site, calculates the acreage, and puts them all in a data frame</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="ecosites.html#cb75-1" aria-hidden="true" tabindex="-1"></a>ecosite_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb75-2"><a href="ecosites.html#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-3"><a href="ecosites.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> MLRA18_ecosites){</span>
-<span id="cb75-4"><a href="ecosites.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  ecosite_list[[i]] <span class="ot">&lt;-</span> aqp<span class="sc">::</span><span class="fu">site</span>(my.components.MLRA) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(ecosite_id <span class="sc">==</span> i) <span class="sc">%&gt;%</span> <span class="fu">select</span>(ecosite_id, coiid, comppct_r, muacres) <span class="sc">%&gt;%</span></span>
-<span id="cb75-5"><a href="ecosites.html#cb75-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="fu">mutate</span>(<span class="at">comp_acreage =</span> (comppct_r<span class="sc">/</span><span class="dv">100</span>)<span class="sc">*</span>muacres) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Ecosite =</span> <span class="fu">first</span>(ecosite_id), <span class="at">Acreage =</span></span>
-<span id="cb75-6"><a href="ecosites.html#cb75-6" aria-hidden="true" tabindex="-1"></a>                                                                                                           <span class="fu">sum</span>(comp_acreage))</span>
-<span id="cb75-7"><a href="ecosites.html#cb75-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb75-8"><a href="ecosites.html#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-9"><a href="ecosites.html#cb75-9" aria-hidden="true" tabindex="-1"></a>MLRA18_ecosite_acreage <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, ecosite_list) <span class="sc">%&gt;%</span> <span class="fu">remove_rownames</span>()</span>
-<span id="cb75-10"><a href="ecosites.html#cb75-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-11"><a href="ecosites.html#cb75-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(MLRA18_ecosite_acreage)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="ecosites.html#cb73-1" aria-hidden="true" tabindex="-1"></a>ecosite_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb73-2"><a href="ecosites.html#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="ecosites.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> MLRA18_ecosites){</span>
+<span id="cb73-4"><a href="ecosites.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  ecosite_list[[i]] <span class="ot">&lt;-</span> aqp<span class="sc">::</span><span class="fu">site</span>(my.components.MLRA) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(ecosite_id <span class="sc">==</span> i) <span class="sc">%&gt;%</span> <span class="fu">select</span>(ecosite_id, coiid, comppct_r, muacres) <span class="sc">%&gt;%</span></span>
+<span id="cb73-5"><a href="ecosites.html#cb73-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="fu">mutate</span>(<span class="at">comp_acreage =</span> (comppct_r<span class="sc">/</span><span class="dv">100</span>)<span class="sc">*</span>muacres) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Ecosite =</span> <span class="fu">first</span>(ecosite_id), <span class="at">Acreage =</span></span>
+<span id="cb73-6"><a href="ecosites.html#cb73-6" aria-hidden="true" tabindex="-1"></a>                                                                                                           <span class="fu">sum</span>(comp_acreage))</span>
+<span id="cb73-7"><a href="ecosites.html#cb73-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb73-8"><a href="ecosites.html#cb73-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-9"><a href="ecosites.html#cb73-9" aria-hidden="true" tabindex="-1"></a>MLRA18_ecosite_acreage <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, ecosite_list) <span class="sc">%&gt;%</span> <span class="fu">remove_rownames</span>()</span>
+<span id="cb73-10"><a href="ecosites.html#cb73-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-11"><a href="ecosites.html#cb73-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(MLRA18_ecosite_acreage)</span></code></pre></div>
 <pre><code>##       Ecosite   Acreage
 ## 1 R018XI163CA 251072.59
 ## 2 R018XI164CA  38683.76
@@ -380,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="plotveg" class="section level2 hasAnchor" number="4.7">
 <h2><span class="header-section-number">4.7</span> Accessing plot level vegetation data<a href="ecosites.html#plotveg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla &gt; ‘Pedon/Site/Vegetation Plot by area overlap type and areasym.’ The description for this Query gives the necessary details.</p>
+<p>This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla &gt; ‘Pedon/Site/Vegetation Plot by area overlap type and areasym’. The description for this Query gives the necessary details.</p>
 <p>NATIONAL: Have to run this twice against the national in order to get sites, pedons, and vegetation plot. First, set target table to PEDON. Second, set target tablet to VEGETATION PLOT.</p>
 <p>LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.</p>
 <ol style="list-style-type: decimal">
@@ -391,11 +381,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Run against Local
 <img src="_book/veg_plot_local.JPG" alt="Run against local Vegplot" /></p></li>
 </ol>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="ecosites.html#cb77-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> <span class="fu">fetchVegdata</span>(<span class="at">SS =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="ecosites.html#cb75-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> <span class="fu">fetchVegdata</span>(<span class="at">SS =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>I will return to this to provide some tools for dealing with the actual veg data.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="ecosites.html#cb78-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">UserSiteID =</span> veg_data<span class="sc">$</span>vegplot<span class="sc">$</span>site_id, <span class="at">DataOrigin =</span> veg_data<span class="sc">$</span>vegplot<span class="sc">$</span>vegdataorigin)</span>
-<span id="cb78-2"><a href="ecosites.html#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-3"><a href="ecosites.html#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(test<span class="sc">$</span>DataOrigin)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="ecosites.html#cb76-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">UserSiteID =</span> veg_data<span class="sc">$</span>vegplot<span class="sc">$</span>site_id, <span class="at">DataOrigin =</span> veg_data<span class="sc">$</span>vegplot<span class="sc">$</span>vegdataorigin)</span>
+<span id="cb76-2"><a href="ecosites.html#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="ecosites.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(test<span class="sc">$</span>DataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## site existing veg table        spreadsheet form 
 ##                     470                     880</code></pre>

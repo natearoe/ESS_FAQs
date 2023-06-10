@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2023-03-19" />
+<meta name="date" content="2023-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -108,7 +108,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -121,7 +121,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -222,7 +222,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="components" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Components<a href="components.html#components" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Components are one of the core concepts in the NRCS ecological workflow. Ecosites are correlated to components.</p>
+<p>The concept of map units and map unit components is essential to understand for ecological site work. Map units are associated with landforms, though this is not explicitly stated in the map unit section of the Soil Survey Manual. Examples of landforms that map units might be associated with in a mountain landscape could include, north-facing backslopes of mountains, ….. Map units are spatially explicit - they are delineated as polygons on a map. Often times, map units have multiple delineations. For example, the same map unit - let’s call it Map Unit #1 - can appear multiple times on your soil map. Despite having separate delineations, all of the delineations are the same map unit - Map Unit #1.</p>
+<p>Map units have one, or more, map unit components. Map unit components, or simply - components, partition map units into areas with different properties. Examples of properties that may differ include, family particle size class, depth to restriction, drainage class, surface fragments, and others. Typically, component within a map unit will not differ based on elevation or slope. Elevation and slope contribute towards the landform and therefore significant differences would justify creating a separate map unit. Components are not spatially explicit, there are not polygons on a map showing the spatial location of components. Components should be identifiable in the field, though. For example, if you know you are within a map unit (check to see if you are within the map unit polygon), you should be able to distinguish between the possible components of that map unit. For example, a map unit may have two components - Component A and Component B. Component A has higher surface fragments than Component B. Therefore, to determine if a specific location within your map unit of interest is Component A or B, you would examine the amount of surface fragments. Though components are not spatially explicit, a component percent is assigned. The component percent describes the percentage of the map unit that the component is expected to occupy. For example, a component percent of 40 would mean that 40% of the map unit is expected to be associated with that component. Given that map units have a defined acreage, you can determine the number of acres associated with each component by multiplying the map unit acreage times the component percent. If a map unit has a total acreage of 500,000 acres and the Component A has a component percent of 60, than there are 300,000 acres of Component A. A component should appear in all delineations of a map unit. If Component A and Component B are part of Map Unit #1, they should appear in all delineations. Technically, they should appear in the same proportions. For example, if Component A has a component percent of 60, 60% of the acreage of all map unit delineations should be Component A. In practice, this is often not the case. Components appear in different map unit delineations in different proportions. Just as the separate map unit delineations are the same map unit - Map Unit #1, the components appearing in each delineation are considered the same component. No matter how many delineations of Map Unit #1 there are, they are all Map Unit #1 every time Component A appears in each delineation, it is still Component A. There are several structures for naming map units in NASIS, including mukey, musym, muiid. A common way of identifying map units is using mukey. The common way of identifying component is coiid. This is unique identifier for components. Each component has a unique coiid. Ultimately, it is the coiid that an ecological site is correlated to. Components also have a component name. The component name can be a soil series or a higher soil taxonomic class, such as family. Component names are not unique to components. If multiple components are associated with the same soil series, than those components will all have the same component name. For example, if Component A from Map Unit #1 and a different component - Component Z from Map Unit #9 - are both associated with the soil series, Turney, than Component A and Component Z will both have the component name, Turney. Some areas of country require all components with the same component name to be correlated to the same ecological site. This would mean that Component A and Component Z must be correlated to the same ecological site. Component phases are a way of distinguishing that two components with the same component name differ in some condition. Various descriptors can be used to phase a component, such as cool, warm, steep - any modifier that describes how the component is different from other components with the same name. Often times, phases are used as justification for components with the same component name being correlated to different ecological sites.</p>
+<p>Ecological sites, are correlated to th</p>
+<p>Depending on the order of the soil survey, components may be associated with soil series or high taxa, such as family.</p>
+<p>are one of the core concepts in the NRCS ecological workflow. Ecosites are correlated to components. Components are part of</p>
 <p>Often times we will access component level data using a query and then the fetchNASIS function. One of the fetchNASIS arguments is duplicates. This argument helps to deal with the fact that components (coiids) can be associated with multiple legends. In the vast majority of cases, a component being associated with multiple legends is the result of a MLRA mapunit. An MLRA mapunit uses the same data mapunit across survey boundaries. MLRA mapunits are increasingly popular because they allow mapunits to span larger, environmentally contiguous areas, like MLRAs, rather than being restricted to political or administrative boundaries, like counties and soil survey areas. As a result, a component (coiid) can be associate with multiple legends. By default (duplicates = FALSE), fetchNASIS outputs a single instance for each component and does not include legend level information, such as areasymbol, mukey, muacres, etc. To include legend level information, you must duplicate (duplicates = TRUE) the components, or report each component multiple times if it exists in multiple legends. If duplicates = TRUE, components will be listed for every time they are used in a different legend. If a component is used in four legends, it will be listed four times. When components are duplicated, each instance is associated with a particular legend, therefore the specific legend information will be included. The full list of additional variables that will be include is: coiidcmb, muiid, lmapunitiid, mukey, musym, nationalmusym, muname, mukind, mutype, mustatus, muacres, farmlndcl, repdmu, areasymbol, areaname, ssastatus, cordate.</p>
 <div id="componentsinMLRA" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Identify components in MLRA?<a href="components.html#componentsinMLRA" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -478,8 +482,8 @@ rock frag using the horizon thickness as the weighting.</p>
 <span id="cb40-10"><a href="components.html#cb40-10" aria-hidden="true" tabindex="-1"></a>                <span class="fu">everything</span>())</span></code></pre></div>
 <pre><code>## Warning in left_join(., component_data_combined): Each row in `x` is expected to match at most 1 row in `y`.
 ## ℹ Row 149 of `x` matches multiple rows.
-## ℹ If multiple matches are expected, set `multiple = &quot;all&quot;` to silence this
-##   warning.</code></pre>
+## ℹ If multiple matches are expected, set `multiple = &quot;all&quot;` to
+##   silence this warning.</code></pre>
 <p>Save as csv</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="components.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(all_data, <span class="st">&quot;C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv&quot;</span>,</span>
 <span id="cb42-2"><a href="components.html#cb42-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
