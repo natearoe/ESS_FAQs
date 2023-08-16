@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2023-06-09" />
+<meta name="date" content="2023-08-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -199,7 +199,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.1" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips-1"><i class="fa fa-check"></i><b>7.1</b> Package building/maintaining tips</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="8" data-path="random-tools.html"><a href="random-tools.html"><i class="fa fa-check"></i><b>8</b> Random tools</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="random-tools.html"><a href="random-tools.html#organizing-scanned-data"><i class="fa fa-check"></i><b>8.1</b> Organizing scanned data</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -480,10 +483,11 @@ rock frag using the horizon thickness as the weighting.</p>
 <span id="cb40-8"><a href="components.html#cb40-8" aria-hidden="true" tabindex="-1"></a>                elev_rv, elev_h, map_l, map_rv, map_h, maat_l, maat_rv, </span>
 <span id="cb40-9"><a href="components.html#cb40-9" aria-hidden="true" tabindex="-1"></a>                maat_h, ffd_l, ffd_rv, ffd_h ,comppct_r, dmuiid, </span>
 <span id="cb40-10"><a href="components.html#cb40-10" aria-hidden="true" tabindex="-1"></a>                <span class="fu">everything</span>())</span></code></pre></div>
-<pre><code>## Warning in left_join(., component_data_combined): Each row in `x` is expected to match at most 1 row in `y`.
+<pre><code>## Warning in left_join(., component_data_combined): Each row in `x` is expected to match at most 1 row
+## in `y`.
 ## ℹ Row 149 of `x` matches multiple rows.
-## ℹ If multiple matches are expected, set `multiple = &quot;all&quot;` to
-##   silence this warning.</code></pre>
+## ℹ If multiple matches are expected, set `multiple =
+##   &quot;all&quot;` to silence this warning.</code></pre>
 <p>Save as csv</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="components.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(all_data, <span class="st">&quot;C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv&quot;</span>,</span>
 <span id="cb42-2"><a href="components.html#cb42-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>

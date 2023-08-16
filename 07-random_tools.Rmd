@@ -1,0 +1,34 @@
+# Random tools
+
+## Organizing scanned data
+
+Often times, you likely want to store a digital copy of your datasheets in an organized fashion. The following workflow makes that process more efficient, and reduced the tedious steps of creating/naming folders, naming files, separating pdfs manually, or using pictures. Instead, you can use the office scanner and scan all of your datasheets at once into a single pdf file. Then, using R we will separate that one pdf file into individual pdfs, one pdf for each site. Each pdf will be named based on the associated site id and put in a folder with the same site id. Let's go over the steps - 
+
+1. Organize your paper datasheets in numerical order
+2. Scan your paper datasheets using the office scanner. You should be able to feed all of the datasheets in at once. The result is a single pdf file with all of your sites.
+3. Determine the site numbers. This step requires either extracting the site numbers from a GPS device, NASIS, or some other source OR typing the site numbers manually. Typing the site numbers manually would look like this:
+```{r}
+my_site_number <- c(401, 402, 403, 404, 405)
+```
+
+Depending on what you have available and your skillset (willing to use soilDB to pull sites/pedons under your name in NASIS, etc.), you may have to enter this manually. This will be the only manual portion though. 
+
+4. Install the ecositer R package
+```{r, eval=FALSE}
+remotes::install_github("natearoe/ecositer", dependencies = FALSE)
+```
+
+5. Look at the help file for the scanned_data_organizer() function in R
+```{r, eval=FALSE}
+?ecositer::scanned_data_organizer()
+```
+
+6. Run scanned data_organizer(). Here is some example code:
+```{r, eval=FALSE}
+ecositer::scanned_data_organizer(scanned_data_path = "S:/NRCS/XEROX SCANS/DOC057.pdf",
+directory = "C:/Users/Nathan.Roe/Documents/Alaska2023/Willow_project",
+year_state_fips = "2023AK185",
+site_number = my_site_number)
+```
+
+That's it! You now have a folder for each site that contains a pdf of that site's datasheet. There is also an all_sites folder containing all of the site pdfs together in one location.
