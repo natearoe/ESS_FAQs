@@ -7,7 +7,7 @@ knitr::include_graphics("_book/scanned_data_organizer.jpg")
 ```
 
 
-Digitizing and organizing datasheets can be tedious. The following workflow automates this process, removing the need to create/name folders, name files, scan documents individually (or manually separate), and sort files into the appropriate folder. Instead, you can use the office scanner and scan all of your datasheets at once into a single pdf file. Then, using R we will separate that file into individual pdfs, one pdf for each site. Each pdf will be named using the site id and put in a folder using the same site id. Let's go over the steps - 
+Digitizing and organizing datasheets can be tedious. The following workflow automates this process, removing the need to create/name folders, name files, scan documents individually (or manually separate), and sort files into the appropriate folder. Instead, you can use workflow scanning (feed your whole stack to the scanner at once) and scan all of your datasheets into a single pdf file. Then, using R we will separate that file into individual pdfs, one pdf for each site. Each pdf will be named using the site id and put in a folder using the same site id. Let's go over the steps - 
 
 1. Organize your paper datasheets in numerical order
 2. Scan your paper datasheets using the office scanner. You should be able to feed all of the datasheets in at once. The result is a single pdf file with all of your sites.
