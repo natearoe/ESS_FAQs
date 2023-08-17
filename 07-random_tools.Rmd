@@ -25,7 +25,7 @@ remotes::install_github("natearoe/ecositer", dependencies = FALSE)
 ?ecositer::scanned_data_organizer()
 ```
 
-6. Run scanned data_organizer(). Here is some example code:
+6. Run scanned data_organizer(). Remember that your paths need to have forward slashes, not back slashes. That'll be a show stopper. I do find and replace all. Here is an example of running scanned_data_organizer():
 ```{r, eval=FALSE}
 ecositer::scanned_data_organizer(scanned_data_path = "S:/NRCS/XEROX SCANS/DOC057.pdf",
 directory = "C:/Users/Nathan.Roe/Documents/Alaska2023/Willow_project",
