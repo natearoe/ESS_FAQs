@@ -235,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Determine the site numbers. This step requires either extracting the site numbers from a GPS device, NASIS, or some other source OR typing the site numbers manually. Typing the site numbers manually would look like this:</li>
 </ol>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="random-tools.html#cb98-1" aria-hidden="true" tabindex="-1"></a>my_site_number <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">401</span>, <span class="dv">402</span>, <span class="dv">403</span>, <span class="dv">404</span>, <span class="dv">405</span>)</span></code></pre></div>
-<p>Depending on what you have available and your skillset (willing to use soilDB to pull sites/pedons under your name in NASIS, etc.), you may have to enter this manually. This will be the only manual portion though.</p>
+<p>Depending on what you have available and your skillset (willing to use soilDB to pull sites/pedons under your name in NASIS, etc.), you may have to enter this manually. Fortunately, this will be the only manual part of the workflow.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Install the ecositer R package</li>
 </ol>
@@ -245,8 +245,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="random-tools.html#cb100-1" aria-hidden="true" tabindex="-1"></a>?ecositer<span class="sc">::</span><span class="fu">scanned_data_organizer</span>()</span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
-<li>Run scanned data_organizer(). Remember that your paths need to have forward slashes, not back slashes. That’ll be a show stopper. I do find and replace all. Here is an example of running scanned_data_organizer():</li>
+<li>Run scanned data_organizer(). Remember that your paths need to have forward slashes, not back slashes. That’ll be a show stopper. I do find and replace all. Also, make sure you have created a vector of site numbers, that needs to be called in the site_number argument.</li>
 </ol>
+<p>Here is an example of running scanned_data_organizer():</p>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="random-tools.html#cb101-1" aria-hidden="true" tabindex="-1"></a>ecositer<span class="sc">::</span><span class="fu">scanned_data_organizer</span>(<span class="at">scanned_data_path =</span> <span class="st">&quot;S:/NRCS/XEROX SCANS/DOC057.pdf&quot;</span>,</span>
 <span id="cb101-2"><a href="random-tools.html#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="at">directory =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/Alaska2023/Willow_project&quot;</span>,</span>
 <span id="cb101-3"><a href="random-tools.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="at">year_state_fips =</span> <span class="st">&quot;2023AK185&quot;</span>,</span>

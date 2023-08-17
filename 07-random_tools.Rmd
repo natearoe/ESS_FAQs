@@ -16,7 +16,7 @@ Digitizing and organizing datasheets can be tedious. The following workflow auto
 my_site_number <- c(401, 402, 403, 404, 405)
 ```
 
-Depending on what you have available and your skillset (willing to use soilDB to pull sites/pedons under your name in NASIS, etc.), you may have to enter this manually. This will be the only manual portion though. 
+Depending on what you have available and your skillset (willing to use soilDB to pull sites/pedons under your name in NASIS, etc.), you may have to enter this manually. Fortunately, this will be the only manual part of the workflow.  
 
 4. Install the ecositer R package
 ```{r, eval=FALSE}
@@ -28,7 +28,9 @@ remotes::install_github("natearoe/ecositer", dependencies = FALSE)
 ?ecositer::scanned_data_organizer()
 ```
 
-6. Run scanned data_organizer(). Remember that your paths need to have forward slashes, not back slashes. That'll be a show stopper. I do find and replace all. Here is an example of running scanned_data_organizer():
+6. Run scanned data_organizer(). Remember that your paths need to have forward slashes, not back slashes. That'll be a show stopper. I do find and replace all. Also, make sure you have created a vector of site numbers, that needs to be called in the site_number argument. 
+
+Here is an example of running scanned_data_organizer():
 ```{r, eval=FALSE}
 ecositer::scanned_data_organizer(scanned_data_path = "S:/NRCS/XEROX SCANS/DOC057.pdf",
 directory = "C:/Users/Nathan.Roe/Documents/Alaska2023/Willow_project",
