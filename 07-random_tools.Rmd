@@ -2,7 +2,7 @@
 
 ## Organizing scanned data
 
-![Scanned data organizer workflow caricature](_book/scanned_data_organizer.PNG)
+![Scanned data organizer workflow caricature](_book/scanned_data_organizer.JPG)
 
 Often times, you likely want to store a digital copy of your datasheets in an organized fashion. The following workflow makes that process more efficient, and reduced the tedious steps of creating/naming folders, naming files, separating pdfs manually, or using pictures. Instead, you can use the office scanner and scan all of your datasheets at once into a single pdf file. Then, using R we will separate that one pdf file into individual pdfs, one pdf for each site. Each pdf will be named based on the associated site id and put in a folder with the same site id. Let's go over the steps - 
 
