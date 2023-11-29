@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2023-08-16" />
+<meta name="date" content="2023-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -189,7 +189,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="species.html"><a href="species.html"><i class="fa fa-check"></i><b>5</b> Species</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="species.html"><a href="species.html#mapping-the-location-of-species"><i class="fa fa-check"></i><b>5.1</b> Mapping the location of species</a></li>
+<li class="chapter" data-level="5.1" data-path="species.html"><a href="species.html#working-with-vegetation-data"><i class="fa fa-check"></i><b>5.1</b> Working with vegetation data</a></li>
+<li class="chapter" data-level="5.2" data-path="species.html"><a href="species.html#mapping-the-location-of-species"><i class="fa fa-check"></i><b>5.2</b> Mapping the location of species</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="nasis.html"><a href="nasis.html"><i class="fa fa-check"></i><b>6</b> NASIS</a>
 <ul>
@@ -373,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="plotveg" class="section level2 hasAnchor" number="4.7">
 <h2><span class="header-section-number">4.7</span> Accessing plot level vegetation data<a href="ecosites.html#plotveg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla &gt; ‘Pedon/Site/Vegetation Plot by area overlap type and areasym’. The description for this Query gives the necessary details.</p>
+<p>This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla &gt; ‘Pedon/Site/Vegetation Plot by site area overlap table’. The description for this Query gives the necessary details.</p>
 <p>NATIONAL: Have to run this twice against the national in order to get sites, pedons, and vegetation plot. First, set target table to PEDON. Second, set target tablet to VEGETATION PLOT.</p>
 <p>LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.</p>
 <ol style="list-style-type: decimal">
@@ -384,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Run against Local
 <img src="_book/veg_plot_local.JPG" alt="Run against local Vegplot" /></p></li>
 </ol>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="ecosites.html#cb75-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> <span class="fu">fetchVegdata</span>(<span class="at">SS =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="ecosites.html#cb75-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">fetchVegdata</span>(<span class="at">SS =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>I will return to this to provide some tools for dealing with the actual veg data.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="ecosites.html#cb76-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">UserSiteID =</span> veg_data<span class="sc">$</span>vegplot<span class="sc">$</span>site_id, <span class="at">DataOrigin =</span> veg_data<span class="sc">$</span>vegplot<span class="sc">$</span>vegdataorigin)</span>
 <span id="cb76-2"><a href="ecosites.html#cb76-2" aria-hidden="true" tabindex="-1"></a></span>

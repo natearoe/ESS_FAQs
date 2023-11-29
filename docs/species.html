@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2023-08-16" />
+<meta name="date" content="2023-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -189,7 +189,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="species.html"><a href="species.html"><i class="fa fa-check"></i><b>5</b> Species</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="species.html"><a href="species.html#mapping-the-location-of-species"><i class="fa fa-check"></i><b>5.1</b> Mapping the location of species</a></li>
+<li class="chapter" data-level="5.1" data-path="species.html"><a href="species.html#working-with-vegetation-data"><i class="fa fa-check"></i><b>5.1</b> Working with vegetation data</a></li>
+<li class="chapter" data-level="5.2" data-path="species.html"><a href="species.html#mapping-the-location-of-species"><i class="fa fa-check"></i><b>5.2</b> Mapping the location of species</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="nasis.html"><a href="nasis.html"><i class="fa fa-check"></i><b>6</b> NASIS</a>
 <ul>
@@ -225,11 +226,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="species" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Species<a href="species.html#species" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="mapping-the-location-of-species" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Mapping the location of species<a href="species.html#mapping-the-location-of-species" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="working-with-vegetation-data" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Working with vegetation data<a href="species.html#working-with-vegetation-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To begin with, we will query plot level NASIS data using the query outlined in <a href="ecosites.html#plotveg">Accessing plot level vegetation data</a>. Then, run <code>ecositer::vegStaticNASIS()</code> and <code>ecositer::formatted_veg_df()</code>. See the</p>
+<p>Vegetation data QC is a critical step in ecological data analysis. The USDA plants database improves vegetation data quality, ensuring proper scientific names are used, but additional QC must be performed. One of the primary tasks will be dealing with identifications to different taxonomic levels (i.e., genus, species, and subspecies). Statistical approaches think of each class separately and therefore do not recognize any similarity between taxonomic levels. For example, statistical analyses do not recognize any relationship between Pinus, Pinus contorta, and Pinus contorta var. murrayana. For this reason, you will need to determine how to modify your data based on the characteristics of your data set and expert knowledge. This will likely need to be done on a species-by-species basis. The ultimate goal is to group all of the observations of one organism into one class.</p>
+<p>Below is an example of this process and code you can use to assist:</p>
+<p>To begin with, I will look at all of the plant names used:</p>
+</div>
+<div id="mapping-the-location-of-species" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Mapping the location of species<a href="species.html#mapping-the-location-of-species" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s take a look at the location of species. To do this we will query plot level NASIS data using the query outlined in <a href="ecosites.html#plotveg">Accessing plot level vegetation data</a>.</p>
 <p>Once you have queried, you can filter your dataset for any species of interest. I am going to search for a genus - <em>Artemisia</em> (sagebrush). Ultimately, we will produce a map that shows the distribution of all the species of <em>Artemisia</em>.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="species.html#cb78-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> <span class="fu">fetchVegdata</span>(<span class="at">dsn =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg.sqlite&quot;</span>, <span class="at">SS =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="species.html#cb78-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> <span class="fu">fetchVegdata</span>(<span class="at">dsn =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite&quot;</span>, <span class="at">SS =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## NOTE: some records are missing surface fragment cover</code></pre>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="species.html#cb80-1" aria-hidden="true" tabindex="-1"></a>artemesia_df <span class="ot">&lt;-</span></span>
 <span id="cb80-2"><a href="species.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  veg_data<span class="sc">$</span>vegplotspecies <span class="sc">%&gt;%</span> <span class="fu">filter</span>(plantsciname <span class="sc">%in%</span> <span class="fu">str_subset</span>(veg_data<span class="sc">$</span>vegplotspecies<span class="sc">$</span>plantsciname, <span class="st">&quot;Artemisia&quot;</span>)) <span class="sc">%&gt;%</span></span>
@@ -244,12 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb81-7"><a href="species.html#cb81-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(artemesia_df) <span class="sc">%&gt;%</span> <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&#39;utmeasting&#39;</span>, <span class="st">&#39;utmnorthing&#39;</span>),</span>
 <span id="cb81-8"><a href="species.html#cb81-8" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">32611</span>))</span></code></pre></div>
 <pre><code>## Joining with `by = join_by(siteiid)`</code></pre>
-<pre><code>## Warning in dplyr::left_join(., artemesia_df): Each row in `x` is expected to match at most 1 row in `y`.
+<pre><code>## Warning in dplyr::left_join(., artemesia_df): Each row in `x` is expected to match at most 1 row in
+## `y`.
 ## ℹ Row 1 of `x` matches multiple rows.
-## ℹ If multiple matches are expected, set `multiple = &quot;all&quot;` to
-##   silence this warning.</code></pre>
+## ℹ If multiple matches are expected, set `multiple =
+##   &quot;all&quot;` to silence this warning.</code></pre>
 <p>Create a list of dataframes based on the different</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="species.html#cb84-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> <span class="fu">fetchVegdata</span>(<span class="at">dsn =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg.sqlite&quot;</span>, <span class="at">SS =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="species.html#cb84-1" aria-hidden="true" tabindex="-1"></a>veg_data <span class="ot">&lt;-</span> <span class="fu">fetchVegdata</span>(<span class="at">dsn =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite&quot;</span>, <span class="at">SS =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## NOTE: some records are missing surface fragment cover</code></pre>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="species.html#cb86-1" aria-hidden="true" tabindex="-1"></a>artemesia_df <span class="ot">&lt;-</span></span>
 <span id="cb86-2"><a href="species.html#cb86-2" aria-hidden="true" tabindex="-1"></a>  veg_data<span class="sc">$</span>vegplotspecies <span class="sc">%&gt;%</span> <span class="fu">filter</span>(plantsciname <span class="sc">%in%</span> <span class="fu">str_subset</span>(veg_data<span class="sc">$</span>vegplotspecies<span class="sc">$</span>plantsciname, <span class="st">&quot;Artemisia&quot;</span>)) <span class="sc">%&gt;%</span></span>
@@ -260,10 +269,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb86-7"><a href="species.html#cb86-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(artemesia_df) <span class="sc">%&gt;%</span> <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&#39;utmeasting&#39;</span>, <span class="st">&#39;utmnorthing&#39;</span>),</span>
 <span id="cb86-8"><a href="species.html#cb86-8" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">32611</span>))</span></code></pre></div>
 <pre><code>## Joining with `by = join_by(siteiid)`</code></pre>
-<pre><code>## Warning in dplyr::left_join(., artemesia_df): Each row in `x` is expected to match at most 1 row in `y`.
+<pre><code>## Warning in dplyr::left_join(., artemesia_df): Each row in `x` is expected to match at most 1 row in
+## `y`.
 ## ℹ Row 1 of `x` matches multiple rows.
-## ℹ If multiple matches are expected, set `multiple = &quot;all&quot;` to
-##   silence this warning.</code></pre>
+## ℹ If multiple matches are expected, set `multiple =
+##   &quot;all&quot;` to silence this warning.</code></pre>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="species.html#cb89-1" aria-hidden="true" tabindex="-1"></a>artemesia_location_split <span class="ot">&lt;-</span>  <span class="fu">split</span>(artemesia_location, artemesia_location<span class="sc">$</span>plantsciname)</span>
 <span id="cb89-2"><a href="species.html#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb89-3"><a href="species.html#cb89-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -277,10 +287,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s look at how we can create a stored SQlite database.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="species.html#cb90-1" aria-hidden="true" tabindex="-1"></a>soilDB<span class="sc">::</span><span class="fu">createStaticNASIS</span>(<span class="at">SS =</span> <span class="cn">TRUE</span>, <span class="at">tables =</span> </span>
 <span id="cb90-2"><a href="species.html#cb90-2" aria-hidden="true" tabindex="-1"></a>      soilDB<span class="sc">::</span><span class="fu">get_NASIS_table_name_by_purpose</span>(<span class="fu">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;legend&quot;</span>, <span class="st">&quot;mapunit&quot;</span>, <span class="st">&quot;datamapunit&quot;</span>, <span class="st">&quot;component&quot;</span>, <span class="st">&quot;metadata&quot;</span>, <span class="st">&quot;lookup&quot;</span>, <span class="st">&quot;nasis&quot;</span>)),</span>
-<span id="cb90-3"><a href="species.html#cb90-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">output_path =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg.sqlite&quot;</span>)</span></code></pre></div>
+<span id="cb90-3"><a href="species.html#cb90-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">output_path =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite&quot;</span>)</span></code></pre></div>
 <p>Note: The tables listed in the get_NASIS_table_name_by_purpose argument should cover the majority of situations. If you run into an issue, though, soilDB will likely name a specific table that is missing. If that happens, you will have to add the table to the character vector.</p>
 <p>Once you have stored your SQlite database, you can call it using the soilDB functions. The default argument in <code>fetchNASIS()</code> and other SoilDB functions is <code>SS = TRUE</code>. We are going to change that to false and identify the location of the SQlite database in the dsn argument.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="species.html#cb91-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> T, <span class="at">dsn =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg.sqlite&quot;</span>, <span class="at">SS =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="species.html#cb91-1" aria-hidden="true" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> T, <span class="at">dsn =</span> <span class="st">&quot;C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite&quot;</span>, <span class="at">SS =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>This can be extremely useful when you have multiple selected sets that you are working with.</p>
 
 </div>
