@@ -199,7 +199,7 @@ head(MLRA18_ecosite_acreage)
 
 ## Accessing plot level vegetation data{#plotveg}
 
-This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla > 'Pedon/Site/Vegetation Plot by area overlap type and areasym'. The description for this Query gives the necessary details. 
+This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla > 'Pedon/Site/Vegetation Plot by site area overlap table'. The description for this Query gives the necessary details. 
 
 NATIONAL: Have to run this twice against the national in order to get sites, pedons, and vegetation plot.  First, set target table to PEDON.  Second, set target tablet to VEGETATION PLOT.
 
@@ -215,11 +215,11 @@ LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.
 ![Run against local Vegplot](_book/veg_plot_local.JPG)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-veg_data <- fetchVegdata(dsn = "C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg.sqlite", SS = FALSE)
+veg_data <- soilDB::fetchVegdata(dsn = "C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite", SS = FALSE)
 ```
 
 ```{r, eval=FALSE}
-veg_data <- fetchVegdata(SS = TRUE)
+veg_data <- soilDB::fetchVegdata(SS = TRUE)
 ```
 
 I will return to this to provide some tools for dealing with the actual veg data. 
