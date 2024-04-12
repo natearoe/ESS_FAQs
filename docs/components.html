@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Components | NRCS Ecologist FAQs</title>
   <meta name="description" content="This is a compilation of FAQs for NRCS Ecologists." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Components | NRCS Ecologist FAQs" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2023-11-28" />
+<meta name="date" content="2024-04-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,16 +52,16 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-binding-2.2.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.1/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -135,6 +135,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -203,6 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8" data-path="random-tools.html"><a href="random-tools.html"><i class="fa fa-check"></i><b>8</b> Random tools</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="random-tools.html"><a href="random-tools.html#organizing-scanned-data"><i class="fa fa-check"></i><b>8.1</b> Organizing scanned data</a></li>
+<li class="chapter" data-level="8.2" data-path="random-tools.html"><a href="random-tools.html#comparing-bray-curtis-and-jaccard-dissimilarity-measures"><i class="fa fa-check"></i><b>8.2</b> Comparing Bray-Curtis and Jaccard (dis)similarity measures</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -247,13 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Acquire the component names and component IDs using R:</li>
 </ol>
 <p>Load the soilDB package and fetch NASIS data</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="components.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
-<span id="cb11-2"><a href="components.html#cb11-2" aria-hidden="true" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="components.html#cb11-1" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb11-2"><a href="components.html#cb11-2" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Look at component names - the <code>head()</code> function shows just the first six records. Remove the <code>head()</code> function to see all the component names</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="components.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA<span class="sc">$</span>compname)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="components.html#cb12-1" tabindex="-1"></a><span class="fu">head</span>(my.components.MLRA<span class="sc">$</span>compname)</span></code></pre></div>
 <pre><code>## [1] &quot;Clay pits&quot; &quot;Quarry&quot;    &quot;Pits&quot;      &quot;Dams&quot;      &quot;Water&quot;     &quot;Dams&quot;</code></pre>
 <p>Look at the component IDs</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="components.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">site</span>(my.components.MLRA)<span class="sc">$</span>coiid)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="components.html#cb14-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">site</span>(my.components.MLRA)<span class="sc">$</span>coiid)</span></code></pre></div>
 <pre><code>## [1] 1199623  658862 1201344  650195  650196  650195</code></pre>
 </div>
 <div id="identify-components-in-soil-survey-area" class="section level2 hasAnchor" number="3.2">
@@ -267,8 +272,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Acquire component names and IDs using R.</p></li>
 </ol>
 <p>Load the soilDB package and fetch NASIS data</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="components.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
-<span id="cb16-2"><a href="components.html#cb16-2" aria-hidden="true" tabindex="-1"></a>my.components.SSA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="components.html#cb16-1" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb16-2"><a href="components.html#cb16-2" tabindex="-1"></a>my.components.SSA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## Warning: Horizon top depths contain NA! Check depth logic with
 ## aqp::checkHzDepthLogic()</code></pre>
 <pre><code>## Warning: Horizon bottom depths contain NA! Check depth logic with
@@ -276,21 +281,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning in `hzidname&lt;-`(`*tmp*`, value = &quot;chiid&quot;): horizon ID name (chiid) not
 ## unique. unique ID not changed.</code></pre>
 <p>Look at component names - the <code>head()</code> function shows just the first six records. Remove the <code>head()</code> function to see all the component names</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="components.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.SSA<span class="sc">$</span>compname)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="components.html#cb20-1" tabindex="-1"></a><span class="fu">head</span>(my.components.SSA<span class="sc">$</span>compname)</span></code></pre></div>
 <pre><code>## [1] &quot;Water&quot;             &quot;Rock outcrop&quot;      &quot;Typic Cryorthents&quot;
 ## [4] &quot;Benchlake&quot;         &quot;Rock outcrop&quot;      &quot;McDermand&quot;</code></pre>
 <p>Look at the component IDs</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="components.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(my.components.SSA<span class="sc">$</span>coiid)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="components.html#cb22-1" tabindex="-1"></a><span class="fu">head</span>(my.components.SSA<span class="sc">$</span>coiid)</span></code></pre></div>
 <pre><code>## [1]  650196 2405837 2405838 2405955 2405841 2776001</code></pre>
 </div>
 <div id="existing-component-ecosite-correlations" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Existing component, ecosite correlations<a href="components.html#existing-component-ecosite-correlations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Perhaps we want to see what ecosite each component is correlated to. For this example, we will work with all the components in MLRA 18 using the <a href="index.html#standard">Standard Dataset and packages</a>.</p>
 <p>With the Standard Dataset loaded, let’s look at the correlations between component ID and ecosite ID. This script takes our components in MLRA 18, pulls out the site level data (allows us to ignore pedon data), and then selects only the columns for component ID and ecosite ID (there are lots of other columns you can choose from, tailor to your needs). Finally we look at just the <code>head()</code> of the <code>comp.ecosite.correlations</code>. If you want to see the full dataframe, remove <code>head()</code>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="components.html#cb24-1" aria-hidden="true" tabindex="-1"></a>comp.ecosite.correlations <span class="ot">&lt;-</span> my.components.MLRA <span class="sc">%&gt;%</span> aqp<span class="sc">::</span><span class="fu">site</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb24-2"><a href="components.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(coiid, ecosite_id)</span>
-<span id="cb24-3"><a href="components.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="components.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(comp.ecosite.correlations)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="components.html#cb24-1" tabindex="-1"></a>comp.ecosite.correlations <span class="ot">&lt;-</span> my.components.MLRA <span class="sc">%&gt;%</span> aqp<span class="sc">::</span><span class="fu">site</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="components.html#cb24-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(coiid, ecosite_id)</span>
+<span id="cb24-3"><a href="components.html#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="components.html#cb24-4" tabindex="-1"></a><span class="fu">head</span>(comp.ecosite.correlations)</span></code></pre></div>
 <pre><code>##     coiid ecosite_id
 ## 1 1199623       &lt;NA&gt;
 ## 2  658862       &lt;NA&gt;
@@ -302,8 +307,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="components-correlated-to-an-ecosite-of-interest" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Components correlated to an ecosite of interest?<a href="components.html#components-correlated-to-an-ecosite-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Perhaps there is a specific ecosite we are interested in and we want to see what components are correlated to that ecosite. Let’s say the ecosite is <code>R018XI202CA</code>. We will start with the <code>comp.ecosite.correlations</code> dataframe that we created in the previous example.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="components.html#cb26-1" aria-hidden="true" tabindex="-1"></a>R018XI202CA <span class="ot">&lt;-</span> comp.ecosite.correlations <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ecosite_id <span class="sc">==</span> <span class="st">&quot;F018XA202CA&quot;</span>)</span>
-<span id="cb26-2"><a href="components.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(R018XI202CA) <span class="co"># Again, remove head() to see the full list. </span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="components.html#cb26-1" tabindex="-1"></a>R018XI202CA <span class="ot">&lt;-</span> comp.ecosite.correlations <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ecosite_id <span class="sc">==</span> <span class="st">&quot;F018XA202CA&quot;</span>)</span>
+<span id="cb26-2"><a href="components.html#cb26-2" tabindex="-1"></a><span class="fu">head</span>(R018XI202CA) <span class="co"># Again, remove head() to see the full list. </span></span></code></pre></div>
 <pre><code>##     coiid  ecosite_id
 ## 1 1122909 F018XA202CA
 ## 2 1153767 F018XA202CA
@@ -331,8 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 going to simplify things and remove some of the oddities that may exist in the
 data. Ecological sciences do not correlate to misc. areas or minor components,
 so it will not be a loss to us.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="components.html#cb28-1" aria-hidden="true" tabindex="-1"></a>nasis_selection <span class="ot">&lt;-</span> <span class="fu">subset</span>(my.components.MLRA, compkind <span class="sc">!=</span> <span class="st">&quot;miscellaneous area&quot;</span> <span class="sc">&amp;</span></span>
-<span id="cb28-2"><a href="components.html#cb28-2" aria-hidden="true" tabindex="-1"></a>                            majcompflag <span class="sc">==</span> <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="components.html#cb28-1" tabindex="-1"></a>nasis_selection <span class="ot">&lt;-</span> <span class="fu">subset</span>(my.components.MLRA, compkind <span class="sc">!=</span> <span class="st">&quot;miscellaneous area&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb28-2"><a href="components.html#cb28-2" tabindex="-1"></a>                            majcompflag <span class="sc">==</span> <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
 <p><strong><em>Horizon level data</em></strong></p>
 <p>Create data frame from the horizon level data. This script provides
 the flexibility to add characteristics of interest. If there are other
@@ -341,27 +346,27 @@ the same syntax shown below. To see what horizon level data is available,
 type ‘<a href="mailto:nasis_selection@horizons" class="email">nasis_selection@horizons</a>$’ into the console. Horizon level data is
 summarized into site level info. If you add other horizon level data, make
 sure it is summarized in a conceptually meaningful way.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="components.html#cb29-1" aria-hidden="true" tabindex="-1"></a>horizon_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">texture =</span> nasis_selection<span class="sc">$</span>texture,</span>
-<span id="cb29-2"><a href="components.html#cb29-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">frag_vol =</span> nasis_selection<span class="sc">$</span>fragvoltot_r,</span>
-<span id="cb29-3"><a href="components.html#cb29-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sand =</span> nasis_selection<span class="sc">$</span>sandtotal_r,</span>
-<span id="cb29-4"><a href="components.html#cb29-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">clay =</span> nasis_selection<span class="sc">$</span>claytotal_r,</span>
-<span id="cb29-5"><a href="components.html#cb29-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sieve10 =</span> nasis_selection<span class="sc">$</span>sieveno10_r,</span>
-<span id="cb29-6"><a href="components.html#cb29-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">thickness =</span> nasis_selection<span class="sc">$</span>hzdepb_r <span class="sc">-</span> nasis_selection<span class="sc">$</span>hzdept_r,</span>
-<span id="cb29-7"><a href="components.html#cb29-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rock_frag =</span> nasis_selection<span class="sc">$</span>total_frags_pct,</span>
-<span id="cb29-8"><a href="components.html#cb29-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ph_l =</span> nasis_selection<span class="sc">$</span>ph1to1h2o_l,</span>
-<span id="cb29-9"><a href="components.html#cb29-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ph_r =</span> nasis_selection<span class="sc">$</span>ph1to1h2o_r,</span>
-<span id="cb29-10"><a href="components.html#cb29-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ph_h =</span> nasis_selection<span class="sc">$</span>ph1to1h2o_h,</span>
-<span id="cb29-11"><a href="components.html#cb29-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">awc_l =</span> nasis_selection<span class="sc">$</span>awc_l,</span>
-<span id="cb29-12"><a href="components.html#cb29-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">awc_r =</span> nasis_selection<span class="sc">$</span>awc_r,</span>
-<span id="cb29-13"><a href="components.html#cb29-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">awc_h =</span> nasis_selection<span class="sc">$</span>awc_h,</span>
-<span id="cb29-14"><a href="components.html#cb29-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">coiidcmb =</span> nasis_selection<span class="sc">$</span>coiidcmb) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(<span class="fu">site</span>(nasis_selection) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(coiidcmb, coiid)) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-15"><a href="components.html#cb29-15" aria-hidden="true" tabindex="-1"></a>                                                                  <span class="fu">select</span>(<span class="sc">-</span>coiidcmb) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">component =</span> coiid)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="components.html#cb29-1" tabindex="-1"></a>horizon_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">texture =</span> nasis_selection<span class="sc">$</span>texture,</span>
+<span id="cb29-2"><a href="components.html#cb29-2" tabindex="-1"></a>                         <span class="at">frag_vol =</span> nasis_selection<span class="sc">$</span>fragvoltot_r,</span>
+<span id="cb29-3"><a href="components.html#cb29-3" tabindex="-1"></a>                         <span class="at">sand =</span> nasis_selection<span class="sc">$</span>sandtotal_r,</span>
+<span id="cb29-4"><a href="components.html#cb29-4" tabindex="-1"></a>                         <span class="at">clay =</span> nasis_selection<span class="sc">$</span>claytotal_r,</span>
+<span id="cb29-5"><a href="components.html#cb29-5" tabindex="-1"></a>                         <span class="at">sieve10 =</span> nasis_selection<span class="sc">$</span>sieveno10_r,</span>
+<span id="cb29-6"><a href="components.html#cb29-6" tabindex="-1"></a>                         <span class="at">thickness =</span> nasis_selection<span class="sc">$</span>hzdepb_r <span class="sc">-</span> nasis_selection<span class="sc">$</span>hzdept_r,</span>
+<span id="cb29-7"><a href="components.html#cb29-7" tabindex="-1"></a>                         <span class="at">rock_frag =</span> nasis_selection<span class="sc">$</span>total_frags_pct,</span>
+<span id="cb29-8"><a href="components.html#cb29-8" tabindex="-1"></a>                         <span class="at">ph_l =</span> nasis_selection<span class="sc">$</span>ph1to1h2o_l,</span>
+<span id="cb29-9"><a href="components.html#cb29-9" tabindex="-1"></a>                         <span class="at">ph_r =</span> nasis_selection<span class="sc">$</span>ph1to1h2o_r,</span>
+<span id="cb29-10"><a href="components.html#cb29-10" tabindex="-1"></a>                         <span class="at">ph_h =</span> nasis_selection<span class="sc">$</span>ph1to1h2o_h,</span>
+<span id="cb29-11"><a href="components.html#cb29-11" tabindex="-1"></a>                         <span class="at">awc_l =</span> nasis_selection<span class="sc">$</span>awc_l,</span>
+<span id="cb29-12"><a href="components.html#cb29-12" tabindex="-1"></a>                         <span class="at">awc_r =</span> nasis_selection<span class="sc">$</span>awc_r,</span>
+<span id="cb29-13"><a href="components.html#cb29-13" tabindex="-1"></a>                         <span class="at">awc_h =</span> nasis_selection<span class="sc">$</span>awc_h,</span>
+<span id="cb29-14"><a href="components.html#cb29-14" tabindex="-1"></a>                         <span class="at">coiidcmb =</span> nasis_selection<span class="sc">$</span>coiidcmb) <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(<span class="fu">site</span>(nasis_selection) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(coiidcmb, coiid)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-15"><a href="components.html#cb29-15" tabindex="-1"></a>                                                                  <span class="fu">select</span>(<span class="sc">-</span>coiidcmb) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">component =</span> coiid)</span></code></pre></div>
 <pre><code>## Joining with `by = join_by(coiidcmb)`</code></pre>
 <p>Separate the texture column</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="components.html#cb31-1" aria-hidden="true" tabindex="-1"></a>horizon_df<span class="sc">$</span>texture_qualifier <span class="ot">&lt;-</span> horizon_df<span class="sc">$</span>texture <span class="sc">%&gt;%</span> stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="st">&quot;.*(?=-)&quot;</span>)</span>
-<span id="cb31-2"><a href="components.html#cb31-2" aria-hidden="true" tabindex="-1"></a>horizon_df<span class="sc">$</span>texture_only <span class="ot">&lt;-</span> horizon_df<span class="sc">$</span>texture <span class="sc">%&gt;%</span> stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="st">&quot;(?&lt;=-).*&quot;</span>)</span>
-<span id="cb31-3"><a href="components.html#cb31-3" aria-hidden="true" tabindex="-1"></a>horizon_df<span class="sc">$</span>texture_only <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(horizon_df<span class="sc">$</span>texture_only), horizon_df<span class="sc">$</span>texture, </span>
-<span id="cb31-4"><a href="components.html#cb31-4" aria-hidden="true" tabindex="-1"></a>                                  horizon_df<span class="sc">$</span>texture_only)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="components.html#cb31-1" tabindex="-1"></a>horizon_df<span class="sc">$</span>texture_qualifier <span class="ot">&lt;-</span> horizon_df<span class="sc">$</span>texture <span class="sc">%&gt;%</span> stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="st">&quot;.*(?=-)&quot;</span>)</span>
+<span id="cb31-2"><a href="components.html#cb31-2" tabindex="-1"></a>horizon_df<span class="sc">$</span>texture_only <span class="ot">&lt;-</span> horizon_df<span class="sc">$</span>texture <span class="sc">%&gt;%</span> stringr<span class="sc">::</span><span class="fu">str_extract</span>(<span class="st">&quot;(?&lt;=-).*&quot;</span>)</span>
+<span id="cb31-3"><a href="components.html#cb31-3" tabindex="-1"></a>horizon_df<span class="sc">$</span>texture_only <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(horizon_df<span class="sc">$</span>texture_only), horizon_df<span class="sc">$</span>texture, </span>
+<span id="cb31-4"><a href="components.html#cb31-4" tabindex="-1"></a>                                  horizon_df<span class="sc">$</span>texture_only)</span></code></pre></div>
 <p>Working with texture:</p>
 <p>We have two goals for texture. One, we want to have a textural modifier where
 appropriate (i.e., CB, CBV, GR). Two, we want to have a texture (i.e., L, CL,
@@ -382,17 +387,17 @@ ecological significance, and we do not want the texture of the soil profile
 to be determined by BR conditions. We are also specifically stating that
 texture is not equal to “BR” because several horizons that are BR have
 values of 0 for sand and clay when they should be NAs.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="components.html#cb32-1" aria-hidden="true" tabindex="-1"></a>horizon_df<span class="sc">$</span>thickness_modified <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(horizon_df<span class="sc">$</span>clay), <span class="fl">0.1</span>, </span>
-<span id="cb32-2"><a href="components.html#cb32-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">ifelse</span>(horizon_df<span class="sc">$</span>texture <span class="sc">==</span> <span class="st">&quot;BR&quot;</span>, </span>
-<span id="cb32-3"><a href="components.html#cb32-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="fl">0.1</span>, horizon_df<span class="sc">$</span>thickness))</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="components.html#cb32-1" tabindex="-1"></a>horizon_df<span class="sc">$</span>thickness_modified <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(horizon_df<span class="sc">$</span>clay), <span class="fl">0.1</span>, </span>
+<span id="cb32-2"><a href="components.html#cb32-2" tabindex="-1"></a>                                        <span class="fu">ifelse</span>(horizon_df<span class="sc">$</span>texture <span class="sc">==</span> <span class="st">&quot;BR&quot;</span>, </span>
+<span id="cb32-3"><a href="components.html#cb32-3" tabindex="-1"></a>                                        <span class="fl">0.1</span>, horizon_df<span class="sc">$</span>thickness))</span></code></pre></div>
 <p>Now, we assign the textural modifier from the thickest horizon to the component.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="components.html#cb33-1" aria-hidden="true" tabindex="-1"></a>summarized_texture_qualifier <span class="ot">&lt;-</span> horizon_df <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="components.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(component, texture_qualifier) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-3"><a href="components.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">combined_thickness =</span> <span class="fu">sum</span>(thickness_modified)) <span class="sc">%&gt;%</span></span>
-<span id="cb33-4"><a href="components.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb33-5"><a href="components.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(component) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-6"><a href="components.html#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">1</span>, combined_thickness) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb33-7"><a href="components.html#cb33-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>combined_thickness) </span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="components.html#cb33-1" tabindex="-1"></a>summarized_texture_qualifier <span class="ot">&lt;-</span> horizon_df <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="components.html#cb33-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(component, texture_qualifier) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="components.html#cb33-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">combined_thickness =</span> <span class="fu">sum</span>(thickness_modified)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="components.html#cb33-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="components.html#cb33-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(component) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-6"><a href="components.html#cb33-6" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">1</span>, combined_thickness) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb33-7"><a href="components.html#cb33-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>combined_thickness) </span></code></pre></div>
 <p>Texture -</p>
 <p>Now, we are going to assign a texture to the entire profile. For texture, we
 have quantitative data (sand and clay percentages). This allows us to do a
@@ -403,95 +408,97 @@ horizons labelled with texture as “BR” because some of those bedrock horizon
 have sand and clay percentages entered as zero rather than NA. Then, we group the
 horizons by the component id and calculate a weighted mean for clay/sand, pH, and
 rock frag using the horizon thickness as the weighting.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="components.html#cb34-1" aria-hidden="true" tabindex="-1"></a>weighted_texture <span class="ot">&lt;-</span> horizon_df <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="components.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(clay) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(sand) <span class="sc">&amp;</span> texture <span class="sc">!=</span> <span class="st">&quot;BR&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="components.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(component) <span class="sc">%&gt;%</span></span>
-<span id="cb34-4"><a href="components.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">clay_mean_texture =</span> <span class="fu">weighted.mean</span>(clay, thickness_modified),</span>
-<span id="cb34-5"><a href="components.html#cb34-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sand_mean_texture =</span> <span class="fu">weighted.mean</span>(sand, thickness_modified),</span>
-<span id="cb34-6"><a href="components.html#cb34-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ph_l_mean =</span> <span class="fu">weighted.mean</span>(ph_l, thickness_modified),</span>
-<span id="cb34-7"><a href="components.html#cb34-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ph_r_mean =</span> <span class="fu">weighted.mean</span>(ph_r, thickness_modified),</span>
-<span id="cb34-8"><a href="components.html#cb34-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ph_h_mean =</span> <span class="fu">weighted.mean</span>(ph_h, thickness_modified),</span>
-<span id="cb34-9"><a href="components.html#cb34-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">awc_l_sum =</span> <span class="fu">sum</span>(awc_l <span class="sc">*</span> thickness_modified),</span>
-<span id="cb34-10"><a href="components.html#cb34-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">awc_r_sum =</span> <span class="fu">sum</span>(awc_r <span class="sc">*</span> thickness_modified),</span>
-<span id="cb34-11"><a href="components.html#cb34-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">awc_h_sum =</span> <span class="fu">sum</span>(awc_h <span class="sc">*</span> thickness_modified),</span>
-<span id="cb34-12"><a href="components.html#cb34-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">rock_frag =</span> <span class="fu">weighted.mean</span>(rock_frag, thickness_modified),</span>
-<span id="cb34-13"><a href="components.html#cb34-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">depth_to_restr =</span> <span class="fu">sum</span>(thickness_modified)) <span class="sc">%&gt;%</span></span>
-<span id="cb34-14"><a href="components.html#cb34-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">textural_class =</span> aqp<span class="sc">::</span><span class="fu">ssc_to_texcl</span>(<span class="at">clay =</span> clay_mean_texture,</span>
-<span id="cb34-15"><a href="components.html#cb34-15" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">sand =</span> sand_mean_texture))</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="components.html#cb34-1" tabindex="-1"></a>weighted_texture <span class="ot">&lt;-</span> horizon_df <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="components.html#cb34-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(clay) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(sand) <span class="sc">&amp;</span> texture <span class="sc">!=</span> <span class="st">&quot;BR&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="components.html#cb34-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(component) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="components.html#cb34-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">clay_mean_texture =</span> <span class="fu">weighted.mean</span>(clay, thickness_modified),</span>
+<span id="cb34-5"><a href="components.html#cb34-5" tabindex="-1"></a>                   <span class="at">sand_mean_texture =</span> <span class="fu">weighted.mean</span>(sand, thickness_modified),</span>
+<span id="cb34-6"><a href="components.html#cb34-6" tabindex="-1"></a>                   <span class="at">ph_l_mean =</span> <span class="fu">weighted.mean</span>(ph_l, thickness_modified),</span>
+<span id="cb34-7"><a href="components.html#cb34-7" tabindex="-1"></a>                   <span class="at">ph_r_mean =</span> <span class="fu">weighted.mean</span>(ph_r, thickness_modified),</span>
+<span id="cb34-8"><a href="components.html#cb34-8" tabindex="-1"></a>                   <span class="at">ph_h_mean =</span> <span class="fu">weighted.mean</span>(ph_h, thickness_modified),</span>
+<span id="cb34-9"><a href="components.html#cb34-9" tabindex="-1"></a>                   <span class="at">awc_l_sum =</span> <span class="fu">sum</span>(awc_l <span class="sc">*</span> thickness_modified),</span>
+<span id="cb34-10"><a href="components.html#cb34-10" tabindex="-1"></a>                   <span class="at">awc_r_sum =</span> <span class="fu">sum</span>(awc_r <span class="sc">*</span> thickness_modified),</span>
+<span id="cb34-11"><a href="components.html#cb34-11" tabindex="-1"></a>                   <span class="at">awc_h_sum =</span> <span class="fu">sum</span>(awc_h <span class="sc">*</span> thickness_modified),</span>
+<span id="cb34-12"><a href="components.html#cb34-12" tabindex="-1"></a>                   <span class="at">rock_frag =</span> <span class="fu">weighted.mean</span>(rock_frag, thickness_modified),</span>
+<span id="cb34-13"><a href="components.html#cb34-13" tabindex="-1"></a>                   <span class="at">depth_to_restr =</span> <span class="fu">sum</span>(thickness_modified)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-14"><a href="components.html#cb34-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">textural_class =</span> aqp<span class="sc">::</span><span class="fu">ssc_to_texcl</span>(<span class="at">clay =</span> clay_mean_texture,</span>
+<span id="cb34-15"><a href="components.html#cb34-15" tabindex="-1"></a>                                                   <span class="at">sand =</span> sand_mean_texture))</span></code></pre></div>
 <p>Combine the texture qualifiers and the textures into a dataframe</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="components.html#cb35-1" aria-hidden="true" tabindex="-1"></a>horizon_to_component_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(summarized_texture_qualifier, weighted_texture)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="components.html#cb35-1" tabindex="-1"></a>horizon_to_component_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(summarized_texture_qualifier, weighted_texture)</span></code></pre></div>
 <p><strong><em>Component level data</em></strong></p>
 <p>Here, we change gears and start assembling component level data.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="components.html#cb36-1" aria-hidden="true" tabindex="-1"></a>component_data <span class="ot">&lt;-</span></span>
-<span id="cb36-2"><a href="components.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">site</span>(nasis_selection),</span>
-<span id="cb36-3"><a href="components.html#cb36-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">data.frame</span>(</span>
-<span id="cb36-4"><a href="components.html#cb36-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">coiid =</span> coiid,</span>
-<span id="cb36-5"><a href="components.html#cb36-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">compname =</span> compname,</span>
-<span id="cb36-6"><a href="components.html#cb36-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">compkind =</span> compkind,</span>
-<span id="cb36-7"><a href="components.html#cb36-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">areasymbol =</span> areasymbol,</span>
-<span id="cb36-8"><a href="components.html#cb36-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">areaname =</span> areaname,</span>
-<span id="cb36-9"><a href="components.html#cb36-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">comppct_r =</span> comppct_r,</span>
-<span id="cb36-10"><a href="components.html#cb36-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope_l =</span> slope_l,</span>
-<span id="cb36-11"><a href="components.html#cb36-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope_r =</span> slope_r,</span>
-<span id="cb36-12"><a href="components.html#cb36-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">slope_h =</span> slope_h,</span>
-<span id="cb36-13"><a href="components.html#cb36-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">majcompflag =</span> majcompflag,</span>
-<span id="cb36-14"><a href="components.html#cb36-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">pmkind =</span> pmkind,</span>
-<span id="cb36-15"><a href="components.html#cb36-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">dmuiid =</span> dmuiid,</span>
-<span id="cb36-16"><a href="components.html#cb36-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">pmorigin =</span> pmorigin,</span>
-<span id="cb36-17"><a href="components.html#cb36-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">surf_frag =</span> surface_total_frags_pct,</span>
-<span id="cb36-18"><a href="components.html#cb36-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">elev_l =</span> elev_l,</span>
-<span id="cb36-19"><a href="components.html#cb36-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">elev_rv =</span> elev_r,</span>
-<span id="cb36-20"><a href="components.html#cb36-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">elev_h =</span> elev_h,</span>
-<span id="cb36-21"><a href="components.html#cb36-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">map_l =</span> map_l,</span>
-<span id="cb36-22"><a href="components.html#cb36-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">map_rv =</span> map_r,</span>
-<span id="cb36-23"><a href="components.html#cb36-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">map_h =</span> map_h,</span>
-<span id="cb36-24"><a href="components.html#cb36-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">maat_l =</span> maat_l,</span>
-<span id="cb36-25"><a href="components.html#cb36-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">maat_rv =</span> maat_r,</span>
-<span id="cb36-26"><a href="components.html#cb36-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">maat_h =</span> maat_h,</span>
-<span id="cb36-27"><a href="components.html#cb36-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">ffd_l =</span> ffd_l,</span>
-<span id="cb36-28"><a href="components.html#cb36-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">ffd_rv =</span> ffd_r,</span>
-<span id="cb36-29"><a href="components.html#cb36-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">ffd_h =</span> ffd_h,</span>
-<span id="cb36-30"><a href="components.html#cb36-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">aspectccwise =</span> aspectccwise,</span>
-<span id="cb36-31"><a href="components.html#cb36-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">aspectrep =</span> aspectrep,</span>
-<span id="cb36-32"><a href="components.html#cb36-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">aspectcwise =</span> aspectcwise,</span>
-<span id="cb36-33"><a href="components.html#cb36-33" aria-hidden="true" tabindex="-1"></a>         <span class="at">landform =</span> landform_string,</span>
-<span id="cb36-34"><a href="components.html#cb36-34" aria-hidden="true" tabindex="-1"></a>         <span class="at">taxtemp =</span> taxtempregime,</span>
-<span id="cb36-35"><a href="components.html#cb36-35" aria-hidden="true" tabindex="-1"></a>         <span class="at">drainagecl =</span> drainagecl,</span>
-<span id="cb36-36"><a href="components.html#cb36-36" aria-hidden="true" tabindex="-1"></a>         <span class="at">ecosite =</span> ecosite_name,</span>
-<span id="cb36-37"><a href="components.html#cb36-37" aria-hidden="true" tabindex="-1"></a>         <span class="at">ecosite_id =</span> ecosite_id,</span>
-<span id="cb36-38"><a href="components.html#cb36-38" aria-hidden="true" tabindex="-1"></a>         <span class="at">taxorder =</span> taxorder,</span>
-<span id="cb36-39"><a href="components.html#cb36-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">taxsuborder =</span> taxsuborder</span>
-<span id="cb36-40"><a href="components.html#cb36-40" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb36-41"><a href="components.html#cb36-41" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="components.html#cb36-1" tabindex="-1"></a>component_data <span class="ot">&lt;-</span></span>
+<span id="cb36-2"><a href="components.html#cb36-2" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">site</span>(nasis_selection),</span>
+<span id="cb36-3"><a href="components.html#cb36-3" tabindex="-1"></a>       <span class="fu">data.frame</span>(</span>
+<span id="cb36-4"><a href="components.html#cb36-4" tabindex="-1"></a>         <span class="at">coiid =</span> coiid,</span>
+<span id="cb36-5"><a href="components.html#cb36-5" tabindex="-1"></a>         <span class="at">compname =</span> compname,</span>
+<span id="cb36-6"><a href="components.html#cb36-6" tabindex="-1"></a>         <span class="at">compkind =</span> compkind,</span>
+<span id="cb36-7"><a href="components.html#cb36-7" tabindex="-1"></a>         <span class="at">areasymbol =</span> areasymbol,</span>
+<span id="cb36-8"><a href="components.html#cb36-8" tabindex="-1"></a>         <span class="at">areaname =</span> areaname,</span>
+<span id="cb36-9"><a href="components.html#cb36-9" tabindex="-1"></a>         <span class="at">comppct_r =</span> comppct_r,</span>
+<span id="cb36-10"><a href="components.html#cb36-10" tabindex="-1"></a>         <span class="at">slope_l =</span> slope_l,</span>
+<span id="cb36-11"><a href="components.html#cb36-11" tabindex="-1"></a>         <span class="at">slope_r =</span> slope_r,</span>
+<span id="cb36-12"><a href="components.html#cb36-12" tabindex="-1"></a>         <span class="at">slope_h =</span> slope_h,</span>
+<span id="cb36-13"><a href="components.html#cb36-13" tabindex="-1"></a>         <span class="at">majcompflag =</span> majcompflag,</span>
+<span id="cb36-14"><a href="components.html#cb36-14" tabindex="-1"></a>         <span class="at">pmkind =</span> pmkind,</span>
+<span id="cb36-15"><a href="components.html#cb36-15" tabindex="-1"></a>         <span class="at">dmuiid =</span> dmuiid,</span>
+<span id="cb36-16"><a href="components.html#cb36-16" tabindex="-1"></a>         <span class="at">pmorigin =</span> pmorigin,</span>
+<span id="cb36-17"><a href="components.html#cb36-17" tabindex="-1"></a>         <span class="at">surf_frag =</span> surface_total_frags_pct,</span>
+<span id="cb36-18"><a href="components.html#cb36-18" tabindex="-1"></a>         <span class="at">elev_l =</span> elev_l,</span>
+<span id="cb36-19"><a href="components.html#cb36-19" tabindex="-1"></a>         <span class="at">elev_rv =</span> elev_r,</span>
+<span id="cb36-20"><a href="components.html#cb36-20" tabindex="-1"></a>         <span class="at">elev_h =</span> elev_h,</span>
+<span id="cb36-21"><a href="components.html#cb36-21" tabindex="-1"></a>         <span class="at">map_l =</span> map_l,</span>
+<span id="cb36-22"><a href="components.html#cb36-22" tabindex="-1"></a>         <span class="at">map_rv =</span> map_r,</span>
+<span id="cb36-23"><a href="components.html#cb36-23" tabindex="-1"></a>         <span class="at">map_h =</span> map_h,</span>
+<span id="cb36-24"><a href="components.html#cb36-24" tabindex="-1"></a>         <span class="at">maat_l =</span> maat_l,</span>
+<span id="cb36-25"><a href="components.html#cb36-25" tabindex="-1"></a>         <span class="at">maat_rv =</span> maat_r,</span>
+<span id="cb36-26"><a href="components.html#cb36-26" tabindex="-1"></a>         <span class="at">maat_h =</span> maat_h,</span>
+<span id="cb36-27"><a href="components.html#cb36-27" tabindex="-1"></a>         <span class="at">ffd_l =</span> ffd_l,</span>
+<span id="cb36-28"><a href="components.html#cb36-28" tabindex="-1"></a>         <span class="at">ffd_rv =</span> ffd_r,</span>
+<span id="cb36-29"><a href="components.html#cb36-29" tabindex="-1"></a>         <span class="at">ffd_h =</span> ffd_h,</span>
+<span id="cb36-30"><a href="components.html#cb36-30" tabindex="-1"></a>         <span class="at">aspectccwise =</span> aspectccwise,</span>
+<span id="cb36-31"><a href="components.html#cb36-31" tabindex="-1"></a>         <span class="at">aspectrep =</span> aspectrep,</span>
+<span id="cb36-32"><a href="components.html#cb36-32" tabindex="-1"></a>         <span class="at">aspectcwise =</span> aspectcwise,</span>
+<span id="cb36-33"><a href="components.html#cb36-33" tabindex="-1"></a>         <span class="at">landform =</span> landform_string,</span>
+<span id="cb36-34"><a href="components.html#cb36-34" tabindex="-1"></a>         <span class="at">taxtemp =</span> taxtempregime,</span>
+<span id="cb36-35"><a href="components.html#cb36-35" tabindex="-1"></a>         <span class="at">drainagecl =</span> drainagecl,</span>
+<span id="cb36-36"><a href="components.html#cb36-36" tabindex="-1"></a>         <span class="at">ecosite =</span> ecosite_name,</span>
+<span id="cb36-37"><a href="components.html#cb36-37" tabindex="-1"></a>         <span class="at">ecosite_id =</span> ecosite_id,</span>
+<span id="cb36-38"><a href="components.html#cb36-38" tabindex="-1"></a>         <span class="at">taxorder =</span> taxorder,</span>
+<span id="cb36-39"><a href="components.html#cb36-39" tabindex="-1"></a>         <span class="at">taxsuborder =</span> taxsuborder</span>
+<span id="cb36-40"><a href="components.html#cb36-40" tabindex="-1"></a>       )</span>
+<span id="cb36-41"><a href="components.html#cb36-41" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Collect restriction data</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="components.html#cb37-1" aria-hidden="true" tabindex="-1"></a>restriction_data <span class="ot">&lt;-</span> <span class="fu">restrictions</span>(nasis_selection) <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="components.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(coiid, reskind, resdept_l, resdept_r, resdept_h, reshard) <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="components.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&quot;noncemented&quot;</span>, reshard)) <span class="sc">%&gt;%</span></span>
-<span id="cb37-4"><a href="components.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(coiid) <span class="sc">%&gt;%</span></span>
-<span id="cb37-5"><a href="components.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(resdept_r) <span class="sc">%&gt;%</span></span>
-<span id="cb37-6"><a href="components.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="components.html#cb37-1" tabindex="-1"></a>restriction_data <span class="ot">&lt;-</span> <span class="fu">restrictions</span>(nasis_selection) <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="components.html#cb37-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(coiid, reskind, resdept_l, resdept_r, resdept_h, reshard) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="components.html#cb37-3" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&quot;noncemented&quot;</span>, reshard)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="components.html#cb37-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(coiid) <span class="sc">%&gt;%</span></span>
+<span id="cb37-5"><a href="components.html#cb37-5" tabindex="-1"></a>  <span class="fu">arrange</span>(resdept_r) <span class="sc">%&gt;%</span></span>
+<span id="cb37-6"><a href="components.html#cb37-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice</span>(<span class="dv">1</span>)</span></code></pre></div>
 <p>Merge component data and restriction data</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="components.html#cb38-1" aria-hidden="true" tabindex="-1"></a>component_data_combined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(component_data, restriction_data)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="components.html#cb38-1" tabindex="-1"></a>component_data_combined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(component_data, restriction_data)</span></code></pre></div>
 <pre><code>## Joining with `by = join_by(coiid)`</code></pre>
 <p><strong><em>Merge horizon data and component data</em></strong></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="components.html#cb40-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> horizon_to_component_data <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="components.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">coiid =</span> component) <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="components.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(component_data_combined) <span class="sc">%&gt;%</span></span>
-<span id="cb40-4"><a href="components.html#cb40-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(coiid,  compname, ecosite, ecosite_id, landform, pmkind, </span>
-<span id="cb40-5"><a href="components.html#cb40-5" aria-hidden="true" tabindex="-1"></a>                pmorigin, taxtemp, textural_class, texture_qualifier, </span>
-<span id="cb40-6"><a href="components.html#cb40-6" aria-hidden="true" tabindex="-1"></a>                rock_frag, surf_frag, depth_to_restr, drainagecl, slope_l, </span>
-<span id="cb40-7"><a href="components.html#cb40-7" aria-hidden="true" tabindex="-1"></a>                slope_r, slope_h, ph_l_mean, ph_r_mean, ph_h_mean, elev_l, </span>
-<span id="cb40-8"><a href="components.html#cb40-8" aria-hidden="true" tabindex="-1"></a>                elev_rv, elev_h, map_l, map_rv, map_h, maat_l, maat_rv, </span>
-<span id="cb40-9"><a href="components.html#cb40-9" aria-hidden="true" tabindex="-1"></a>                maat_h, ffd_l, ffd_rv, ffd_h ,comppct_r, dmuiid, </span>
-<span id="cb40-10"><a href="components.html#cb40-10" aria-hidden="true" tabindex="-1"></a>                <span class="fu">everything</span>())</span></code></pre></div>
-<pre><code>## Warning in left_join(., component_data_combined): Each row in `x` is expected to match at most 1 row in
-## `y`.
-## ℹ Row 149 of `x` matches multiple rows.
-## ℹ If multiple matches are expected, set `multiple =
-##   &quot;all&quot;` to silence this warning.</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="components.html#cb40-1" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> horizon_to_component_data <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="components.html#cb40-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">coiid =</span> component) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="components.html#cb40-3" tabindex="-1"></a>  <span class="fu">left_join</span>(component_data_combined) <span class="sc">%&gt;%</span></span>
+<span id="cb40-4"><a href="components.html#cb40-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(coiid,  compname, ecosite, ecosite_id, landform, pmkind, </span>
+<span id="cb40-5"><a href="components.html#cb40-5" tabindex="-1"></a>                pmorigin, taxtemp, textural_class, texture_qualifier, </span>
+<span id="cb40-6"><a href="components.html#cb40-6" tabindex="-1"></a>                rock_frag, surf_frag, depth_to_restr, drainagecl, slope_l, </span>
+<span id="cb40-7"><a href="components.html#cb40-7" tabindex="-1"></a>                slope_r, slope_h, ph_l_mean, ph_r_mean, ph_h_mean, elev_l, </span>
+<span id="cb40-8"><a href="components.html#cb40-8" tabindex="-1"></a>                elev_rv, elev_h, map_l, map_rv, map_h, maat_l, maat_rv, </span>
+<span id="cb40-9"><a href="components.html#cb40-9" tabindex="-1"></a>                maat_h, ffd_l, ffd_rv, ffd_h ,comppct_r, dmuiid, </span>
+<span id="cb40-10"><a href="components.html#cb40-10" tabindex="-1"></a>                <span class="fu">everything</span>())</span></code></pre></div>
+<pre><code>## Warning in left_join(., component_data_combined): Detected an unexpected many-to-many relationship
+## between `x` and `y`.
+## ℹ Row 149 of `x` matches multiple rows in `y`.
+## ℹ Row 6922 of `y` matches multiple rows in `x`.
+## ℹ If a many-to-many relationship is expected, set
+##   `relationship = &quot;many-to-many&quot;` to silence this
+##   warning.</code></pre>
 <p>Save as csv</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="components.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(all_data, <span class="st">&quot;C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv&quot;</span>,</span>
-<span id="cb42-2"><a href="components.html#cb42-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="components.html#cb42-1" tabindex="-1"></a><span class="fu">write.csv</span>(all_data, <span class="st">&quot;C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv&quot;</span>,</span>
+<span id="cb42-2"><a href="components.html#cb42-2" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="where-do-components-occur" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> Where do components occur?<a href="components.html#where-do-components-occur" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -567,6 +574,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
