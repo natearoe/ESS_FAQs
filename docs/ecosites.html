@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Ecosites | NRCS Ecologist FAQs</title>
   <meta name="description" content="This is a compilation of FAQs for NRCS Ecologists." />
-  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Ecosites | NRCS Ecologist FAQs" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2024-04-12" />
+<meta name="date" content="2024-11-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,7 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -59,9 +60,9 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.2.1/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
 <script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.2.1/leaflet-providers-plugin.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
 <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
 <script src="libs/HomeButton-0.0.1/home-button.js"></script>
 <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
@@ -186,10 +187,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="ecosites.html"><a href="ecosites.html#what-ecosites-are-active-in-an-mlra"><i class="fa fa-check"></i><b>4.1</b> What ecosites are active in an MLRA?</a></li>
 <li class="chapter" data-level="4.2" data-path="ecosites.html"><a href="ecosites.html#range-in-characteristics-of-ecosites"><i class="fa fa-check"></i><b>4.2</b> Range in characteristics of ecosites</a></li>
 <li class="chapter" data-level="4.3" data-path="ecosites.html"><a href="ecosites.html#mapping-ecological-sites"><i class="fa fa-check"></i><b>4.3</b> Mapping ecological sites</a></li>
-<li class="chapter" data-level="4.4" data-path="ecosites.html"><a href="ecosites.html#associated-sites"><i class="fa fa-check"></i><b>4.4</b> Associated sites</a></li>
-<li class="chapter" data-level="4.5" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-single-ecological-site"><i class="fa fa-check"></i><b>4.5</b> Determine acreage of single ecological site</a></li>
-<li class="chapter" data-level="4.6" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-multiple-ecological-sites"><i class="fa fa-check"></i><b>4.6</b> Determine acreage of multiple ecological sites</a></li>
-<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#plotveg"><i class="fa fa-check"></i><b>4.7</b> Accessing plot level vegetation data</a></li>
+<li class="chapter" data-level="4.4" data-path="ecosites.html"><a href="ecosites.html#climate"><i class="fa fa-check"></i><b>4.4</b> Climate</a></li>
+<li class="chapter" data-level="4.5" data-path="ecosites.html"><a href="ecosites.html#associated-sites"><i class="fa fa-check"></i><b>4.5</b> Associated sites</a></li>
+<li class="chapter" data-level="4.6" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-single-ecological-site"><i class="fa fa-check"></i><b>4.6</b> Determine acreage of single ecological site</a></li>
+<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-multiple-ecological-sites"><i class="fa fa-check"></i><b>4.7</b> Determine acreage of multiple ecological sites</a></li>
+<li class="chapter" data-level="4.8" data-path="ecosites.html"><a href="ecosites.html#plotveg"><i class="fa fa-check"></i><b>4.8</b> Accessing plot level vegetation data</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="species.html"><a href="species.html"><i class="fa fa-check"></i><b>5</b> Species</a>
 <ul>
@@ -303,8 +305,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb60-5"><a href="ecosites.html#cb60-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(<span class="st">&quot;Distribution of ecological site - &quot;</span>, ecosite_of_interest))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 </div>
-<div id="associated-sites" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Associated sites<a href="ecosites.html#associated-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="climate" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Climate<a href="ecosites.html#climate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At a large scale, climate is the most important abiotic variable affecting the distribution of organisms. In ecological site concept development, it is a critical starting place. This section will introduce functions that can help report the climate associated with an ecoligcal site by summarizing PRISM climate data (<a href="https://prism.oregonstate.edu/" class="uri">https://prism.oregonstate.edu/</a>). PRISM data is 800m raster data that includes precipitation, temperature, vapor pressure, and dew point.</p>
+<p>The primary product of PRISM is climate normals. PRISM normals are averages of climate conditions across a 30-year time frame. There are annual normals, monthly normals, and daily normals. There are 365 daily normals (one for each day), 12 monthly normals (one for each month), and only one annual normal. As an example of how normals work, consider precipitation on the 12th day of the year across the time period 1991-2020. There are 30 years of data, each with a 12th day and an associated estimate of precipitation. Those 30 estimates are averaged. The result is the daily normal for the 12th day of the year. The same process can be applied for the other days of the year.</p>
+</div>
+<div id="associated-sites" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Associated sites<a href="ecosites.html#associated-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Associated sites are ecological sites that occur in the same area of the landscape. The simplest way to think about this is ecological sites that are adjacent to your ecological site of interest. I am going to present a simple way of addressing this. We can determine what ecological sites occur in the same mapunit as your ecosite of interest. Looking at all the mapunits that your ecological site of interest occurs in, and tallying up all of the other ecological sites that are in shared mapunits, we can come to a metric of what other ecological sites tend to be near your ecological site of interest. In the future, I would like to make some improvements to this, so that it considers adjacent mapunits and considers the length of boundary between mapunits.</p>
 <p>Load the <a href="index.html#standard">Standard Dataset and packages</a>.</p>
 <p>Reduce data how you see fit. I am just going to remove miscellaneous areas, but you could choose additional criteria such as removing minor components.</p>
@@ -331,8 +338,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 R018XA104CA  8784.
 ## 3 R015XF008CA  1657</code></pre>
 </div>
-<div id="determine-acreage-of-single-ecological-site" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Determine acreage of single ecological site<a href="ecosites.html#determine-acreage-of-single-ecological-site" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="determine-acreage-of-single-ecological-site" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Determine acreage of single ecological site<a href="ecosites.html#determine-acreage-of-single-ecological-site" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>My office leader recently asked me how many acres a particular ecological site occupies because she was entering it as a project in NASIS and needed the associated acres. You might need to do something similar for a NASIS project, a tech team meeting, or to improve your own understanding of how prevalent an ecological site is.</p>
 <p>Load the <a href="index.html#standard">Standard Dataset and packages</a>.</p>
 <p>First, let’s say we have a particular ecosite of interest - “R018XI105CA”</p>
@@ -352,8 +359,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="ecosites.html#cb70-1" tabindex="-1"></a><span class="fu">sum</span>(my_ecosite_compacres<span class="sc">$</span>comp_acreage)</span></code></pre></div>
 <pre><code>## [1] 85585.38</code></pre>
 </div>
-<div id="determine-acreage-of-multiple-ecological-sites" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> Determine acreage of multiple ecological sites<a href="ecosites.html#determine-acreage-of-multiple-ecological-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="determine-acreage-of-multiple-ecological-sites" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Determine acreage of multiple ecological sites<a href="ecosites.html#determine-acreage-of-multiple-ecological-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s look at how we would efficiently calculate the acreage of all the ecosites in your MLRA.</p>
 <p>First, we will restrict the ecosites of interest to only those associate with MLRA 18.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="ecosites.html#cb72-1" tabindex="-1"></a>MLRA18_ecosites <span class="ot">&lt;-</span> my.components.MLRA<span class="sc">$</span>ecosite_id <span class="sc">%&gt;%</span> <span class="fu">str_subset</span>(<span class="at">pattern =</span> <span class="st">&quot;18X&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code></pre></div>
@@ -377,9 +384,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 F018XA201CA  32945.32
 ## 6 F018XI201CA 364947.53</code></pre>
 </div>
-<div id="plotveg" class="section level2 hasAnchor" number="4.7">
-<h2><span class="header-section-number">4.7</span> Accessing plot level vegetation data<a href="ecosites.html#plotveg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla &gt; ‘Pedon/Site/Vegetation Plot by site area overlap table’. The description for this Query gives the necessary details.</p>
+<div id="plotveg" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Accessing plot level vegetation data<a href="ecosites.html#plotveg" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For this process, we are going to look at vegetation data associated with the Sequoia and King’s Canyon National Parks soil survey - CA792. For accessing vegetation data associated with a survey area, use the following query - SSRO_Alaska &gt; ‘Pedon/Site/Vegetation Plot by site area overlap table’. The description for this Query gives the necessary details.</p>
 <p>NATIONAL: Have to run this twice against the national in order to get sites, pedons, and vegetation plot. First, set target table to PEDON. Second, set target tablet to VEGETATION PLOT.</p>
 <p>LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.</p>
 <ol style="list-style-type: decimal">
@@ -397,7 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb76-3"><a href="ecosites.html#cb76-3" tabindex="-1"></a><span class="fu">table</span>(test<span class="sc">$</span>DataOrigin)</span></code></pre></div>
 <pre><code>## 
 ## site existing veg table        spreadsheet form 
-##                     470                     880</code></pre>
+##                     472                     880</code></pre>
 
 </div>
 </div>
