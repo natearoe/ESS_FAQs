@@ -42,8 +42,6 @@ table(my.components.MLRA.reduced$ecosite_id) %>% as.data.frame() %>%
 
 Interesting... the most used ecosites in MLRA18 are ecosite concepts from MLRAs 22a and 17. 
 
-
-
 ## Range in characteristics of ecosites
 I created a report that summarizes the characteristics of ecosites. It is organized based on the information that is supposed to be populated in EDIT. Here is a link to a [sample report](https://htmlpreview.github.io/?https://github.com/natearoe/practice/blob/master/F018XA201CA.html). I have established a methodology allowing you to create reports like the one linked for all of the ecosites in your MLRA within a few short steps. You can also produce the report for just one of your ecosites. For documentation on this methodology, [click here](https://natearoe.github.io/git-cloud-storage/read_me.docx). Click on the green 'Code' button and choose 'Download ZIP'. Once you have downloaded to the location of your preference, you can right click > Extract all. You can then open the read_me.docx file. Additionally, you can watch the following YouTube video:
 
@@ -111,6 +109,16 @@ ggplot() + theme_minimal() +  geom_sf(data = ca) +
           col = "hotpink", alpha = 0, size = 2) + 
   ggtitle(paste0("Distribution of ecological site - ", ecosite_of_interest))
 ```
+
+## Climate
+At a large scale, climate is the most important abiotic variable affecting the distribution of organisms. In ecological site concept development, it is a critical starting place. This section will introduce functions that can help report the climate associated with an ecoligcal site by summarizing PRISM climate data (https://prism.oregonstate.edu/). PRISM data is 800m raster data that includes precipitation, temperature, vapor pressure, and dew point. 
+
+The primary product of PRISM is climate normals. PRISM normals are averages of climate conditions across a 30-year time frame. There are annual normals, monthly normals, and daily normals. There are 365 daily normals (one for each day), 12 monthly normals (one for each month), and only one annual normal. As an example of how normals work, consider precipitation on the 12th day of the year across the time period 1991-2020. There are 30 years of data, each with a 12th day and an associated estimate of precipitation. Those 30 estimates are averaged. The result is the daily normal for the 12th day of the year. The same process can be applied for the other days of the year.
+
+```{r}
+
+```
+
 
 
 ## Associated sites
@@ -199,7 +207,7 @@ head(MLRA18_ecosite_acreage)
 
 ## Accessing plot level vegetation data{#plotveg}
 
-This requires a bit of Querying magic. The Query that we want is MLRA13_Wasilla > 'Pedon/Site/Vegetation Plot by site area overlap table'. The description for this Query gives the necessary details. 
+For this process, we are going to look at vegetation data associated with the Sequoia and King's Canyon National Parks soil survey - CA792. For accessing vegetation data associated with a survey area, use the following query -  SSRO_Alaska > 'Pedon/Site/Vegetation Plot by site area overlap table'. The description for this Query gives the necessary details. 
 
 NATIONAL: Have to run this twice against the national in order to get sites, pedons, and vegetation plot.  First, set target table to PEDON.  Second, set target tablet to VEGETATION PLOT.
 
