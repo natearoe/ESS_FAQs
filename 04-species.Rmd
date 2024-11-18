@@ -1,5 +1,22 @@
 # Species
 
+## Creating a species list
+
+Here is a brief introduction to create a species list from your selected set in NASIS. This can be helpful to provide to folks who are less familiar with the vegetation of an area, so that they know what species have been observed. The function accesses the USDA PLANTS database and returns modern taxonomies if old taxa exist in the dataset, functional class, plant family, and native status. 
+
+```{r, eval = FALSE}
+species_list <- ecositer::species_list(SS = TRUE)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+species_list <- ecositer::species_list(SS = FALSE,
+                                       static_location = "C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite")
+head(species_list)
+```
+
+
+
+
 ## Working with vegetation data
 
 To begin with, we will query plot level NASIS data using the query outlined in [Accessing plot level vegetation data](#plotveg). Then, run ```ecositer::vegStaticNASIS()``` and ```ecositer::formatted_veg_df()```. See the 
@@ -43,8 +60,6 @@ artemesia_location <-
 ```
 
 Create a list of dataframes based on the different 
-
-
 
 ```{r}
 veg_data <- fetchVegdata(dsn = "C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite", SS = FALSE)
