@@ -21,6 +21,7 @@ ecosites
 what-ecosites-are-active-in-an-mlra
 range-in-characteristics-of-ecosites
 mapping-ecological-sites
+climate
 associated-sites
 determine-acreage-of-single-ecological-site
 determine-acreage-of-multiple-ecological-sites

@@ -23,7 +23,11 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
+<<<<<<< HEAD
 <meta name="date" content="2024-11-18" />
+=======
+<meta name="date" content="2024-11-08" />
+>>>>>>> be4c98e180cb2bd240e6f257eaa20ba313ac3daf
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -187,10 +191,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="ecosites.html"><a href="ecosites.html#what-ecosites-are-active-in-an-mlra"><i class="fa fa-check"></i><b>4.1</b> What ecosites are active in an MLRA?</a></li>
 <li class="chapter" data-level="4.2" data-path="ecosites.html"><a href="ecosites.html#range-in-characteristics-of-ecosites"><i class="fa fa-check"></i><b>4.2</b> Range in characteristics of ecosites</a></li>
 <li class="chapter" data-level="4.3" data-path="ecosites.html"><a href="ecosites.html#mapping-ecological-sites"><i class="fa fa-check"></i><b>4.3</b> Mapping ecological sites</a></li>
-<li class="chapter" data-level="4.4" data-path="ecosites.html"><a href="ecosites.html#associated-sites"><i class="fa fa-check"></i><b>4.4</b> Associated sites</a></li>
-<li class="chapter" data-level="4.5" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-single-ecological-site"><i class="fa fa-check"></i><b>4.5</b> Determine acreage of single ecological site</a></li>
-<li class="chapter" data-level="4.6" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-multiple-ecological-sites"><i class="fa fa-check"></i><b>4.6</b> Determine acreage of multiple ecological sites</a></li>
-<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#plotveg"><i class="fa fa-check"></i><b>4.7</b> Accessing plot level vegetation data</a></li>
+<li class="chapter" data-level="4.4" data-path="ecosites.html"><a href="ecosites.html#climate"><i class="fa fa-check"></i><b>4.4</b> Climate</a></li>
+<li class="chapter" data-level="4.5" data-path="ecosites.html"><a href="ecosites.html#associated-sites"><i class="fa fa-check"></i><b>4.5</b> Associated sites</a></li>
+<li class="chapter" data-level="4.6" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-single-ecological-site"><i class="fa fa-check"></i><b>4.6</b> Determine acreage of single ecological site</a></li>
+<li class="chapter" data-level="4.7" data-path="ecosites.html"><a href="ecosites.html#determine-acreage-of-multiple-ecological-sites"><i class="fa fa-check"></i><b>4.7</b> Determine acreage of multiple ecological sites</a></li>
+<li class="chapter" data-level="4.8" data-path="ecosites.html"><a href="ecosites.html#plotveg"><i class="fa fa-check"></i><b>4.8</b> Accessing plot level vegetation data</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="species.html"><a href="species.html"><i class="fa fa-check"></i><b>5</b> Species</a>
 <ul>
@@ -296,6 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb104-23"><a href="random-tools.html#cb104-23" tabindex="-1"></a>my_results<span class="sc">$</span>bray_dis <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> my_results<span class="sc">$</span>bray</span>
 <span id="cb104-24"><a href="random-tools.html#cb104-24" tabindex="-1"></a>my_results<span class="sc">$</span>jaccard_dis <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> my_results<span class="sc">$</span>jaccard</span></code></pre></div>
 <p>Plot the relationship between Bray-Curtis and Jaccard</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="random-tools.html#cb105-1" tabindex="-1"></a>my_results_long <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(my_results, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;bray&quot;</span>, <span class="st">&quot;jaccard&quot;</span>, <span class="st">&quot;bray_dis&quot;</span>, <span class="st">&quot;jaccard_dis&quot;</span>))</span>
 <span id="cb105-2"><a href="random-tools.html#cb105-2" tabindex="-1"></a></span>
 <span id="cb105-3"><a href="random-tools.html#cb105-3" tabindex="-1"></a>my_results_long<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;dis&quot;</span>, my_results_long<span class="sc">$</span>name) <span class="sc">==</span> <span class="cn">TRUE</span>, <span class="st">&quot;Dissimilarity&quot;</span>, <span class="st">&quot;Similarity&quot;</span>)</span>
@@ -339,6 +345,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb107-5"><a href="random-tools.html#cb107-5" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="st">&quot;Abs. value diff. of Bray-Curtis and Jaccard&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="random-tools.html#cb108-1" tabindex="-1"></a>my_results <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(prop_sim, diff) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(diff)) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
+=======
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="random-tools.html#cb103-1" tabindex="-1"></a>my_results_long <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(my_results, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;bray&quot;</span>, <span class="st">&quot;jaccard&quot;</span>, <span class="st">&quot;bray_dis&quot;</span>, <span class="st">&quot;jaccard_dis&quot;</span>))</span>
+<span id="cb103-2"><a href="random-tools.html#cb103-2" tabindex="-1"></a></span>
+<span id="cb103-3"><a href="random-tools.html#cb103-3" tabindex="-1"></a>my_results_long<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">&quot;dis&quot;</span>, my_results_long<span class="sc">$</span>name) <span class="sc">==</span> <span class="cn">TRUE</span>, <span class="st">&quot;Dissimilarity&quot;</span>, <span class="st">&quot;Similarity&quot;</span>)</span>
+<span id="cb103-4"><a href="random-tools.html#cb103-4" tabindex="-1"></a></span>
+<span id="cb103-5"><a href="random-tools.html#cb103-5" tabindex="-1"></a>my_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#999999&quot;</span>)</span>
+<span id="cb103-6"><a href="random-tools.html#cb103-6" tabindex="-1"></a></span>
+<span id="cb103-7"><a href="random-tools.html#cb103-7" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> my_results_long, </span>
+<span id="cb103-8"><a href="random-tools.html#cb103-8" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> prop_sim,</span>
+<span id="cb103-9"><a href="random-tools.html#cb103-9" tabindex="-1"></a>                             <span class="at">y =</span> value,</span>
+<span id="cb103-10"><a href="random-tools.html#cb103-10" tabindex="-1"></a>                             <span class="at">color =</span> name)) <span class="sc">+</span></span>
+<span id="cb103-11"><a href="random-tools.html#cb103-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_path</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb103-12"><a href="random-tools.html#cb103-12" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">xlab</span>(<span class="st">&quot;Shared abundance&quot;</span>) <span class="sc">+</span></span>
+<span id="cb103-13"><a href="random-tools.html#cb103-13" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="st">&quot;Value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb103-14"><a href="random-tools.html#cb103-14" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Measure&quot;</span>) <span class="sc">+</span></span>
+<span id="cb103-15"><a href="random-tools.html#cb103-15" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Bray-Curtis (sim)&quot;</span>,</span>
+<span id="cb103-16"><a href="random-tools.html#cb103-16" tabindex="-1"></a>                                         <span class="st">&quot;Bray-Curtis (dis)&quot;</span>,</span>
+<span id="cb103-17"><a href="random-tools.html#cb103-17" tabindex="-1"></a>                                         <span class="st">&quot;Jaccard (sim)&quot;</span>,</span>
+<span id="cb103-18"><a href="random-tools.html#cb103-18" tabindex="-1"></a>                                         <span class="st">&quot;Jaccard (dis)&quot;</span>),</span>
+<span id="cb103-19"><a href="random-tools.html#cb103-19" tabindex="-1"></a>                              <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#F8766D&quot;</span>, <span class="st">&quot;#7CAE00&quot;</span>,</span>
+<span id="cb103-20"><a href="random-tools.html#cb103-20" tabindex="-1"></a>                                         <span class="st">&quot;#00BFC4&quot;</span>, <span class="st">&quot;#C77CFF&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p>Bray-Curtis is linear with a slope of 1 or -1. Jaccard is non-linear. To determine how the slope of Jaccard changes over a gradient of shared abundance, I will differentiate Jaccard (sim).</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="random-tools.html#cb104-1" tabindex="-1"></a>my_results<span class="sc">$</span>jaccard_deriv <span class="ot">&lt;-</span> <span class="fu">apply</span>(prop_sim, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
+<span id="cb104-2"><a href="random-tools.html#cb104-2" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">/</span>(<span class="dv">1</span><span class="fl">-.5</span><span class="sc">*</span>x)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb104-3"><a href="random-tools.html#cb104-3" tabindex="-1"></a>})</span>
+<span id="cb104-4"><a href="random-tools.html#cb104-4" tabindex="-1"></a></span>
+<span id="cb104-5"><a href="random-tools.html#cb104-5" tabindex="-1"></a></span>
+<span id="cb104-6"><a href="random-tools.html#cb104-6" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> my_results, </span>
+<span id="cb104-7"><a href="random-tools.html#cb104-7" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> prop_sim,</span>
+<span id="cb104-8"><a href="random-tools.html#cb104-8" tabindex="-1"></a>                             <span class="at">y =</span> jaccard_deriv)) <span class="sc">+</span></span>
+<span id="cb104-9"><a href="random-tools.html#cb104-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_path</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb104-10"><a href="random-tools.html#cb104-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">xlab</span>(<span class="st">&quot;Shared abundance&quot;</span>) <span class="sc">+</span></span>
+<span id="cb104-11"><a href="random-tools.html#cb104-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="st">&quot;1st derivative of Jaccard similarity&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p>The derivative of Jaccard (sim) shows us that changes to shared abundance at low levels of shared abundance have 1/4 of the influence as changes to shared abundance at high levels of shared abundance. This is observable from the 1st derivative being 0.5 at low levels of shared abundance and 2 at high levels of shared abundance. This could be a useful property if low amounts of shared abundance could be considered spurious.</p>
+<p>Finally, let’s look at disagreement between Jaccard and Bray-Curtis.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="random-tools.html#cb105-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> my_results,</span>
+<span id="cb105-2"><a href="random-tools.html#cb105-2" tabindex="-1"></a>                ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> prop_sim, <span class="at">y =</span> diff)) <span class="sc">+</span></span>
+<span id="cb105-3"><a href="random-tools.html#cb105-3" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_path</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb105-4"><a href="random-tools.html#cb105-4" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">xlab</span>(<span class="st">&quot;Shared abundance&quot;</span>) <span class="sc">+</span></span>
+<span id="cb105-5"><a href="random-tools.html#cb105-5" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="st">&quot;Abs. value diff. of Bray-Curtis and Jaccard&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="random-tools.html#cb106-1" tabindex="-1"></a>my_results <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(prop_sim, diff) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(diff)) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
+>>>>>>> be4c98e180cb2bd240e6f257eaa20ba313ac3daf
 <pre><code>##   prop_sim      diff
 ## 1     0.59 0.1715603
 ## 2     0.58 0.1715493
