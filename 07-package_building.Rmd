@@ -1,0 +1,27 @@
+# Package building/maintaining tips
+
+## Package building/maintaining tips
+
+This section has helpful reminders for building and maintaining R packages. 
+
+Update package documentation
+```{r}
+# devtools::document()
+```
+
+Add package
+```{r}
+# use_package()
+```
+
+Add function from package. Adding a function from a package instead of the whole package keeps things lighter weight. If you want to just add a function, use the script below and put it in your function.R file where you use their function. 
+```{r}
+# @importFrom package-name object1 object2 objectn
+```
+
+Make a package documentation file
+```{r}
+# usethis::use_package_doc()
+```
+
+Check out this link for more details - https://devtools.r-lib.org/

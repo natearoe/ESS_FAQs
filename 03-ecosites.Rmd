@@ -1,7 +1,7 @@
 # Ecosites
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-my.components.MLRA <- fetchNASIS(from = "components", duplicates = T, dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE)
+my.components.MLRA <- fetchNASIS(from = "components", duplicates = T, dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/data/Loafercreek_mapunit.sqlite", SS = FALSE)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}

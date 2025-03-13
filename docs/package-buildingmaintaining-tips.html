@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Package building/maintaining tips | NRCS Ecologist FAQs</title>
+  <title>Chapter 8 Package building/maintaining tips | NRCS Ecologist FAQs</title>
   <meta name="description" content="This is a compilation of FAQs for NRCS Ecologists." />
   <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Package building/maintaining tips | NRCS Ecologist FAQs" />
+  <meta property="og:title" content="Chapter 8 Package building/maintaining tips | NRCS Ecologist FAQs" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a compilation of FAQs for NRCS Ecologists." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Package building/maintaining tips | NRCS Ecologist FAQs" />
+  <meta name="twitter:title" content="Chapter 8 Package building/maintaining tips | NRCS Ecologist FAQs" />
   
   <meta name="twitter:description" content="This is a compilation of FAQs for NRCS Ecologists." />
   
@@ -23,18 +23,14 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<<<<<<< HEAD
-<meta name="date" content="2024-11-18" />
-=======
-<meta name="date" content="2024-11-08" />
->>>>>>> be4c98e180cb2bd240e6f257eaa20ba313ac3daf
+<meta name="date" content="2025-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="nasis.html"/>
+<link rel="prev" href="es-verification.html"/>
 <link rel="next" href="random-tools.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -207,14 +203,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="nasis.html"><a href="nasis.html#creating-a-static-nasis-database"><i class="fa fa-check"></i><b>6.1</b> Creating a Static NASIS database</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>7</b> Package building/maintaining tips</a>
+<li class="chapter" data-level="7" data-path="es-verification.html"><a href="es-verification.html"><i class="fa fa-check"></i><b>7</b> ES Verification</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips-1"><i class="fa fa-check"></i><b>7.1</b> Package building/maintaining tips</a></li>
+<li class="chapter" data-level="7.1" data-path="es-verification.html"><a href="es-verification.html#r-markdown"><i class="fa fa-check"></i><b>7.1</b> R Markdown</a></li>
+<li class="chapter" data-level="7.2" data-path="es-verification.html"><a href="es-verification.html#including-plots"><i class="fa fa-check"></i><b>7.2</b> Including Plots</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="random-tools.html"><a href="random-tools.html"><i class="fa fa-check"></i><b>8</b> Random tools</a>
+<li class="chapter" data-level="8" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>8</b> Package building/maintaining tips</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="random-tools.html"><a href="random-tools.html#organizing-scanned-data"><i class="fa fa-check"></i><b>8.1</b> Organizing scanned data</a></li>
-<li class="chapter" data-level="8.2" data-path="random-tools.html"><a href="random-tools.html#comparing-bray-curtis-and-jaccard-dissimilarity-measures"><i class="fa fa-check"></i><b>8.2</b> Comparing Bray-Curtis and Jaccard (dis)similarity measures</a></li>
+<li class="chapter" data-level="8.1" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips-1"><i class="fa fa-check"></i><b>8.1</b> Package building/maintaining tips</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="random-tools.html"><a href="random-tools.html"><i class="fa fa-check"></i><b>9</b> Random tools</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="random-tools.html"><a href="random-tools.html#organizing-scanned-data"><i class="fa fa-check"></i><b>9.1</b> Organizing scanned data</a></li>
+<li class="chapter" data-level="9.2" data-path="random-tools.html"><a href="random-tools.html#comparing-bray-curtis-and-jaccard-dissimilarity-measures"><i class="fa fa-check"></i><b>9.2</b> Comparing Bray-Curtis and Jaccard (dis)similarity measures</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -236,19 +237,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="package-buildingmaintaining-tips" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Package building/maintaining tips<a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="package-buildingmaintaining-tips-1" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Package building/maintaining tips<a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="package-buildingmaintaining-tips" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Package building/maintaining tips<a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="package-buildingmaintaining-tips-1" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Package building/maintaining tips<a href="package-buildingmaintaining-tips.html#package-buildingmaintaining-tips-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This section has helpful reminders for building and maintaining R packages.</p>
 <p>Update package documentation</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="package-buildingmaintaining-tips.html#cb96-1" tabindex="-1"></a><span class="co"># devtools::document()</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="package-buildingmaintaining-tips.html#cb91-1" tabindex="-1"></a><span class="co"># devtools::document()</span></span></code></pre></div>
 <p>Add package</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="package-buildingmaintaining-tips.html#cb97-1" tabindex="-1"></a><span class="co"># use_package()</span></span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="package-buildingmaintaining-tips.html#cb92-1" tabindex="-1"></a><span class="co"># use_package()</span></span></code></pre></div>
 <p>Add function from package. Adding a function from a package instead of the whole package keeps things lighter weight. If you want to just add a function, use the script below and put it in your function.R file where you use their function.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="package-buildingmaintaining-tips.html#cb98-1" tabindex="-1"></a><span class="co"># @importFrom package-name object1 object2 objectn</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="package-buildingmaintaining-tips.html#cb93-1" tabindex="-1"></a><span class="co"># @importFrom package-name object1 object2 objectn</span></span></code></pre></div>
 <p>Make a package documentation file</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="package-buildingmaintaining-tips.html#cb99-1" tabindex="-1"></a><span class="co"># usethis::use_package_doc()</span></span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="package-buildingmaintaining-tips.html#cb94-1" tabindex="-1"></a><span class="co"># usethis::use_package_doc()</span></span></code></pre></div>
 <p>Check out this link for more details - <a href="https://devtools.r-lib.org/" class="uri">https://devtools.r-lib.org/</a></p>
 
 </div>
@@ -258,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="nasis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="es-verification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="random-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -290,7 +291,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-package_building.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-package_building.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -32,6 +32,9 @@ working-with-vegetation-data
 mapping-the-location-of-species
 nasis
 creating-a-static-nasis-database
+es-verification
+r-markdown
+including-plots
 package-buildingmaintaining-tips
 package-buildingmaintaining-tips-1
 random-tools

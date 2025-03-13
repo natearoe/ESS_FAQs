@@ -1,11 +1,6 @@
 # Components
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE,
-                                 duplicates = TRUE)
-```
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(soilDB)
 library(dplyr)
 library(aqp)
@@ -53,9 +48,8 @@ my.components.MLRA <- fetchNASIS(from = "components", duplicates = TRUE)
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(soilDB)
-my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/components18.sqlite", SS = FALSE,
-                                     duplicates = TRUE)
+my.components.MLRA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/data/Loafercreek_mapunit.sqlite", SS = FALSE,
+                                 duplicates = TRUE)
 ```
 
 
@@ -91,8 +85,7 @@ my.components.SSA <- fetchNASIS(from = "components", duplicates = TRUE)
 
 ```{r, echo=FALSE, message=FALSE}
 library(soilDB)
-my.components.SSA <- fetchNASIS(from = "components", dsn = "C:/Users/Nathan.Roe/Documents/ESS-FAQ/SQlite_tables/componentsSSA792.sqlite", SS = FALSE,
-                                duplicates = TRUE)
+my.components.SSA <- my.components.MLRA
 ```
 
 Look at component names - the ```head()``` function shows just the first six records. Remove the ```head()``` function to see all the component names
@@ -111,16 +104,16 @@ Perhaps we want to see what ecosite each component is correlated to. For this ex
 With the Standard Dataset loaded, let's look at the correlations between component ID and ecosite ID. This script takes our components in MLRA 18, pulls out the site level data (allows us to ignore pedon data), and then selects only the columns for component ID and ecosite ID (there are lots of other columns you can choose from, tailor to your needs). Finally we look at just the ```head()``` of the ```comp.ecosite.correlations```. If you want to see the full dataframe, remove ```head()```. 
 ```{r}
 comp.ecosite.correlations <- my.components.MLRA %>% aqp::site() %>% 
-  dplyr::select(coiid, ecosite_id)
+  dplyr::select(coiid, ecositeid)
 
 head(comp.ecosite.correlations)
 ```
 
 ## Components correlated to an ecosite of interest?
-Perhaps there is a specific ecosite we are interested in and we want to see what components are correlated to that ecosite. Let's say the ecosite is ```R018XI202CA```. We will start with the ```comp.ecosite.correlations``` dataframe that we created in the previous example. 
+Perhaps there is a specific ecosite we are interested in and we want to see what components are correlated to that ecosite. Let's say the ecosite is ```R018XI201CA```. We will start with the ```comp.ecosite.correlations``` dataframe that we created in the previous example. 
 
 ```{r}
-R018XI202CA <- comp.ecosite.correlations %>% filter(ecosite_id == "F018XA202CA")
+R018XI202CA <- comp.ecosite.correlations %>% filter(ecositeid == "F018XA201CA")
 head(R018XI202CA) # Again, remove head() to see the full list. 
 ```
 
@@ -303,7 +296,7 @@ component_data <-
          taxtemp = taxtempregime,
          drainagecl = drainagecl,
          ecosite = ecosite_name,
-         ecosite_id = ecosite_id,
+         ecositeid = ecositeid,
          taxorder = taxorder,
          taxsuborder = taxsuborder
        )
@@ -330,7 +323,7 @@ component_data_combined <- left_join(component_data, restriction_data)
 all_data <- horizon_to_component_data %>%
   dplyr::rename(coiid = component) %>%
   left_join(component_data_combined) %>%
-  dplyr::select(coiid,  compname, ecosite, ecosite_id, landform, pmkind, 
+  dplyr::select(coiid,  compname, ecosite, ecositeid, landform, pmkind, 
                 pmorigin, taxtemp, textural_class, texture_qualifier, 
                 rock_frag, surf_frag, depth_to_restr, drainagecl, slope_l, 
                 slope_r, slope_h, ph_l_mean, ph_r_mean, ph_h_mean, elev_l, 
@@ -340,7 +333,7 @@ all_data <- horizon_to_component_data %>%
 ```
 
 Save as csv
-```{r}
+```{r, eval = FALSE}
 write.csv(all_data, "C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv",
           row.names = FALSE)
 ```
