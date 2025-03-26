@@ -209,8 +209,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.1.1" data-path="es-verification.html"><a href="es-verification.html#guidance-from-national-instruction"><i class="fa fa-check"></i><b>7.1.1</b> Guidance from National Instruction</a></li>
 <li class="chapter" data-level="7.1.2" data-path="es-verification.html"><a href="es-verification.html#goal-of-with-workflow"><i class="fa fa-check"></i><b>7.1.2</b> Goal of with workflow</a></li>
-<li class="chapter" data-level="7.1.3" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.1.3</b> Querying NASIS</a></li>
-<li class="chapter" data-level="7.1.4" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.1.4</b> Run workflow</a></li>
+<li class="chapter" data-level="7.1.3" data-path="es-verification.html"><a href="es-verification.html#youtube-summary"><i class="fa fa-check"></i><b>7.1.3</b> YouTube summary</a></li>
+<li class="chapter" data-level="7.1.4" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.1.4</b> Querying NASIS</a></li>
+<li class="chapter" data-level="7.1.5" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.1.5</b> Run workflow</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>8</b> Package building/maintaining tips</a>
@@ -327,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb104-18"><a href="random-tools.html#cb104-18" tabindex="-1"></a>                                         <span class="st">&quot;Jaccard (dis)&quot;</span>),</span>
 <span id="cb104-19"><a href="random-tools.html#cb104-19" tabindex="-1"></a>                              <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#F8766D&quot;</span>, <span class="st">&quot;#7CAE00&quot;</span>,</span>
 <span id="cb104-20"><a href="random-tools.html#cb104-20" tabindex="-1"></a>                                         <span class="st">&quot;#00BFC4&quot;</span>, <span class="st">&quot;#C77CFF&quot;</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <p>Bray-Curtis is linear with a slope of 1 or -1. Jaccard is non-linear. To determine how the slope of Jaccard changes over a gradient of shared abundance, I will differentiate Jaccard (sim).</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="random-tools.html#cb105-1" tabindex="-1"></a>my_results<span class="sc">$</span>jaccard_deriv <span class="ot">&lt;-</span> <span class="fu">apply</span>(prop_sim, <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">FUN =</span> <span class="cf">function</span>(x){</span>
 <span id="cb105-2"><a href="random-tools.html#cb105-2" tabindex="-1"></a>  <span class="fl">0.5</span><span class="sc">/</span>(<span class="dv">1</span><span class="fl">-.5</span><span class="sc">*</span>x)<span class="sc">^</span><span class="dv">2</span></span>
@@ -340,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb105-9"><a href="random-tools.html#cb105-9" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_path</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb105-10"><a href="random-tools.html#cb105-10" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">xlab</span>(<span class="st">&quot;Shared abundance&quot;</span>) <span class="sc">+</span></span>
 <span id="cb105-11"><a href="random-tools.html#cb105-11" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="st">&quot;1st derivative of Jaccard similarity&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
 <p>The derivative of Jaccard (sim) shows us that changes to shared abundance at low levels of shared abundance have 1/4 of the influence as changes to shared abundance at high levels of shared abundance. This is observable from the 1st derivative being 0.5 at low levels of shared abundance and 2 at high levels of shared abundance. This could be a useful property if low amounts of shared abundance could be considered spurious.</p>
 <p>Finally, let’s look at disagreement between Jaccard and Bray-Curtis.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="random-tools.html#cb106-1" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="at">data =</span> my_results,</span>
@@ -348,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb106-3"><a href="random-tools.html#cb106-3" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_path</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb106-4"><a href="random-tools.html#cb106-4" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">xlab</span>(<span class="st">&quot;Shared abundance&quot;</span>) <span class="sc">+</span></span>
 <span id="cb106-5"><a href="random-tools.html#cb106-5" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ylab</span>(<span class="st">&quot;Abs. value diff. of Bray-Curtis and Jaccard&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 <div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="random-tools.html#cb107-1" tabindex="-1"></a>my_results <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(prop_sim, diff) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(diff)) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>##   prop_sim      diff
 ## 1     0.59 0.1715603

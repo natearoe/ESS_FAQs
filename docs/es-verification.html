@@ -209,8 +209,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.1.1" data-path="es-verification.html"><a href="es-verification.html#guidance-from-national-instruction"><i class="fa fa-check"></i><b>7.1.1</b> Guidance from National Instruction</a></li>
 <li class="chapter" data-level="7.1.2" data-path="es-verification.html"><a href="es-verification.html#goal-of-with-workflow"><i class="fa fa-check"></i><b>7.1.2</b> Goal of with workflow</a></li>
-<li class="chapter" data-level="7.1.3" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.1.3</b> Querying NASIS</a></li>
-<li class="chapter" data-level="7.1.4" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.1.4</b> Run workflow</a></li>
+<li class="chapter" data-level="7.1.3" data-path="es-verification.html"><a href="es-verification.html#youtube-summary"><i class="fa fa-check"></i><b>7.1.3</b> YouTube summary</a></li>
+<li class="chapter" data-level="7.1.4" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.1.4</b> Querying NASIS</a></li>
+<li class="chapter" data-level="7.1.5" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.1.5</b> Run workflow</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>8</b> Package building/maintaining tips</a>
@@ -278,8 +279,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><img src="images/ES_verification_site_level.JPG" /></p>
 </div>
-<div id="querying-nasis" class="section level3 hasAnchor" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> Querying NASIS<a href="es-verification.html#querying-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="youtube-summary" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> YouTube summary<a href="es-verification.html#youtube-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe src="https://www.youtube.com/embed/CdWECBzVe90?si=XAM17rCs7NJmFSsd" width="672" height="400px" data-external="1">
+</iframe>
+</div>
+<div id="querying-nasis" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Querying NASIS<a href="es-verification.html#querying-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This process requires two different NASIS queries. First to access site/pedon/vegplot data, and the other to access component data associated with your MLRA.</p>
 <p>Before getting started, clear selected set.</p>
 <p><strong>Query 1 (site/pedon/vegetation plot)</strong>
@@ -287,8 +293,8 @@ Run “SSRO_Southwest &gt; Sites by ecositeid with %” (not listed as ready for
 <p><strong>Query 2 (components)</strong>
 Use <a href="https://nroe.shinyapps.io/MapunitsInMLRA/" class="uri">https://nroe.shinyapps.io/MapunitsInMLRA/</a> to access all mukeys in your MLRA of interest. Mukeys are batched into groups of 2100 parameters on each tab, as this is the limit that NASIS accepts as arguments in a query. Read the instructions on the page for details. If multiple tabs are populated, the query will have to be run multiple times. Use these mukeys as input into “NSSC Pangaea &gt; Area/Legend/Mapunit/DMU by record ID - LMAPUNITIID”.</p>
 </div>
-<div id="run-workflow" class="section level3 hasAnchor" number="7.1.4">
-<h3><span class="header-section-number">7.1.4</span> Run workflow<a href="es-verification.html#run-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="run-workflow" class="section level3 hasAnchor" number="7.1.5">
+<h3><span class="header-section-number">7.1.5</span> Run workflow<a href="es-verification.html#run-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Access data from NASIS</strong></p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="es-verification.html#cb89-1" tabindex="-1"></a><span class="co"># library</span></span>
 <span id="cb89-2"><a href="es-verification.html#cb89-2" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>

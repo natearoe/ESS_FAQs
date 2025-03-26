@@ -34,6 +34,12 @@ There are two main outputs. For both of the visuals below there are more columns
 
 ![](images/ES_verification_site_level.JPG)
 
+### YouTube summary
+
+```{r, echo=FALSE}
+knitr::include_url("https://www.youtube.com/embed/CdWECBzVe90?si=XAM17rCs7NJmFSsd")
+```
+
 ### Querying NASIS
 
 This process requires two different NASIS queries. First to access site/pedon/vegplot data, and the other to access component data associated with your MLRA.
