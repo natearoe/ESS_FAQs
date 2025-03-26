@@ -205,10 +205,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="es-verification.html"><a href="es-verification.html"><i class="fa fa-check"></i><b>7</b> ES Verification</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="es-verification.html"><a href="es-verification.html#guidance-from-national-instruction"><i class="fa fa-check"></i><b>7.1</b> Guidance from National Instruction</a></li>
-<li class="chapter" data-level="7.2" data-path="es-verification.html"><a href="es-verification.html#goal-of-with-workflow"><i class="fa fa-check"></i><b>7.2</b> Goal of with workflow</a></li>
-<li class="chapter" data-level="7.3" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.3</b> Querying NASIS</a></li>
-<li class="chapter" data-level="7.4" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.4</b> Run workflow</a></li>
+<li class="chapter" data-level="7.1" data-path="es-verification.html"><a href="es-verification.html#prioritization"><i class="fa fa-check"></i><b>7.1</b> Prioritization</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="es-verification.html"><a href="es-verification.html#guidance-from-national-instruction"><i class="fa fa-check"></i><b>7.1.1</b> Guidance from National Instruction</a></li>
+<li class="chapter" data-level="7.1.2" data-path="es-verification.html"><a href="es-verification.html#goal-of-with-workflow"><i class="fa fa-check"></i><b>7.1.2</b> Goal of with workflow</a></li>
+<li class="chapter" data-level="7.1.3" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.1.3</b> Querying NASIS</a></li>
+<li class="chapter" data-level="7.1.4" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.1.4</b> Run workflow</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>8</b> Package building/maintaining tips</a>
 <ul>
@@ -256,9 +259,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Queries by Soil Survey Area are much more reliable than queries by MLRA. As previously mentioned, queries by MLRA are not ideal because the mapunit overlap tables are imperfectly populated. The Soil Survey area corresponds to the legend, and this means that components are reliably associated with Soil Survey Areas. Therefore, let’s use the following: NASIS &gt; Query &gt; NSSC Pangaea &gt; Area/Legend/Mapunit/DMU/Pedon/Site/ by areasymbol.</p>
 <ol style="list-style-type: decimal">
 <li><p>Run against National
-<img src="_book/componentsinSSA.JPG" alt="Run against National SSA" /></p></li>
+<img src="images/componentsinSSA.JPG" alt="Run against National SSA" /></p></li>
 <li><p>Run against Local
-<img src="_book/componentsinSSAlocal.JPG" alt="Run against Local SSA" /></p></li>
+<img src="images/componentsinSSAlocal.JPG" alt="Run against Local SSA" /></p></li>
 <li><p>Acquire component names and IDs using R.</p></li>
 </ol>
 <p>Load the soilDB package and fetch NASIS data</p>

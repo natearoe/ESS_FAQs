@@ -33,6 +33,7 @@ mapping-the-location-of-species
 nasis
 creating-a-static-nasis-database
 es-verification
+prioritization
 guidance-from-national-instruction
 goal-of-with-workflow
 querying-nasis

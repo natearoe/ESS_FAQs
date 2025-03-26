@@ -205,10 +205,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="es-verification.html"><a href="es-verification.html"><i class="fa fa-check"></i><b>7</b> ES Verification</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="es-verification.html"><a href="es-verification.html#guidance-from-national-instruction"><i class="fa fa-check"></i><b>7.1</b> Guidance from National Instruction</a></li>
-<li class="chapter" data-level="7.2" data-path="es-verification.html"><a href="es-verification.html#goal-of-with-workflow"><i class="fa fa-check"></i><b>7.2</b> Goal of with workflow</a></li>
-<li class="chapter" data-level="7.3" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.3</b> Querying NASIS</a></li>
-<li class="chapter" data-level="7.4" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.4</b> Run workflow</a></li>
+<li class="chapter" data-level="7.1" data-path="es-verification.html"><a href="es-verification.html#prioritization"><i class="fa fa-check"></i><b>7.1</b> Prioritization</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="es-verification.html"><a href="es-verification.html#guidance-from-national-instruction"><i class="fa fa-check"></i><b>7.1.1</b> Guidance from National Instruction</a></li>
+<li class="chapter" data-level="7.1.2" data-path="es-verification.html"><a href="es-verification.html#goal-of-with-workflow"><i class="fa fa-check"></i><b>7.1.2</b> Goal of with workflow</a></li>
+<li class="chapter" data-level="7.1.3" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.1.3</b> Querying NASIS</a></li>
+<li class="chapter" data-level="7.1.4" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.1.4</b> Run workflow</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>8</b> Package building/maintaining tips</a>
 <ul>
@@ -278,9 +281,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Step 1. Determine the mapunits of interest using the <a href="https://nroe.shinyapps.io/MapunitsInMLRA/">Mapunit in MLRA tool</a> for MLRA 18 with a 15% Membership. This tool is discussed in detail in <a href="mapunits.html#mapunitsinMLRA">What mapunits are in an MLRA?</a>.</p>
 <p>Step 2. Take the group of mapunits and enter them into Query &gt; NSSC Pangaea &gt; Area/Legend/Mapunit/DMU by record ID - LMAPUNITIID list.</p>
 <p>Run against National Database:
-<img src="_book/componentsinMLRAquery.JPG" alt="Run against National" /></p>
+<img src="images/componentsinMLRAquery.JPG" alt="Run against National" /></p>
 <p>Run against Local:
-<img src="_book/componentsinMLRAlocal.JPG" alt="Run against Local" />effec</p>
+<img src="images/componentsinMLRAlocal.JPG" alt="Run against Local" /></p>
 <p>Step 3. Fetch NASIS data</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a>my.components.MLRA <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>, <span class="at">duplicates =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Note on the <code>duplicates = TRUE</code> argument: <code>fetchNASIS(from = "components")</code> can access two hierarchical levels of data. The higher hierarchical level data is mapunit/soil survey area data. The lower hierarchical level data is component level data. By default, <code>fetchNASIS(from = "components")</code> accesses data at the component level. At times, we want to access data at a higher level (mapunit/soil survey area). When we want to access higher level data, the component level data must be nested within the higher level data. If there is a multiple:1 relationship between the higher level data and the component level data, duplication occurs. The multiple:1 relationship between higher level data and the component level data occurs because of MLRA mapunits - mapunits that occur across soil survey areas. With MLRA mapunits, components can be used in multiple mapunits/soil survey areas.</p>
