@@ -39,10 +39,10 @@ Why not use a NASIS Query that queries components by MLRA, like NASIS > Queries 
 Queries by Soil Survey Area are much more reliable than queries by MLRA. As previously mentioned, queries by MLRA are not ideal because the mapunit overlap tables are imperfectly populated. The Soil Survey area corresponds to the legend, and this means that components are reliably associated with Soil Survey Areas. Therefore, let's use the following: NASIS > Query > NSSC Pangaea > Area/Legend/Mapunit/DMU/Pedon/Site/ by areasymbol.
 
 1. Run against National
-![Run against National SSA](_book/componentsinSSA.JPG)
+![Run against National SSA](images/componentsinSSA.JPG)
 
 2. Run against Local
-![Run against Local SSA](_book/componentsinSSAlocal.JPG)
+![Run against Local SSA](images/componentsinSSAlocal.JPG)
 
 3. Acquire component names and IDs using R. 
 

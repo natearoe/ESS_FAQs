@@ -214,13 +214,13 @@ NATIONAL: Have to run this twice against the national in order to get sites, ped
 LOCAL: Set target tablest to PEDON, SITE, and VEGETATION PLOT.
 
 1. Run against National - Pedon
-![Run against National Vegplot Pedon](_book/veg_plot_national_pedon.JPG)
+![Run against National Vegplot Pedon](images/veg_plot_national_pedon.JPG)
 
 2. Run against National - Vegetation plot
-![Run against National Vegplot Vegetation Plot](_book/veg_plot_national_vegplot.JPG)
+![Run against National Vegplot Vegetation Plot](images/veg_plot_national_vegplot.JPG)
 
 3. Run against Local
-![Run against local Vegplot](_book/veg_plot_local.JPG)
+![Run against local Vegplot](images/veg_plot_local.JPG)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 veg_data <- soilDB::fetchVegdata(dsn = "C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite", SS = FALSE)

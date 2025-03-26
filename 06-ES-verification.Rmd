@@ -1,14 +1,16 @@
 # ES Verification
 
-## Guidance from National Instruction
+## Prioritization
+
+### Guidance from National Instruction
 
 This section is intended to assist with ES Verification projects. The National Instruction with full details of verification project requirements can be accessed here - [Part 306 – Ecological Site Inventory and Ecological Site Description](https://raw.githubusercontent.com/natearoe/ESS_FAQs/main/_book/Title_430_NI.pdf). 
 
 This workflow addresses many of the requirements outlined section 306.6.C.2 from the National Instruction, shown in the photo below:
 
-![306.6.C.2 from National Instruction](_book/ES_verification_instruction.JPG)
+![306.6.C.2 from National Instruction](images/ES_verification_instruction.JPG)
 
-## Goal of with workflow
+### Goal of with workflow
 
 The goal of this methodology is to determine what data is available to use for ES Verification Projects. It reports on data elements listed in the ES Verification standards as well as other elements that are not required but are indicative of data quality, including:
 
@@ -26,13 +28,13 @@ There are two main outputs. For both of the visuals below there are more columns
 
 1. The first shows the amount of supporting data for the ecosites in your MLRA. 
 
-![](_book/ES_verification_ecosite_level_output.JPG)
+![](images/ES_verification_ecosite_level_output.JPG)
 
 2. The second allows users to look at specific ecosites and determine what sites have the best data and could be used as supporting evidence of the ES.
 
-![](_book/ES_verification_site_level.JPG)
+![](images/ES_verification_site_level.JPG)
 
-## Querying NASIS
+### Querying NASIS
 
 This process requires two different NASIS queries. First to access site/pedon/vegplot data, and the other to access component data associated with your MLRA.
 
@@ -44,7 +46,7 @@ Run "SSRO_Southwest > Sites by ecositeid with %" (not listed as ready for use) u
 **Query 2 (components)**
 Use https://nroe.shinyapps.io/MapunitsInMLRA/ to access all mukeys in your MLRA of interest. Mukeys are batched into groups of 2100 parameters on each tab, as this is the limit that NASIS accepts as arguments in a query. Read the instructions on the page for details. If multiple tabs are populated, the query will have to be run multiple times. Use these mukeys as input into "NSSC Pangaea > Area/Legend/Mapunit/DMU by record ID - LMAPUNITIID". 
 
-## Run workflow
+### Run workflow
 
 **Access data from NASIS**
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}

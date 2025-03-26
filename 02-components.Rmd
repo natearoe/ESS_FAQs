@@ -33,10 +33,10 @@ There are NASIS Queries that allow querying by MLRA. Unfortunately, this is not 
 2. Take the group of mapunits and enter them into Query > MLRA09_Temple > ARE/LMU/MU/DMU by Lmukey list.
 
 Run against National Database:
-![Run against National](_book/componentsinMLRAquery.JPG)
+![Run against National](images/componentsinMLRAquery.JPG)
 
 Run against Local: 
-![Run against Local](_book/componentsinMLRAlocal.JPG)
+![Run against Local](images/componentsinMLRAlocal.JPG)
 
 3. Acquire the component names and component IDs using R:
 
@@ -69,10 +69,10 @@ head(site(my.components.MLRA)$coiid)
 Queries by Soil Survey Area are much more reliable than queries by MLRA. As previously mentioned, queries by MLRA are not ideal because the mapunit overlap tables are imperfectly populated. The Soil Survey area corresponds to the legend, and this means that components are reliably associated with Soil Survey Areas. Therefore, beginning with a query is the preferred approach:
 
 1. Run against National
-![Run against National SSA](_book/componentsinSSA.JPG)
+![Run against National SSA](images/componentsinSSA.JPG)
 
 2. Run against Local
-![Run against Local SSA](_book/componentsinSSAlocal.JPG)
+![Run against Local SSA](images/componentsinSSAlocal.JPG)
 
 3. Acquire component names and IDs using R. 
 
@@ -123,7 +123,7 @@ head(R018XI202CA) # Again, remove head() to see the full list.
 One of the best ways to do this is a NASIS report: NASIS > Reports > MLRA02_Davis > EXPORT - Ecological site concept data by MUKEY list v3. This report takes mapunit keys (MUKEY) as input. If you are interested in all the components in an MLRA, refer to [What mapunits are in an MLRA?](#mapunitsinMLRA). If you are interested in a Soil Survey Area ...... 
 
 1. Run against National
-![Run against National ecosite](_book/ecositereport18.JPG)
+![Run against National ecosite](images/ecositereport18.JPG)
 2. In the resulting output (html output in your browser), click anywhere, ctrl + a (select all), ctrl + c (copy)
 3. Open Excel, click in top left cell, ctrl + v (paste)
 4. Ctrl + a (select all), Insert > Table
