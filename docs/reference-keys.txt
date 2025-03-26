@@ -33,8 +33,10 @@ mapping-the-location-of-species
 nasis
 creating-a-static-nasis-database
 es-verification
-r-markdown
-including-plots
+guidance-from-national-instruction
+goal-of-with-workflow
+querying-nasis
+run-workflow
 package-buildingmaintaining-tips
 package-buildingmaintaining-tips-1
 random-tools

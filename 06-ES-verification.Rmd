@@ -1,25 +1,194 @@
 # ES Verification
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+## Guidance from National Instruction
+
+This section is intended to assist with ES Verification projects. The National Instruction with full details of verification project requirements can be accessed here - [Part 306 – Ecological Site Inventory and Ecological Site Description](https://raw.githubusercontent.com/natearoe/ESS_FAQs/main/_book/Title_430_NI.pdf). 
+
+This workflow addresses many of the requirements outlined section 306.6.C.2 from the National Instruction, shown in the photo below:
+
+![306.6.C.2 from National Instruction](_book/ES_verification_instruction.JPG)
+
+## Goal of with workflow
+
+The goal of this methodology is to determine what data is available to use for ES Verification Projects. It reports on data elements listed in the ES Verification standards as well as other elements that are not required but are indicative of data quality, including:
+
+
+* correlated pedons & vegplots (including whether they are colocated)
+* use of states and phases
+* canopy cover by species (plant symbol & cover)
+* strata
+* number components correlated to ecosite
+* number of acres
+* component pedons
+* taxonomic level (i.e., series, family, taxadjunct, etc.)
+
+There are two main outputs. For both of the visuals below there are more columns than are able to be shown:
+
+1. The first shows the amount of supporting data for the ecosites in your MLRA. 
+
+![](_book/ES_verification_ecosite_level_output.JPG)
+
+2. The second allows users to look at specific ecosites and determine what sites have the best data and could be used as supporting evidence of the ES.
+
+![](_book/ES_verification_site_level.JPG)
+
+## Querying NASIS
+
+This process requires two different NASIS queries. First to access site/pedon/vegplot data, and the other to access component data associated with your MLRA.
+
+Before getting started, clear selected set.
+
+**Query 1 (site/pedon/vegetation plot)**
+Run "SSRO_Southwest > Sites by ecositeid with %" (not listed as ready for use) using an appropriate pattern for Ecological Site ID (e.g., %018X% for MLRA18)
+
+**Query 2 (components)**
+Use https://nroe.shinyapps.io/MapunitsInMLRA/ to access all mukeys in your MLRA of interest. Mukeys are batched into groups of 2100 parameters on each tab, as this is the limit that NASIS accepts as arguments in a query. Read the instructions on the page for details. If multiple tabs are populated, the query will have to be run multiple times. Use these mukeys as input into "NSSC Pangaea > Area/Legend/Mapunit/DMU by record ID - LMAPUNITIID". 
+
+## Run workflow
+
+**Access data from NASIS**
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# library
+library(soilDB)
+library(dplyr)
+
+# access veg data
+MLRA18_veg <- ecositer::create_veg_df(from = "static",
+                                      static_location = "C:/Users/Nathan.Roe/Documents/verification_projects/MLRA18_verification.sqlite")
+# access pedon data
+MLRA18_pedons <- fetchNASIS(from = "pedons",
+                            dsn = "C:/Users/Nathan.Roe/Documents/verification_projects/MLRA18_verification.sqlite",
+                            SS = FALSE)
+# access component data
+MLRA18_components <- fetchNASIS(from = "components",
+                                fill = TRUE,
+                                duplicates = TRUE,
+                                dsn = "C:/Users/Nathan.Roe/Documents/verification_projects/MLRA18_verification.sqlite",
+                                SS = FALSE)
+
+# access component pedon data - you will be notified that, "some linked pedons not in selected set or local database"
+MLRA18_component_pedons <- soilDB::get_copedon_from_NASIS_db(SS = FALSE,
+                                                             dsn = "C:/Users/Nathan.Roe/Documents/verification_projects/MLRA18_verification.sqlite")
+
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r, eval=FALSE}
+# library
+library(soilDB)
+library(dplyr)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# access veg data
+MLRA18_veg <- ecositer::create_veg_df(from = "SS")
+# access pedon data
+MLRA18_pedons <- fetchNASIS(from = "pedons")
+# access component data
+MLRA18_components <- fetchNASIS(from = "components",
+                                fill = TRUE,
+                                duplicates = TRUE)
 
-```{r cars}
-summary(cars)
+# access component pedon data - you will be notified that, "some linked pedons not in selected set or local database"
+MLRA18_component_pedons <- soilDB::get_copedon_from_NASIS_db()
 ```
 
-## Including Plots
+**Summarize data**
+```{r, warning=FALSE, message=FALSE}
+# Manipulating data ------------------------------------------------------
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+# aggregate abundance columns
+MLRA18_veg_agg <- ecositer::QC_aggregate_abundance(veg_df = MLRA18_veg)
+
+# select component columns of interest and calculate comp_acres
+MLRA18_components_mod <- MLRA18_components |> aqp::site() |>
+  dplyr::select(mukey, coiid, compname, majcompflag, compkind, ecosite_id, muacres, comppct_r) |>
+  dplyr::mutate(comp_acres = muacres * comppct_r/100,
+                ecositeid = ecosite_id)
+
+
+# Joining data -----------------------------------------------------------
+
+
+# join component pedons to pedons
+MLRA18_pedons_coped <- aqp::site(MLRA18_pedons) |> dplyr::left_join(MLRA18_component_pedons |>
+                                               dplyr::mutate(peiid = as.character(peiid)) |>
+                                               dplyr::select(-upedonid))
+
+
+# join pedon data to veg data
+MLRA18_veg_peiid <- MLRA18_veg_agg |> dplyr::left_join(MLRA18_pedons_coped |>
+                                     dplyr::select(siteobsiid, peiid, coiid, pedon_id, representative, rvindicator) |>
+                                     dplyr::mutate(siteobsiid = as.character(siteobsiid)) |>
+                                     unique() |>
+                                       dplyr::group_by(siteobsiid) |>
+                                       dplyr::arrange(pedon_id) |>
+                                       dplyr::slice(1))
+
+
+# Summarizing data -------------------------------------------------------
+
+MLRA18_triage <- MLRA18_veg_peiid |>
+  dplyr::group_by(ecositeid, siteiid, siteobsiid, vegplotiid, peiid, pedon_id, representative, ecostateid, commphaseid) |>
+  dplyr::summarise(overcanclass = any(!is.na(overstorycancovtotalclass)),
+                   totcanclass = any(!is.na(cancovtotalclass)),
+                   heighclasslow = any(!is.na(plantheightcllowerlimit)),
+                   heighclasshigh = any(!is.na(plantheightclupperlimit)),
+                   planttypegroup = any(!is.na(planttypegroup)),
+                   akstratumclass = any(!is.na(akstratumcoverclass)),
+                   vegstrata = any(!is.na(vegetationstratalevel)),
+                   plantsym = any(!is.na(plantsym)),
+                   speciescancov = any(!is.na(pct_cover)))
+
+MLRA18_triage_summary <- MLRA18_triage |>
+  dplyr::mutate(plant_abund = plantsym + speciescancov,
+                heightlimit = heighclasslow + heighclasshigh) |>
+  dplyr::mutate(plant_abund_logic = ifelse(plant_abund == 2, TRUE, FALSE),
+                heightlimit_logic = ifelse(heightlimit == 2, TRUE, FALSE)) |>
+  dplyr::mutate(strata = heightlimit_logic + planttypegroup + akstratumclass + vegstrata) |>
+  dplyr::mutate(strata_logic = ifelse(strata >= 1, TRUE, FALSE)) |>
+  dplyr::mutate(sum_logic = sum(c(plant_abund_logic,
+                                  strata_logic,
+                                  overcanclass,
+                                  totcanclass))) |>
+  dplyr::mutate(sum_logic_no_can = sum(c(plant_abund_logic,
+                                         strata_logic)))
+
+MLRA18_ecosite_triage_summary <-
+  MLRA18_triage_summary |>
+  dplyr::group_by(ecositeid) |>
+  dplyr::summarise(pedons = sum(!is.na(peiid)),
+                   ecostateid = sum(!is.na(ecostateid)),
+                   commphaseid = sum(!is.na(commphaseid)),
+                   plant_abund = sum(!is.na(plant_abund_logic)),
+                   strata = sum(!is.na(strata_logic))) |>
+  dplyr::left_join(MLRA18_components_mod) |>
+  dplyr::group_by(ecositeid, pedons, ecostateid, commphaseid, plant_abund,
+                  strata) |>
+  dplyr::summarise(components = sum(!is.na(coiid)),
+                   acres = sum(comp_acres, na.rm = TRUE),
+                   majcomp = sum(majcompflag, na.rm = TRUE),
+                   series = sum(compkind == "series", na.rm = TRUE),
+                   taxadjunct = sum(compkind == "taxadjunct", na.rm = TRUE),
+                   family = sum(compkind == "family", na.rm = TRUE),
+                   tax_above_fam = sum(compkind == "taxon above family", na.rm = TRUE),
+                   variant = sum(compkind == "variant", na.rm = TRUE),
+                   misc = sum(compkind == "miscellaneous area", na.rm = TRUE))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+head(MLRA18_ecosite_triage_summary)
+```
+
+```{r}
+head(MLRA18_triage_summary)
+```
+
+
+
+
+
+
+
+
+
+

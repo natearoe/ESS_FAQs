@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2025-03-13" />
+<meta name="date" content="2025-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,8 +205,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="es-verification.html"><a href="es-verification.html"><i class="fa fa-check"></i><b>7</b> ES Verification</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="es-verification.html"><a href="es-verification.html#r-markdown"><i class="fa fa-check"></i><b>7.1</b> R Markdown</a></li>
-<li class="chapter" data-level="7.2" data-path="es-verification.html"><a href="es-verification.html#including-plots"><i class="fa fa-check"></i><b>7.2</b> Including Plots</a></li>
+<li class="chapter" data-level="7.1" data-path="es-verification.html"><a href="es-verification.html#guidance-from-national-instruction"><i class="fa fa-check"></i><b>7.1</b> Guidance from National Instruction</a></li>
+<li class="chapter" data-level="7.2" data-path="es-verification.html"><a href="es-verification.html#goal-of-with-workflow"><i class="fa fa-check"></i><b>7.2</b> Goal of with workflow</a></li>
+<li class="chapter" data-level="7.3" data-path="es-verification.html"><a href="es-verification.html#querying-nasis"><i class="fa fa-check"></i><b>7.3</b> Querying NASIS</a></li>
+<li class="chapter" data-level="7.4" data-path="es-verification.html"><a href="es-verification.html#run-workflow"><i class="fa fa-check"></i><b>7.4</b> Run workflow</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="package-buildingmaintaining-tips.html"><a href="package-buildingmaintaining-tips.html"><i class="fa fa-check"></i><b>8</b> Package building/maintaining tips</a>
 <ul>
@@ -239,24 +241,179 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="es-verification" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Chapter 7</span> ES Verification<a href="es-verification.html#es-verification" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="r-markdown" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> R Markdown<a href="es-verification.html#r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="es-verification.html#cb89-1" tabindex="-1"></a><span class="fu">summary</span>(cars)</span></code></pre></div>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<div id="guidance-from-national-instruction" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Guidance from National Instruction<a href="es-verification.html#guidance-from-national-instruction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section is intended to assist with ES Verification projects. The National Instruction with full details of verification project requirements can be accessed here - <a href="https://raw.githubusercontent.com/natearoe/ESS_FAQs/main/_book/Title_430_NI.pdf">Part 306 – Ecological Site Inventory and Ecological Site Description</a>.</p>
+<p>This workflow addresses many of the requirements outlined section 306.6.C.2 from the National Instruction, shown in the photo below:</p>
+<div class="float">
+<img src="_book/ES_verification_instruction.JPG" alt="306.6.C.2 from National Instruction" />
+<div class="figcaption">306.6.C.2 from National Instruction</div>
 </div>
-<div id="including-plots" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Including Plots<a href="es-verification.html#including-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="_main_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+</div>
+<div id="goal-of-with-workflow" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Goal of with workflow<a href="es-verification.html#goal-of-with-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The goal of this methodology is to determine what data is available to use for ES Verification Projects. It reports on data elements listed in the ES Verification standards as well as other elements that are not required but are indicative of data quality, including:</p>
+<ul>
+<li>correlated pedons &amp; vegplots (including whether they are colocated)</li>
+<li>use of states and phases</li>
+<li>canopy cover by species (plant symbol &amp; cover)</li>
+<li>strata</li>
+<li>number components correlated to ecosite</li>
+<li>number of acres</li>
+<li>component pedons</li>
+<li>taxonomic level (i.e., series, family, taxadjunct, etc.)</li>
+</ul>
+<p>There are two main outputs. For both of the visuals below there are more columns than are able to be shown:</p>
+<ol style="list-style-type: decimal">
+<li>The first shows the amount of supporting data for the ecosites in your MLRA.</li>
+</ol>
+<p><img src="_book/ES_verification_ecosite_level_output.JPG" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>The second allows users to look at specific ecosites and determine what sites have the best data and could be used as supporting evidence of the ES.</li>
+</ol>
+<p><img src="_book/ES_verification_site_level.JPG" /></p>
+</div>
+<div id="querying-nasis" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Querying NASIS<a href="es-verification.html#querying-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This process requires two different NASIS queries. First to access site/pedon/vegplot data, and the other to access component data associated with your MLRA.</p>
+<p>Before getting started, clear selected set.</p>
+<p><strong>Query 1 (site/pedon/vegetation plot)</strong>
+Run “SSRO_Southwest &gt; Sites by ecositeid with %” (not listed as ready for use) using an appropriate pattern for Ecological Site ID (e.g., %018X% for MLRA18)</p>
+<p><strong>Query 2 (components)</strong>
+Use <a href="https://nroe.shinyapps.io/MapunitsInMLRA/" class="uri">https://nroe.shinyapps.io/MapunitsInMLRA/</a> to access all mukeys in your MLRA of interest. Mukeys are batched into groups of 2100 parameters on each tab, as this is the limit that NASIS accepts as arguments in a query. Read the instructions on the page for details. If multiple tabs are populated, the query will have to be run multiple times. Use these mukeys as input into “NSSC Pangaea &gt; Area/Legend/Mapunit/DMU by record ID - LMAPUNITIID”.</p>
+</div>
+<div id="run-workflow" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Run workflow<a href="es-verification.html#run-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Access data from NASIS</strong></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="es-verification.html#cb89-1" tabindex="-1"></a><span class="co"># library</span></span>
+<span id="cb89-2"><a href="es-verification.html#cb89-2" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb89-3"><a href="es-verification.html#cb89-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb89-4"><a href="es-verification.html#cb89-4" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="es-verification.html#cb89-5" tabindex="-1"></a><span class="co"># access veg data</span></span>
+<span id="cb89-6"><a href="es-verification.html#cb89-6" tabindex="-1"></a>MLRA18_veg <span class="ot">&lt;-</span> ecositer<span class="sc">::</span><span class="fu">create_veg_df</span>(<span class="at">from =</span> <span class="st">&quot;SS&quot;</span>)</span>
+<span id="cb89-7"><a href="es-verification.html#cb89-7" tabindex="-1"></a><span class="co"># access pedon data</span></span>
+<span id="cb89-8"><a href="es-verification.html#cb89-8" tabindex="-1"></a>MLRA18_pedons <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;pedons&quot;</span>)</span>
+<span id="cb89-9"><a href="es-verification.html#cb89-9" tabindex="-1"></a><span class="co"># access component data</span></span>
+<span id="cb89-10"><a href="es-verification.html#cb89-10" tabindex="-1"></a>MLRA18_components <span class="ot">&lt;-</span> <span class="fu">fetchNASIS</span>(<span class="at">from =</span> <span class="st">&quot;components&quot;</span>,</span>
+<span id="cb89-11"><a href="es-verification.html#cb89-11" tabindex="-1"></a>                                <span class="at">fill =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb89-12"><a href="es-verification.html#cb89-12" tabindex="-1"></a>                                <span class="at">duplicates =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb89-13"><a href="es-verification.html#cb89-13" tabindex="-1"></a></span>
+<span id="cb89-14"><a href="es-verification.html#cb89-14" tabindex="-1"></a><span class="co"># access component pedon data - you will be notified that, &quot;some linked pedons not in selected set or local database&quot;</span></span>
+<span id="cb89-15"><a href="es-verification.html#cb89-15" tabindex="-1"></a>MLRA18_component_pedons <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_copedon_from_NASIS_db</span>()</span></code></pre></div>
+<p><strong>Summarize data</strong></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="es-verification.html#cb90-1" tabindex="-1"></a><span class="co"># Manipulating data ------------------------------------------------------</span></span>
+<span id="cb90-2"><a href="es-verification.html#cb90-2" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="es-verification.html#cb90-3" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="es-verification.html#cb90-4" tabindex="-1"></a><span class="co"># aggregate abundance columns</span></span>
+<span id="cb90-5"><a href="es-verification.html#cb90-5" tabindex="-1"></a>MLRA18_veg_agg <span class="ot">&lt;-</span> ecositer<span class="sc">::</span><span class="fu">QC_aggregate_abundance</span>(<span class="at">veg_df =</span> MLRA18_veg)</span>
+<span id="cb90-6"><a href="es-verification.html#cb90-6" tabindex="-1"></a></span>
+<span id="cb90-7"><a href="es-verification.html#cb90-7" tabindex="-1"></a><span class="co"># select component columns of interest and calculate comp_acres</span></span>
+<span id="cb90-8"><a href="es-verification.html#cb90-8" tabindex="-1"></a>MLRA18_components_mod <span class="ot">&lt;-</span> MLRA18_components <span class="sc">|&gt;</span> aqp<span class="sc">::</span><span class="fu">site</span>() <span class="sc">|&gt;</span></span>
+<span id="cb90-9"><a href="es-verification.html#cb90-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(mukey, coiid, compname, majcompflag, compkind, ecosite_id, muacres, comppct_r) <span class="sc">|&gt;</span></span>
+<span id="cb90-10"><a href="es-verification.html#cb90-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">comp_acres =</span> muacres <span class="sc">*</span> comppct_r<span class="sc">/</span><span class="dv">100</span>,</span>
+<span id="cb90-11"><a href="es-verification.html#cb90-11" tabindex="-1"></a>                <span class="at">ecositeid =</span> ecosite_id)</span>
+<span id="cb90-12"><a href="es-verification.html#cb90-12" tabindex="-1"></a></span>
+<span id="cb90-13"><a href="es-verification.html#cb90-13" tabindex="-1"></a></span>
+<span id="cb90-14"><a href="es-verification.html#cb90-14" tabindex="-1"></a><span class="co"># Joining data -----------------------------------------------------------</span></span>
+<span id="cb90-15"><a href="es-verification.html#cb90-15" tabindex="-1"></a></span>
+<span id="cb90-16"><a href="es-verification.html#cb90-16" tabindex="-1"></a></span>
+<span id="cb90-17"><a href="es-verification.html#cb90-17" tabindex="-1"></a><span class="co"># join component pedons to pedons</span></span>
+<span id="cb90-18"><a href="es-verification.html#cb90-18" tabindex="-1"></a>MLRA18_pedons_coped <span class="ot">&lt;-</span> aqp<span class="sc">::</span><span class="fu">site</span>(MLRA18_pedons) <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(MLRA18_component_pedons <span class="sc">|&gt;</span></span>
+<span id="cb90-19"><a href="es-verification.html#cb90-19" tabindex="-1"></a>                                               dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">peiid =</span> <span class="fu">as.character</span>(peiid)) <span class="sc">|&gt;</span></span>
+<span id="cb90-20"><a href="es-verification.html#cb90-20" tabindex="-1"></a>                                               dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>upedonid))</span>
+<span id="cb90-21"><a href="es-verification.html#cb90-21" tabindex="-1"></a></span>
+<span id="cb90-22"><a href="es-verification.html#cb90-22" tabindex="-1"></a></span>
+<span id="cb90-23"><a href="es-verification.html#cb90-23" tabindex="-1"></a><span class="co"># join pedon data to veg data</span></span>
+<span id="cb90-24"><a href="es-verification.html#cb90-24" tabindex="-1"></a>MLRA18_veg_peiid <span class="ot">&lt;-</span> MLRA18_veg_agg <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(MLRA18_pedons_coped <span class="sc">|&gt;</span></span>
+<span id="cb90-25"><a href="es-verification.html#cb90-25" tabindex="-1"></a>                                     dplyr<span class="sc">::</span><span class="fu">select</span>(siteobsiid, peiid, coiid, pedon_id, representative, rvindicator) <span class="sc">|&gt;</span></span>
+<span id="cb90-26"><a href="es-verification.html#cb90-26" tabindex="-1"></a>                                     dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">siteobsiid =</span> <span class="fu">as.character</span>(siteobsiid)) <span class="sc">|&gt;</span></span>
+<span id="cb90-27"><a href="es-verification.html#cb90-27" tabindex="-1"></a>                                     <span class="fu">unique</span>() <span class="sc">|&gt;</span></span>
+<span id="cb90-28"><a href="es-verification.html#cb90-28" tabindex="-1"></a>                                       dplyr<span class="sc">::</span><span class="fu">group_by</span>(siteobsiid) <span class="sc">|&gt;</span></span>
+<span id="cb90-29"><a href="es-verification.html#cb90-29" tabindex="-1"></a>                                       dplyr<span class="sc">::</span><span class="fu">arrange</span>(pedon_id) <span class="sc">|&gt;</span></span>
+<span id="cb90-30"><a href="es-verification.html#cb90-30" tabindex="-1"></a>                                       dplyr<span class="sc">::</span><span class="fu">slice</span>(<span class="dv">1</span>))</span>
+<span id="cb90-31"><a href="es-verification.html#cb90-31" tabindex="-1"></a></span>
+<span id="cb90-32"><a href="es-verification.html#cb90-32" tabindex="-1"></a></span>
+<span id="cb90-33"><a href="es-verification.html#cb90-33" tabindex="-1"></a><span class="co"># Summarizing data -------------------------------------------------------</span></span>
+<span id="cb90-34"><a href="es-verification.html#cb90-34" tabindex="-1"></a></span>
+<span id="cb90-35"><a href="es-verification.html#cb90-35" tabindex="-1"></a>MLRA18_triage <span class="ot">&lt;-</span> MLRA18_veg_peiid <span class="sc">|&gt;</span></span>
+<span id="cb90-36"><a href="es-verification.html#cb90-36" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(ecositeid, siteiid, siteobsiid, vegplotiid, peiid, pedon_id, representative, ecostateid, commphaseid) <span class="sc">|&gt;</span></span>
+<span id="cb90-37"><a href="es-verification.html#cb90-37" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">overcanclass =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(overstorycancovtotalclass)),</span>
+<span id="cb90-38"><a href="es-verification.html#cb90-38" tabindex="-1"></a>                   <span class="at">totcanclass =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(cancovtotalclass)),</span>
+<span id="cb90-39"><a href="es-verification.html#cb90-39" tabindex="-1"></a>                   <span class="at">heighclasslow =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(plantheightcllowerlimit)),</span>
+<span id="cb90-40"><a href="es-verification.html#cb90-40" tabindex="-1"></a>                   <span class="at">heighclasshigh =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(plantheightclupperlimit)),</span>
+<span id="cb90-41"><a href="es-verification.html#cb90-41" tabindex="-1"></a>                   <span class="at">planttypegroup =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(planttypegroup)),</span>
+<span id="cb90-42"><a href="es-verification.html#cb90-42" tabindex="-1"></a>                   <span class="at">akstratumclass =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(akstratumcoverclass)),</span>
+<span id="cb90-43"><a href="es-verification.html#cb90-43" tabindex="-1"></a>                   <span class="at">vegstrata =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(vegetationstratalevel)),</span>
+<span id="cb90-44"><a href="es-verification.html#cb90-44" tabindex="-1"></a>                   <span class="at">plantsym =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(plantsym)),</span>
+<span id="cb90-45"><a href="es-verification.html#cb90-45" tabindex="-1"></a>                   <span class="at">speciescancov =</span> <span class="fu">any</span>(<span class="sc">!</span><span class="fu">is.na</span>(pct_cover)))</span>
+<span id="cb90-46"><a href="es-verification.html#cb90-46" tabindex="-1"></a></span>
+<span id="cb90-47"><a href="es-verification.html#cb90-47" tabindex="-1"></a>MLRA18_triage_summary <span class="ot">&lt;-</span> MLRA18_triage <span class="sc">|&gt;</span></span>
+<span id="cb90-48"><a href="es-verification.html#cb90-48" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">plant_abund =</span> plantsym <span class="sc">+</span> speciescancov,</span>
+<span id="cb90-49"><a href="es-verification.html#cb90-49" tabindex="-1"></a>                <span class="at">heightlimit =</span> heighclasslow <span class="sc">+</span> heighclasshigh) <span class="sc">|&gt;</span></span>
+<span id="cb90-50"><a href="es-verification.html#cb90-50" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">plant_abund_logic =</span> <span class="fu">ifelse</span>(plant_abund <span class="sc">==</span> <span class="dv">2</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>),</span>
+<span id="cb90-51"><a href="es-verification.html#cb90-51" tabindex="-1"></a>                <span class="at">heightlimit_logic =</span> <span class="fu">ifelse</span>(heightlimit <span class="sc">==</span> <span class="dv">2</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb90-52"><a href="es-verification.html#cb90-52" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">strata =</span> heightlimit_logic <span class="sc">+</span> planttypegroup <span class="sc">+</span> akstratumclass <span class="sc">+</span> vegstrata) <span class="sc">|&gt;</span></span>
+<span id="cb90-53"><a href="es-verification.html#cb90-53" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">strata_logic =</span> <span class="fu">ifelse</span>(strata <span class="sc">&gt;=</span> <span class="dv">1</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb90-54"><a href="es-verification.html#cb90-54" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sum_logic =</span> <span class="fu">sum</span>(<span class="fu">c</span>(plant_abund_logic,</span>
+<span id="cb90-55"><a href="es-verification.html#cb90-55" tabindex="-1"></a>                                  strata_logic,</span>
+<span id="cb90-56"><a href="es-verification.html#cb90-56" tabindex="-1"></a>                                  overcanclass,</span>
+<span id="cb90-57"><a href="es-verification.html#cb90-57" tabindex="-1"></a>                                  totcanclass))) <span class="sc">|&gt;</span></span>
+<span id="cb90-58"><a href="es-verification.html#cb90-58" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sum_logic_no_can =</span> <span class="fu">sum</span>(<span class="fu">c</span>(plant_abund_logic,</span>
+<span id="cb90-59"><a href="es-verification.html#cb90-59" tabindex="-1"></a>                                         strata_logic)))</span>
+<span id="cb90-60"><a href="es-verification.html#cb90-60" tabindex="-1"></a></span>
+<span id="cb90-61"><a href="es-verification.html#cb90-61" tabindex="-1"></a>MLRA18_ecosite_triage_summary <span class="ot">&lt;-</span></span>
+<span id="cb90-62"><a href="es-verification.html#cb90-62" tabindex="-1"></a>  MLRA18_triage_summary <span class="sc">|&gt;</span></span>
+<span id="cb90-63"><a href="es-verification.html#cb90-63" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(ecositeid) <span class="sc">|&gt;</span></span>
+<span id="cb90-64"><a href="es-verification.html#cb90-64" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">pedons =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(peiid)),</span>
+<span id="cb90-65"><a href="es-verification.html#cb90-65" tabindex="-1"></a>                   <span class="at">ecostateid =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(ecostateid)),</span>
+<span id="cb90-66"><a href="es-verification.html#cb90-66" tabindex="-1"></a>                   <span class="at">commphaseid =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(commphaseid)),</span>
+<span id="cb90-67"><a href="es-verification.html#cb90-67" tabindex="-1"></a>                   <span class="at">plant_abund =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(plant_abund_logic)),</span>
+<span id="cb90-68"><a href="es-verification.html#cb90-68" tabindex="-1"></a>                   <span class="at">strata =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(strata_logic))) <span class="sc">|&gt;</span></span>
+<span id="cb90-69"><a href="es-verification.html#cb90-69" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(MLRA18_components_mod) <span class="sc">|&gt;</span></span>
+<span id="cb90-70"><a href="es-verification.html#cb90-70" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(ecositeid, pedons, ecostateid, commphaseid, plant_abund,</span>
+<span id="cb90-71"><a href="es-verification.html#cb90-71" tabindex="-1"></a>                  strata) <span class="sc">|&gt;</span></span>
+<span id="cb90-72"><a href="es-verification.html#cb90-72" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">components =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(coiid)),</span>
+<span id="cb90-73"><a href="es-verification.html#cb90-73" tabindex="-1"></a>                   <span class="at">acres =</span> <span class="fu">sum</span>(comp_acres, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-74"><a href="es-verification.html#cb90-74" tabindex="-1"></a>                   <span class="at">majcomp =</span> <span class="fu">sum</span>(majcompflag, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-75"><a href="es-verification.html#cb90-75" tabindex="-1"></a>                   <span class="at">series =</span> <span class="fu">sum</span>(compkind <span class="sc">==</span> <span class="st">&quot;series&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-76"><a href="es-verification.html#cb90-76" tabindex="-1"></a>                   <span class="at">taxadjunct =</span> <span class="fu">sum</span>(compkind <span class="sc">==</span> <span class="st">&quot;taxadjunct&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-77"><a href="es-verification.html#cb90-77" tabindex="-1"></a>                   <span class="at">family =</span> <span class="fu">sum</span>(compkind <span class="sc">==</span> <span class="st">&quot;family&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-78"><a href="es-verification.html#cb90-78" tabindex="-1"></a>                   <span class="at">tax_above_fam =</span> <span class="fu">sum</span>(compkind <span class="sc">==</span> <span class="st">&quot;taxon above family&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-79"><a href="es-verification.html#cb90-79" tabindex="-1"></a>                   <span class="at">variant =</span> <span class="fu">sum</span>(compkind <span class="sc">==</span> <span class="st">&quot;variant&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-80"><a href="es-verification.html#cb90-80" tabindex="-1"></a>                   <span class="at">misc =</span> <span class="fu">sum</span>(compkind <span class="sc">==</span> <span class="st">&quot;miscellaneous area&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="es-verification.html#cb91-1" tabindex="-1"></a><span class="fu">head</span>(MLRA18_ecosite_triage_summary)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 15
+## # Groups:   ecositeid, pedons, ecostateid,
+## #   commphaseid, plant_abund [6]
+##   ecositeid   pedons ecostateid commphaseid plant_abund strata components  acres
+##   &lt;chr&gt;        &lt;int&gt;      &lt;int&gt;       &lt;int&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;  &lt;dbl&gt;
+## 1 F001XA001WA      0          0           0           1      1          0 0     
+## 2 F018XA201CA      0          0           0          54     54         66 3.29e4
+## 3 F018XA202CA      0          0           0          76     76         26 7.00e4
+## 4 F018XC110CA      1          1           1           1      1          0 0     
+## 5 F018XC201CA     22         13          11         383    383        210 4.71e5
+## 6 F018XC203CA     20          9           8          48     48         20 2.29e4
+## # ℹ 7 more variables: majcomp &lt;int&gt;, series &lt;int&gt;, taxadjunct &lt;int&gt;,
+## #   family &lt;int&gt;, tax_above_fam &lt;int&gt;, variant &lt;int&gt;, misc &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="es-verification.html#cb93-1" tabindex="-1"></a><span class="fu">head</span>(MLRA18_triage_summary)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 26
+## # Groups:   ecositeid, siteiid, siteobsiid,
+## #   vegplotiid, peiid, pedon_id,
+## #   representative, ecostateid [6]
+##   ecositeid   siteiid siteobsiid vegplotiid peiid pedon_id representative
+##   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;             &lt;int&gt;
+## 1 F001XA001WA 1868185 2338844    1173348    &lt;NA&gt;  &lt;NA&gt;                 NA
+## 2 F018XA201CA 1867763 2338220    1174740    &lt;NA&gt;  &lt;NA&gt;                 NA
+## 3 F018XA201CA 1867773 2338230    1174750    &lt;NA&gt;  &lt;NA&gt;                 NA
+## 4 F018XA201CA 1867775 2338232    1174752    &lt;NA&gt;  &lt;NA&gt;                 NA
+## 5 F018XA201CA 1867777 2338234    1174754    &lt;NA&gt;  &lt;NA&gt;                 NA
+## 6 F018XA201CA 1881378 2338235    1174755    &lt;NA&gt;  &lt;NA&gt;                 NA
+## # ℹ 19 more variables: ecostateid &lt;chr&gt;, commphaseid &lt;chr&gt;, overcanclass &lt;lgl&gt;,
+## #   totcanclass &lt;lgl&gt;, heighclasslow &lt;lgl&gt;, heighclasshigh &lt;lgl&gt;,
+## #   planttypegroup &lt;lgl&gt;, akstratumclass &lt;lgl&gt;, vegstrata &lt;lgl&gt;,
+## #   plantsym &lt;lgl&gt;, speciescancov &lt;lgl&gt;, plant_abund &lt;int&gt;, heightlimit &lt;int&gt;,
+## #   plant_abund_logic &lt;lgl&gt;, heightlimit_logic &lt;lgl&gt;, strata &lt;int&gt;,
+## #   strata_logic &lt;lgl&gt;, sum_logic &lt;int&gt;, sum_logic_no_can &lt;int&gt;</code></pre>
 
 </div>
 </div>
