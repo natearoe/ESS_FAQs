@@ -23,7 +23,7 @@
 <meta name="author" content="Nathan Roe - nateroe@gmail.com" />
 
 
-<meta name="date" content="2025-03-26" />
+<meta name="date" content="2025-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -289,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This process requires two different NASIS queries. First to access site/pedon/vegplot data, and the other to access component data associated with your MLRA.</p>
 <p>Before getting started, clear selected set.</p>
 <p><strong>Query 1 (site/pedon/vegetation plot)</strong>
-Run “SSRO_Southwest &gt; Sites by ecositeid with %” (not listed as ready for use) using an appropriate pattern for Ecological Site ID (e.g., %018X% for MLRA18)</p>
+Run “SSRO_Southwest &gt; ES - Sites by ecositeid with %” (not listed as ready for use) using an appropriate pattern for Ecological Site ID (e.g., %018X% for MLRA18)</p>
 <p><strong>Query 2 (components)</strong>
 Use <a href="https://nroe.shinyapps.io/MapunitsInMLRA/" class="uri">https://nroe.shinyapps.io/MapunitsInMLRA/</a> to access all mukeys in your MLRA of interest. Mukeys are batched into groups of 2100 parameters on each tab, as this is the limit that NASIS accepts as arguments in a query. Read the instructions on the page for details. If multiple tabs are populated, the query will have to be run multiple times. Use these mukeys as input into “NSSC Pangaea &gt; Area/Legend/Mapunit/DMU by record ID - LMAPUNITIID”.</p>
 </div>

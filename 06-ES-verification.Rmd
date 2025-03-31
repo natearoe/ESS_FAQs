@@ -47,7 +47,7 @@ This process requires two different NASIS queries. First to access site/pedon/ve
 Before getting started, clear selected set.
 
 **Query 1 (site/pedon/vegetation plot)**
-Run "SSRO_Southwest > Sites by ecositeid with %" (not listed as ready for use) using an appropriate pattern for Ecological Site ID (e.g., %018X% for MLRA18)
+Run "SSRO_Southwest > ES - Sites by ecositeid with %" (not listed as ready for use) using an appropriate pattern for Ecological Site ID (e.g., %018X% for MLRA18)
 
 **Query 2 (components)**
 Use https://nroe.shinyapps.io/MapunitsInMLRA/ to access all mukeys in your MLRA of interest. Mukeys are batched into groups of 2100 parameters on each tab, as this is the limit that NASIS accepts as arguments in a query. Read the instructions on the page for details. If multiple tabs are populated, the query will have to be run multiple times. Use these mukeys as input into "NSSC Pangaea > Area/Legend/Mapunit/DMU by record ID - LMAPUNITIID". 
