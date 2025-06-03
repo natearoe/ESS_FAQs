@@ -13,10 +13,6 @@ existing-component-ecosite-correlations
 components-correlated-to-an-ecosite-of-interest
 ecological-characteristics-of-components-non-programmatic
 ecological-characteristics-of-components-programmatic
-where-do-components-occur
-how-to-correlate-components-to-ecosites
-how-to-qc-the-correlation-between
-test-section
 ecosites
 what-ecosites-are-active-in-an-mlra
 range-in-characteristics-of-ecosites
@@ -33,12 +29,15 @@ mapping-the-location-of-species
 nasis
 creating-a-static-nasis-database
 es-verification
-prioritization
 guidance-from-national-instruction
+mlra-assessment
 goal-of-with-workflow
 youtube-summary
 querying-nasis
 run-workflow
+ecosite-assessment
+goal-of-with-workflow-1
+querying-nasis-1
 package-buildingmaintaining-tips
 package-buildingmaintaining-tips-1
 random-tools

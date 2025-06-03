@@ -1,7 +1,5 @@
 # ES Verification
 
-## Prioritization
-
 ### Guidance from National Instruction
 
 This section is intended to assist with ES Verification projects. The National Instruction with full details of verification project requirements can be accessed here - [Part 306 – Ecological Site Inventory and Ecological Site Description](https://raw.githubusercontent.com/natearoe/ESS_FAQs/main/_book/Title_430_NI.pdf). 
@@ -10,9 +8,11 @@ This workflow addresses many of the requirements outlined section 306.6.C.2 from
 
 ![306.6.C.2 from National Instruction](images/ES_verification_instruction.JPG)
 
+## MLRA Assessment
+
 ### Goal of with workflow
 
-The goal of this methodology is to determine what data is available to use for ES Verification Projects. It reports on data elements listed in the ES Verification standards as well as other elements that are not required but are indicative of data quality, including:
+The goal of this methodology is to determine what data is available to use for ES Verification Projects. This approach relies on sites being correlated to ecological sites. It reports on data elements listed in the ES Verification standards as well as other elements that are not required but are indicative of data quality, including:
 
 
 * correlated pedons & vegplots (including whether they are colocated)
@@ -191,12 +191,99 @@ head(MLRA18_ecosite_triage_summary)
 head(MLRA18_triage_summary)
 ```
 
+## Ecosite assessment
 
+### Goal of with workflow
 
+Once you have chosen an ecological site for verification, you need to locate all of the relevant data. The MLRA Assessment process above relies on sites being properly correlated to ecological sites. Now that the process is refined to a single ecological site, we can take a closer look to determine if there are any missing correlations. 
 
+The primary situation to look for are sites are not correlated to your ecosite of interest, but are within a mapunit correlated to your ecosite (sites could have no ecosite assignment or are assigned to a different ecosite). This process will provide a visual summary like the one below: 
 
+### Querying NASIS
 
+To begin with, we are going to access the spatial extent of your ecosite of interest.
 
+```{r, message=FALSE, warning=FALSE}
+EOI <- "R018XI101CA"
 
+Mapunits <- soilDB::fetchSDA_spatial(x = EOI,
+                                         by.col = "ecoclassid",
+                                         method = "feature",
+                                         geom.src = "mupolygon",
+                                         add.fields =  "mapunit.muname") |> 
+  terra::vect()
 
+EOI_spatial_extent <- Mapunits |> terra::ext()
 
+EOI_spatial_extent
+```
+
+This spatial extent is used as input in two NASIS queries - SSRO_Southwest > Site/Vegetation Plot by Range of Std Lat/Long & SSRO_Southwest > Site/Pedon by Range of Std Lat/Long. These queries will return sites with a site observation as well as pedon and vegetation plot data for those sites, if it exists. 
+
+Now we can access the site, pedon, and vegetation data from NASIS. 
+```{r, eval=FALSE}
+sites_pedons <- soilDB::get_site_data_from_NASIS_db()
+
+veg_plot <- soilDB::get_veg_data_from_NASIS_db()
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+sites_pedons <- soilDB::get_site_data_from_NASIS_db(SS = FALSE,
+                                                    dsn = "C:/Users/Nathan.Roe/Documents/verification_projects/MLRA18_verification.sqlite")
+
+veg_plot <- soilDB::get_veg_data_from_NASIS_db(SS = FALSE,
+                                               dsn = "C:/Users/Nathan.Roe/Documents/verification_projects/MLRA18_verification.sqlite")
+```
+
+Now we will perform an intersection between the ecosite spatial and sites. 
+```{r, message=FALSE, warning=FALSE}
+sites_pedon_vp_spatial <- sites_pedons |>
+  dplyr::left_join(veg_plot$veg |>
+                     dplyr::select(siteiid, obsdate, vegplotid, vegplotiid)) |>
+  terra::vect(geom = c("longstddecimaldegrees",
+                       "latstddecimaldegrees"),
+              crs = "EPSG:4326")
+
+Sites <- terra::intersect(Mapunits, sites_pedon_vp_spatial)
+
+Sites$Ecosite <- ifelse(Sites$ecositeid == EOI,
+                        paste(EOI),
+                        ifelse(is.na(Sites$ecositeid),
+                               "Unassigned", "Other"))
+
+points_hover <- paste0("usiteid: ", Sites$usiteid, 
+                     "<br>", 
+                     "pedon_id: ", Sites$pedon_id,
+                     "<br>",
+                     "vegplotid: ", Sites$vegplotid,
+                     "<br>",
+                     "ecositeid: ", Sites$ecositeid)
+
+class(points_hover) <- c("html", "character")
+
+poly_hover <- paste0("areasymbol: ", Sites$areasymbol, 
+                     "<br>", 
+                     "natmusym: ", Sites$nationalmusym,
+                     "<br>",
+                     "mukey: ", Sites$mukey,
+                     "<br>",
+                     "muname: ", Sites$muname
+                     )
+
+class(poly_hover) <- c("html", "character")
+```
+
+Visualize
+```{r}
+mapview::mapviewOptions(basemaps = "Esri.WorldImagery")
+
+mapview::mapview(Sites,
+                 label = points_hover,
+                 alpha = 1.0,
+                 zcol = "Ecosite") +
+  mapview::mapview(
+    Mapunits,
+    col.regions = "orange",
+    label = poly_hover,
+    alpha = 0.15)
+```

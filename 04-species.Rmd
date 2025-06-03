@@ -10,7 +10,7 @@ species_list <- ecositer::species_list(SS = TRUE)
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 species_list <- ecositer::species_list(SS = FALSE,
-                                       static_location = "C:/Users/Nathan.Roe/Documents/SEKI/CA792_veg_data.sqlite")
+                                       static_location = "C:/Users/Nathan.Roe/Documents/verification_projects/MLRA18_verification.sqlite")
 head(species_list)
 ```
 

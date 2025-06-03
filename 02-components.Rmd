@@ -337,11 +337,3 @@ Save as csv
 write.csv(all_data, "C:/Users/Nathan.Roe/Downloads/my_ecosite_report.csv",
           row.names = FALSE)
 ```
-
-## Where do components occur?
-
-## How to correlate components to ecosites?
-
-## How to QC the correlation between 
-
-## Test section
